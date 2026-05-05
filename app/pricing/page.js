@@ -3,6 +3,52 @@ import { useState } from 'react';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
+import { motion } from 'framer-motion';
+import { Check, X } from 'lucide-react';
+import { ShieldCheck, ArrowUpCircle, Headphones } from 'lucide-react';
+
+const faqs = [
+  {
+    icon: ArrowUpCircle,
+    title: "Can I upgrade later?",
+    desc: "Yes, you can upgrade your plan at any time. The remaining balance will be adjusted pro-rata.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Is my data secure?",
+    desc: "We use AES-256 encryption and provide daily automated backups for all plans.",
+  },
+  {
+    icon: Headphones,
+    title: "Support options?",
+    desc: "All users get email support. Pro and Enterprise users get dedicated 24/7 call support.",
+  },
+];
+
+const plans = ["Starter", "Professional", "Enterprise"];
+
+const features = [
+  {
+    category: "Student Management",
+    items: [
+      { title: "Student Database", values: [true, true, true] },
+      { title: "Attendance (App/Web)", values: [true, true, true] },
+      { title: "ID Card Generation", values: [false, true, true] },
+      { title: "Batch Management", values: ["Limited", "Unlimited", "Unlimited"] },
+    ],
+  },
+  {
+    category: "Financial Suite",
+    items: [
+      { title: "Fee Tracking", values: [true, true, true] },
+      { title: "WhatsApp Reminders", values: [true, true, true] },
+      { title: "Expense Manager", values: [false, true, true] },
+      { title: "GST Invoicing", values: [false, true, true] },
+      { title: "Tally Integration", values: [false, false, true] },
+    ],
+  },
+];
+
 export default function Pricing() {
    const [isYearly, setIsYearly] = useState(true);
 
@@ -10,7 +56,7 @@ export default function Pricing() {
       <div className="min-h-screen bg-white">
          <Navbar />
 
-         <main className="pt-14 pb-8">
+         <main className="pt-22 pb-8">
             {/* Simple Hero */}
             <section className="section-container text-center mb-4 px-4">
                <span className="text-[9px] font-black pt-2 text-primary uppercase tracking-[0.4em] mb-2 block">Transparent Pricing</span>
@@ -20,7 +66,7 @@ export default function Pricing() {
                </h1>
 
                {/* Pricing Toggle */}
-               <div className="flex items-center justify-center gap-4 mt-6">
+               <div className="flex items-center justify-center gap-4 mt-3">
                   <span className={`text-[10px] font-bold uppercase tracking-widest ${!isYearly ? 'text-navy' : 'text-gray-300'}`}>Monthly</span>
                   <button
                      onClick={() => setIsYearly(!isYearly)}
@@ -36,7 +82,7 @@ export default function Pricing() {
             </section>
 
             {/* Pricing Cards */}
-            <section className="section-container mb-6 px-4 py-6 overflow-hidden">
+            <section className="section-container mb-6 px-4 py-5">
                <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
                   <PricingCard
                      title="Starter"
@@ -63,73 +109,143 @@ export default function Pricing() {
             </section>
 
             {/* Compare All Features Section */}
-            <section className="section-container mb-16 overflow-hidden">
-               <div className="text-center mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-navy tracking-tight">Compare All Features</h2>
-               </div>
+      <section className="section-container pt-16 pb-8">
+      
+      {/* Heading */}
+      <div className="text-center mb-14">
+        <h2 className="text-3xl lg:text-4xl font-black text-navy tracking-tight">
+          Compare All Features
+        </h2>
+        <p className="text-gray-400 text-sm mt-2">
+          Pick the plan that fits your institute best
+        </p>
+      </div>
 
-               <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                     <thead>
-                        <tr className="border-b border-gray-100">
-                           <th className="py-4 text-xs font-black text-navy uppercase tracking-widest w-1/3">Core Capabilities</th>
-                           <th className="py-4 text-xs font-black text-primary uppercase tracking-widest text-center">Starter</th>
-                           <th className="py-4 text-xs font-black text-navy uppercase tracking-widest text-center bg-gray-50/50">Professional</th>
-                           <th className="py-4 text-xs font-black text-navy uppercase tracking-widest text-center">Enterprise</th>
-                        </tr>
-                     </thead>
-                     <tbody className="text-xs">
-                        {/* Category: Management */}
-                        <tr className="bg-gray-50/30"><td colSpan="4" className="py-2 px-2 font-black text-navy opacity-40 uppercase tracking-tighter">Student Management</td></tr>
-                        <ComparisonRow title="Student Database" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Attendance (App/Web)" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="ID Card Generation" starter="—" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Batch Management" starter="Limited" pro="Unlimited" enterprise="Unlimited" />
+      <div className="relative overflow-hidden rounded-3xl border border-gray-100 shadow-xl">
 
-                        {/* Category: Financials */}
-                        <tr className="bg-gray-50/30"><td colSpan="4" className="py-2 px-2 font-black text-navy opacity-40 uppercase tracking-tighter">Financial Suite</td></tr>
-                        <ComparisonRow title="Fee Tracking" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="WhatsApp Reminders" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Expense Manager" starter="—" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="GST Invoicing" starter="—" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Tally Integration" starter="—" pro="—" enterprise="✅" />
+        {/* Glow Background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
-                        {/* Category: Mobile & App */}
-                        <tr className="bg-gray-50/30"><td colSpan="4" className="py-2 px-2 font-black text-navy opacity-40 uppercase tracking-tighter">Mobile & Interaction</td></tr>
-                        <ComparisonRow title="Parent FeeEasy App" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Staff Attendance App" starter="—" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="White-Label App" starter="—" pro="—" enterprise="✅" />
-                        <ComparisonRow title="Push Notifications" starter="✅" pro="✅" enterprise="✅" />
+        {/* Header */}
+        <div className="grid grid-cols-4 bg-white sticky top-0 z-10">
+          <div className="p-5 font-bold text-gray-500 text-xs uppercase tracking-widest">
+            Features
+          </div>
 
-                        {/* Category: Support */}
-                        <tr className="bg-gray-50/30"><td colSpan="4" className="py-2 px-2 font-black text-navy opacity-40 uppercase tracking-tighter">Support & Security</td></tr>
-                        <ComparisonRow title="Daily Backups" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Email Support" starter="✅" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="24/7 Call Support" starter="—" pro="✅" enterprise="✅" />
-                        <ComparisonRow title="Custom API Access" starter="—" pro="—" enterprise="✅" />
-                     </tbody>
-                  </table>
-               </div>
-            </section>
+          {plans.map((plan, i) => (
+            <div key={i} className="p-5 text-center relative group">
+              
+              <div className="text-sm font-bold text-navy">{plan}</div>
+
+              {/* Hover underline animation */}
+              <div className="h-[2px] w-0 bg-primary mx-auto mt-2 transition-all duration-300 group-hover:w-10" />
+            </div>
+          ))}
+        </div>
+
+        {/* Body */}
+        {features.map((section, idx) => (
+          <div key={idx}>
+
+            {/* Category Title */}
+            <div className="bg-gray-50/60 px-5 py-3 text-xs font-black uppercase text-gray-400 tracking-wider">
+              {section.category}
+            </div>
+
+            {/* Rows */}
+            {section.items.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="grid grid-cols-4 items-center border-t border-gray-100 hover:bg-primary/5 transition"
+              >
+                {/* Feature Name */}
+                <div className="p-5 text-sm font-medium text-gray-700">
+                  {item.title}
+                </div>
+
+                {/* Values */}
+                {item.values.map((val, j) => (
+                  <div key={j} className="p-5 text-center">
+
+                    {typeof val === "boolean" ? (
+                      val ? (
+                        <Check className="mx-auto text-green-500 w-5 h-5" />
+                      ) : (
+                        <X className="mx-auto text-gray-300 w-5 h-5" />
+                      )
+                    ) : (
+                      <span className="text-xs font-semibold text-gray-500">
+                        {val}
+                      </span>
+                    )}
+
+                  </div>
+                ))}
+              </motion.div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
 
             {/* FAQ Preview - High Density */}
-            <section className="section-container py-8 border-t border-gray-50">
-               <div className="grid lg:grid-cols-3 gap-8">
-                  <div>
-                     <h4 className="text-sm font-black text-navy uppercase mb-2">Can I upgrade later?</h4>
-                     <p className="text-xs text-gray-400 leading-relaxed">Yes, you can upgrade your plan at any time. The remaining balance will be adjusted pro-rata.</p>
-                  </div>
-                  <div>
-                     <h4 className="text-sm font-black text-navy uppercase mb-2">Is my data secure?</h4>
-                     <p className="text-xs text-gray-400 leading-relaxed">We use AES-256 encryption and provide daily automated backups for all plans.</p>
-                  </div>
-                  <div>
-                     <h4 className="text-sm font-black text-navy uppercase mb-2">Support options?</h4>
-                     <p className="text-xs text-gray-400 leading-relaxed">All users get email support. Pro and Enterprise users get dedicated 24/7 call support.</p>
-                  </div>
-               </div>
-            </section>
+            <section className="section-container pt-8 pb-16 border-t border-gray-100">
 
+      {/* Heading */}
+      <div className="text-center mb-10">
+        <h3 className="text-2xl font-black text-navy tracking-tight">
+          Quick Answers
+        </h3>
+        <p className="text-gray-400 text-sm mt-1">
+          Everything you need to know before getting started
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-6">
+
+        {faqs.map((faq, i) => {
+          const Icon = faq.icon;
+
+          return (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group relative p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+            >
+
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 group-hover:opacity-100 transition" />
+
+              {/* Icon */}
+              <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 text-primary mb-4">
+                <Icon size={20} />
+              </div>
+
+              {/* Title */}
+              <h4 className="text-sm font-black text-navy uppercase mb-2">
+                {faq.title}
+              </h4>
+
+              {/* Description */}
+              <p className="text-xs text-gray-500 leading-relaxed">
+                {faq.desc}
+              </p>
+
+              {/* Bottom hover line */}
+              <div className="h-[2px] w-0 bg-primary mt-4 transition-all duration-300 group-hover:w-12" />
+            </motion.div>
+          );
+        })}
+
+      </div>
+    </section>
             {/* Migration Support Section */}
             <section className="section-container pb-6 pt-4">
                <div className="relative overflow-hidden rounded-[2rem] bg-navy p-8 lg:p-10 text-center">
