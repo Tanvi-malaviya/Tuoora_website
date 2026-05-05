@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Overview from "../components/Overview";
@@ -10,21 +12,22 @@ import CTA from "../components/CTA";
 import Footer from "../components/Footer";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white selection:bg-primary/30">
-      <Navbar />
+      <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <main className="pt-14">
-        <Hero />
+        <Hero setIsModalOpen={setIsModalOpen} />
         <Overview />
         <Modules />
         <OperationalIntegration />
         <WhyChooseUs />
         <MobileShowcase />
         <Security />
-        <CTA />
+        <CTA setIsModalOpen={setIsModalOpen} />
       </main>
       <Footer />
     </div>
   );
 }
-

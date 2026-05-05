@@ -25,7 +25,7 @@ export default function Modules() {
               <div className="pl-10 relative group cursor-default">
                 <div className="absolute left-1.5 top-2 h-3 w-3 rounded-full bg-white border-2 border-primary z-10 group-hover:scale-125 transition-transform"></div>
                 <h3 className="text-base font-bold text-navy mb-1 tracking-tight">Smart Registry</h3>
-                <p className="text-[11px] text-gray-400 font-light max-w-sm leading-relaxed">
+                <p className="text-sm text-gray-400 font-light max-w-sm leading-relaxed">
                   High-density student database with real-time profile management and multi-branch sync.
                 </p>
               </div>
@@ -33,7 +33,7 @@ export default function Modules() {
               <div className="pl-10 relative group cursor-default">
                 <div className="absolute left-1.5 top-2 h-3 w-3 rounded-full bg-white border-2 border-primary z-10 group-hover:scale-125 transition-transform"></div>
                 <h3 className="text-base font-bold text-navy mb-1 tracking-tight">Financial Ledger</h3>
-                <p className="text-[11px] text-gray-400 font-light max-w-sm leading-relaxed">
+                <p className="text-sm text-gray-400 font-light max-w-sm leading-relaxed">
                   Automated fee tracking with smart ledger entries and integrated WhatsApp reminders.
                 </p>
               </div>
@@ -41,7 +41,7 @@ export default function Modules() {
               <div className="pl-10 relative group cursor-default">
                 <div className="absolute left-1.5 top-2 h-3 w-3 rounded-full bg-white border-2 border-primary z-10 group-hover:scale-125 transition-transform"></div>
                 <h3 className="text-base font-bold text-navy mb-1 tracking-tight">Attendance Intelligence</h3>
-                <p className="text-[11px] text-gray-400 font-light max-w-sm leading-relaxed">
+                <p className="text-sm text-gray-400 font-light max-w-sm leading-relaxed">
                   Batch-wise presence tracking with instant automated parent notifications and analytics.
                 </p>
               </div>
