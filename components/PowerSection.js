@@ -11,12 +11,12 @@ export default function PowerSection() {
             <div className="grid lg:grid-cols-2 gap-6 items-center">
                 {/* LEFT CONTENT: Redesigned for Uniqueness */}
                 <div className="relative z-10">
-                    <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] mb-2 block">Administrative Powerhouse</span>
+                    <span className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-2 block">Administrative Powerhouse</span>
                     <h2 className="text-4xl lg:text-5xl font-black text-navy tracking-tight mb-2 leading-tight">
                         The Engine of <br />
                         <span className="text-primary italic">Institutional Control.</span>
                     </h2>
-                    <p className="text-gray-400 text-[10px] font-medium leading-relaxed max-w-lg mb-4">
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed max-w-lg mb-4">
                         Tuoora's administrative core is engineered for extreme performance. Handle thousands of students, multiple branches, and complex financial logic with sub-second precision.
                     </p>
 
@@ -72,7 +72,7 @@ export default function PowerSection() {
                                     <div key={i} style={{ height: `${h}%` }} className="bg-primary/20 rounded-t-md"></div>
                                 ))}
                             </div>
-                            <p className="mt-3 text-[7px] font-black text-navy uppercase tracking-widest opacity-30">Growth Metrics</p>
+                            <p className="mt-3 text-[9px] font-black text-navy uppercase tracking-widest opacity-30">Growth Metrics</p>
                         </motion.div>
 
                         {/* Layer 2: Revenue (Middle) */}
@@ -85,8 +85,8 @@ export default function PowerSection() {
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center text-white text-xs">💰</div>
                                 <div>
-                                    <h4 className="text-white text-[9px] font-bold">Revenue</h4>
-                                    <p className="text-primary text-[7px] font-black tracking-widest">+24.5%</p>
+                                    <h4 className="text-white text-xs font-bold">Revenue</h4>
+                                    <p className="text-primary text-[9px] font-black tracking-widest">+24.5%</p>
                                 </div>
                             </div>
                             <div className="space-y-2">
@@ -109,7 +109,7 @@ export default function PowerSection() {
                             <div className="flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-base shadow-inner">👤</div>
                                 <div>
-                                    <h4 className="text-navy text-[10px] font-black uppercase tracking-tight">Super Admin</h4>
+                                    <h4 className="text-navy text-xs font-black uppercase tracking-tight">Super Admin</h4>
                                     <div className="flex gap-1 mt-0.5">
                                         <div className="h-1 w-3 bg-primary rounded-full"></div>
                                         <div className="h-1 w-6 bg-gray-100 rounded-full"></div>
@@ -117,7 +117,7 @@ export default function PowerSection() {
                                 </div>
                             </div>
                             <div className="p-3 bg-primary/5 rounded-xl flex items-center justify-between">
-                                <span className="text-[8px] font-bold text-navy uppercase tracking-widest">Syncing...</span>
+                                <span className="text-[10px] font-bold text-navy uppercase tracking-widest">Syncing...</span>
                                 <div className="w-1.5 h-1.5 bg-primary rounded-full animate-ping"></div>
                             </div>
                         </motion.div>
@@ -141,18 +141,18 @@ function ModuleCard({ icon, title, desc, accent, stat }) {
                     {icon}
                 </div>
                 <div>
-                    <h4 className="text-[8px] font-black text-navy uppercase tracking-widest leading-none">{title}</h4>
+                    <h4 className="text-[10px] font-black text-navy uppercase tracking-widest leading-none">{title}</h4>
                     <div className={`h-0.5 w-3 rounded-full mt-1 ${isPrimary ? 'bg-primary' : 'bg-navy'}`}></div>
                 </div>
             </div>
 
-            <p className="text-[8px] font-bold text-gray-400 uppercase tracking-tight leading-normal mb-2">
+            <p className="text-sm font-bold text-gray-500 uppercase tracking-tight leading-normal mb-2">
                 {desc}
             </p>
 
             <div className="flex items-center gap-1.5">
                 <div className={`w-1 h-1 rounded-full ${isPrimary ? 'bg-primary' : 'bg-navy'} animate-pulse`}></div>
-                <span className="text-[7px] font-black text-navy/30 uppercase tracking-widest">{stat}</span>
+                <span className="text-[9px] font-black text-navy/30 uppercase tracking-widest">{stat}</span>
             </div>
         </div>
     );

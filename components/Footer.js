@@ -43,14 +43,14 @@ export default function Footer() {
           {/* Brand & Newsletter Section */}
           <div className="lg:col-span-4">
             <Link href="/" className="inline-block mb-6 group">
-              <Image src="/logo.png" alt="Tuoora Logo" width={100} height={32} className="transition-opacity group-hover:opacity-80" />
+              <Image src="/logo3.png" alt="Tuoora Logo" width={100} height={32} className="transition-opacity group-hover:opacity-80" />
             </Link>
-            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-sm font-medium">
+            <p className="text-gray-600 text-sm leading-relaxed mb-8 max-w-sm font-medium">
               The world's most sophisticated institutional ERP infrastructure. Empowering the next generation of global education.
             </p>
             
             <div className="space-y-3">
-               <h4 className="text-[10px] font-black text-navy/30 uppercase tracking-[0.3em]">Join our ecosystem</h4>
+               <h4 className="text-[10px] font-black text-navy/40 uppercase tracking-[0.3em]">Join our ecosystem</h4>
                <div className="flex p-1 bg-gray-50 border border-gray-100 rounded-2xl focus-within:border-primary/50 focus-within:shadow-lg focus-within:shadow-primary/5 transition-all">
                   <input 
                     type="email" 
@@ -72,7 +72,7 @@ export default function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.platform.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className={`text-sm font-bold transition-colors hover:text-primary ${pathname === link.href ? 'text-primary' : 'text-gray-500'}`}>
+                      <Link href={link.href} className={`text-sm font-bold transition-colors hover:text-primary ${pathname === link.href ? 'text-primary' : 'text-navy/60'}`}>
                         {link.name}
                       </Link>
                     </li>
@@ -84,7 +84,7 @@ export default function Footer() {
                 <ul className="space-y-3">
                   {footerLinks.resources.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-sm text-gray-500 font-bold transition-colors hover:text-primary">
+                      <Link href={link.href} className="text-sm text-navy/60 font-bold transition-colors hover:text-primary">
                         {link.name}
                       </Link>
                     </li>
@@ -96,14 +96,14 @@ export default function Footer() {
                 <ul className="space-y-4">
                   <li>
                     <a href="mailto:support@tuoora.com" className="group block">
-                      <div className="text-[10px] font-black text-navy/20 uppercase tracking-widest mb-1">Email Support</div>
-                      <div className="text-sm font-bold text-navy/70 group-hover:text-primary transition-colors">support@tuoora.com</div>
+                      <div className="text-[10px] font-black text-navy/30 uppercase tracking-widest mb-1">Email Support</div>
+                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">support@tuoora.com</div>
                     </a>
                   </li>
                   <li>
                     <a href="tel:+919876543210" className="group block">
-                      <div className="text-[10px] font-black text-navy/20 uppercase tracking-widest mb-1">Direct Call</div>
-                      <div className="text-sm font-bold text-navy/70 group-hover:text-primary transition-colors">+91 98765 43210</div>
+                      <div className="text-[10px] font-black text-navy/30 uppercase tracking-widest mb-1">Direct Call</div>
+                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">+91 98765 43210</div>
                     </a>
                   </li>
                 </ul>
@@ -115,12 +115,12 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-8 order-2 md:order-1">
-            <p className="text-[10px] font-black text-navy/20 uppercase tracking-[0.3em]">
+            <p className="text-[10px] font-black text-navy/50 uppercase tracking-[0.3em]">
               © {currentYear} Tuoora Technologies
             </p>
             <div className="hidden sm:flex gap-6">
               {footerLinks.legal.map(link => (
-                <Link key={link.name} href={link.href} className="text-[10px] font-black text-navy/20 uppercase tracking-[0.2em] hover:text-primary transition-colors">
+                <Link key={link.name} href={link.href} className="text-[10px] font-black text-navy/50 uppercase tracking-[0.2em] hover:text-primary transition-colors">
                   {link.name}
                 </Link>
               ))}
@@ -129,11 +129,11 @@ export default function Footer() {
 
           <div className="flex gap-4 order-1 md:order-2">
             {[
-              { name: 'Twitter', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg> },
-              { name: 'LinkedIn', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> },
-              { name: 'Instagram', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> }
+              { name: 'Twitter', href: 'https://x.com/tuoora', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg> },
+              { name: 'LinkedIn', href: 'https://linkedin.com/company/tuoora', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> },
+              { name: 'Instagram', href: 'https://instagram.com/tuoora', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg> }
             ].map(social => (
-              <a key={social.name} href="#" className="h-10 w-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 hover:text-primary hover:bg-primary/5 hover:border-primary/20 transition-all">
+              <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-primary/5 hover:border-primary/20 transition-all">
                 {social.icon}
               </a>
             ))}

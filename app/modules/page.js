@@ -73,7 +73,7 @@ export default function ModulesPage() {
     <div className="min-h-screen bg-[#FDFDFD]">
       <Navbar />
       
-      <main className="pt-15 pb-8">
+      <main className="pt-22 pb-8">
         {/* Header */}
         <section className="section-container mb-3">
           <div className="max-w-2xl">
@@ -132,7 +132,7 @@ export default function ModulesPage() {
                 </p>
               </div>
               <div className="flex lg:justify-end gap-4">
-                 <Link href="/#contact">
+                 <Link href="/contact">
                     <button className="bg-primary px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary/20">Contact Sales</button>
                  </Link>
               </div>

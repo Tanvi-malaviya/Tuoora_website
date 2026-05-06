@@ -15,7 +15,7 @@ export default function FeaturesPage() {
       <main className="pt-22 pb-12">
         {/* Features Hero */}
         <section className="section-container text-center mb-5">
-          <div className=" inline-block rounded-full bg-primary/5 px-4 py-1 text-[10px] font-bold text-primary uppercase tracking-[0.3em] border border-primary/10">
+          <div className=" inline-block rounded-full bg-primary/5 px-4 py-1 text-xs font-bold text-primary uppercase tracking-[0.3em] border border-primary/10">
             Platform Capabilities
           </div>
           <h1 className="text-5xl font-bold text-navy tracking-tighter mb-4 sm:text-7xl">
@@ -86,7 +86,7 @@ export default function FeaturesPage() {
             </div>
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] mb-1 block">Ready to start?</span>
+              <span className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-1 block">Ready to start?</span>
               <h2 className="text-2xl lg:text-4xl font-bold text-white mb-5 tracking-tighter leading-tight">
                 Experience the Future of <br />
                 <span className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-transparent italic">Institutional Management</span>
@@ -111,7 +111,7 @@ export default function FeaturesPage() {
                 </Link>
               </div>
 
-              <p className="mt-4 text-[9px] text-white/40 font-medium tracking-wide">
+              <p className="mt-4 text-xs text-white/40 font-medium tracking-wide">
                 Join 500+ Institutes Growing with Tuoora ERP. No Credit Card Required.
               </p>
             </div>
@@ -147,7 +147,7 @@ function FeatureCategory({ icon, title, features }) {
         {features.map((feature, i) => (
           <li key={i} className="flex items-center gap-3">
             <div className="h-1.5 w-1.5 rounded-full bg-primary/30"></div>
-            <span className="text-xs text-gray-500 font-medium">{feature}</span>
+            <span className="text-sm text-gray-500 font-medium">{feature}</span>
           </li>
         ))}
       </ul>

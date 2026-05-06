@@ -103,7 +103,7 @@ export default function Navbar({ isModalOpen, setIsModalOpen }) {
                <Link href="/" className="flex items-center gap-2 group">
                   <div className={`relative transition-all duration-500 ${scrolled ? 'h-6 w-20' : 'h-7 w-24'} group-hover:scale-105`}>
                      <Image 
-                        src="/logo2.png" 
+                        src="/logo3.png" 
                         alt="Tuoora Logo" 
                         fill 
                         className="object-contain"
