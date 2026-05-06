@@ -1,24 +1,6 @@
 'use client';
 
 export default function MobileShowcase() {
-  const loginTypes = [
-    { 
-      title: "Students Login", 
-      features: ["View attendance", "Check exam results", "Access study materials", "Receive announcements"] 
-    },
-    { 
-      title: "Teacher Login", 
-      features: ["Mark attendance", "Upload assignments", "Manage classes", "Communicate with students"] 
-    },
-    { 
-      title: "Admin / Management Login", 
-      features: ["Monitor operations", "Track fees", "Access analytics", "Manage staff"] 
-    },
-    { 
-      title: "Branch Login", 
-      features: ["Android & iOS apps", "Secure login", "Access from anywhere", "Multi-branch sync"] 
-    }
-  ];
 
   return (
     <section className="py-5 bg-white overflow-hidden">
@@ -54,7 +36,7 @@ export default function MobileShowcase() {
                   },
                   { 
                     title: "Institute Login", 
-                    features: ["Android & iOS apps", "Secure login", "Access from anywhere", "Full admin control"] 
+                    features: ["Android & iOS apps", "Academic Monitoring", "Staff Management", "Branch Operations"] 
                   }
                 ].map((type, i) => (
                   <div key={i} className="group">
@@ -66,7 +48,7 @@ export default function MobileShowcase() {
                     </div>
                     <ul className="space-y-1.5 pl-7">
                        {type.features.map((feat, j) => (
-                         <li key={j} className="text-[12px] text-gray-400 font-medium flex items-center gap-2">
+                         <li key={j} className="text-sm text-gray-400 font-medium flex items-center gap-2">
                             <span className="h-1 w-1 rounded-full bg-gray-300"></span>
                             {feat}
                          </li>

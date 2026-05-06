@@ -20,21 +20,28 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
-            <div key={i} className="relative p-5 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-white hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-500 group overflow-hidden text-center">
-              {/* Background Number Decal */}
-              <div className="absolute -bottom-4 -right-4 text-6xl font-black text-navy opacity-[0.03] group-hover:opacity-[0.06] transition-opacity uppercase tracking-tighter">
-                {stat.label}
-              </div>
-
-              <div className="relative z-10">
-                <div className="text-3xl font-black text-primary mb-1 tracking-tighter group-hover:scale-110 transition-transform">
+            <div key={i} className="relative p-5 rounded-[2rem] bg-white border border-gray-100 hover:border-primary/20 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.04)] transition-all duration-700 group flex flex-col items-center text-center overflow-hidden">
+              {/* Top Accent Line */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-1 bg-gray-100 rounded-b-full group-hover:bg-primary group-hover:w-20 transition-all duration-500"></div>
+              
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="text-3xl lg:text-4xl font-black text-navy mb-1 tracking-tighter group-hover:text-primary group-hover:scale-105 transition-all duration-500">
                   {stat.value}
                 </div>
-                <h4 className="text-[9px] font-black text-navy uppercase tracking-[0.15em] mb-2">{stat.label}</h4>
-                <p className="text-[10px] text-gray-400 font-light leading-relaxed">{stat.desc}</p>
+                
+                <div className="inline-flex px-3 py-0.5 bg-gray-50 rounded-full border border-gray-100 mb-2 transition-colors group-hover:bg-primary/5 group-hover:border-primary/10">
+                  <span className="text-[8px] font-black text-primary uppercase tracking-[0.2em]">{stat.label}</span>
+                </div>
+                
+                <p className="text-[10px] text-gray-400 font-medium leading-relaxed max-w-[150px]">
+                  {stat.desc}
+                </p>
               </div>
+
+              {/* Decorative Corner Element */}
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-primary/5 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
             </div>
           ))}
         </div>

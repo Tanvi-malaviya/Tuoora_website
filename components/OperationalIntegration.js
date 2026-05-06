@@ -58,7 +58,7 @@ export default function OperationalIntegration() {
           <div className="lg:pl-8 order-1 lg:order-2 text-center lg:text-left">
             <div className="mb-8">
               <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-3 block">Why Modern Institutes Need ERP</span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-navy leading-[1.1] tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-4xl font-black text-navy leading-[1.1] tracking-tight mb-4">
                 One Software for Complete <br className="hidden sm:block" />
                 <span className="text-primary italic">Institute Operations</span>
               </h2>

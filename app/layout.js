@@ -8,9 +8,14 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "Tuoora ERP | Smart School Management System",
-  description: "The ultimate school management ERP for digital transformation. Smart, secure, and scalable.",
+  title: "Tuoora ERP | Smart Institute Management System",
+  description: "The ultimate institute management ERP for digital transformation. Smart, secure, and scalable.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
+
+import FloatingActions from "../components/FloatingActions";
 
 export default function RootLayout({ children }) {
   return (
@@ -18,7 +23,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        <FloatingActions />
+      </body>
     </html>
   );
 }
