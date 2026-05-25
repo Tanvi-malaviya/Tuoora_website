@@ -1,77 +1,107 @@
 'use client'
 import { useState } from 'react';
 import Link from "next/link";
+import { Users, Wallet, Smartphone, Check } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PowerSection from "@/components/PowerSection";
+
+const categoriesData = [
+  {
+    title: "Student Management",
+    desc: "Seamless administration database and automated student cycle monitoring.",
+    icon: Users,
+    colorClass: "text-indigo-600 bg-indigo-50 border-indigo-100",
+    glowClass: "bg-indigo-500/10",
+    features: [
+      { title: "Student Homework & Daily Diary", desc: "Share tasks, classwork updates, and daily diaries instantly with parents." },
+      { title: "Biometric-ready Attendance", desc: "Integrate directly with biometric hardware for real-time check-in tracking." },
+      { title: "Detailed Academic Profiles", desc: "Keep a 360-degree history of files, contact info, and registration details." },
+      { title: "Performance Analytics", desc: "View auto-generated charts showing test progress, class ranks, and historical trends." },
+      { title: "Automated ID Card Generation", desc: "Design and print bulk QR-coded student ID cards with a single click." }
+    ]
+  },
+  {
+    title: "Financial Suite",
+    desc: "Robust expense tracking, automated invoice generation, and collection ledger.",
+    icon: Wallet,
+    colorClass: "text-emerald-600 bg-emerald-50 border-emerald-100",
+    glowClass: "bg-emerald-500/10",
+    features: [
+      { title: "WhatsApp Fee Reminders", desc: "Send automated, gentle payment reminders directly to parent WhatsApp numbers." },
+      { title: "GST-Compliant Invoicing", desc: "Generate professional tax-ready invoices, receipts, and split payment ledgers." },
+      { title: "Partial Payment Tracking", desc: "Manage flexible fee structures, installment setups, and outstanding balances." },
+      { title: "Expense Categorization", desc: "Log vendor payments, utility bills, and salaries to track net profitability." },
+      { title: "Daily Revenue Snapshots", desc: "View real-time collections and bank transfer reports on a clean dashboard." }
+    ]
+  },
+  {
+    title: "Mobile Ecosystem",
+    desc: "Unified parent-teacher communication app with instant notifications and payments.",
+    icon: Smartphone,
+    colorClass: "text-primary bg-orange-50 border-orange-100",
+    glowClass: "bg-primary/10",
+    features: [
+      { title: "Exam Results & Digital Report Cards", desc: "Publish exam marks and beautiful, downloadable digital report cards." },
+      { title: "Real-time Attendance Push Notifications", desc: "Notify parents instantly when a student arrives or leaves the campus." },
+      { title: "Online Fee Payment (UPI/Card/NetBanking)", desc: "Accept instant payments via integrated gateways with automated receipting." },
+      { title: "Digital Leave Requests for Parents", desc: "Allow parents to submit leave notes through the app for teacher approval." },
+      { title: "Institute Gallery & Event Highlights", desc: "Share school announcements, news, images, and video galleries easily." }
+    ]
+  }
+];
 
 export default function FeaturesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Global Tech Grid Backdrop */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35 pointer-events-none -z-20"></div>
+
+      {/* Hero Glowing Blob */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-primary/10 to-transparent blur-[120px] pointer-events-none -z-10"></div>
+
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 
-      <main className="pt-22 pb-12">
+      <main className="pt-24 pb-12">
         {/* Features Hero */}
-        <section className="section-container text-center mb-5">
-          <div className=" inline-block rounded-full bg-primary/5 px-4 py-1 text-xs font-bold text-primary uppercase tracking-[0.3em] border border-primary/10">
+        <section className="section-container text-center mb-10 relative">
+          <div className="inline-block rounded-full bg-primary/5 px-4 py-1 text-xs font-bold text-primary uppercase tracking-[0.3em] border border-primary/10 mb-4">
             Platform Capabilities
           </div>
-          <h1 className="text-5xl font-bold text-navy tracking-tighter mb-4 sm:text-7xl">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-navy tracking-tight mb-4 leading-tight">
             Everything you need to <br />
-            <span className="text-primary">Scale</span> your Institute.
+            <span className="text-primary italic font-black">Scale</span> your Institute.
           </h1>
-          <p className="text-gray-500 max-w-2xl mx-auto text-sm font-light leading-relaxed">
+          <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-base font-light leading-relaxed">
             Explore the deep architectural features of Tuoora ERP and FeeEasy App.
             Designed for high-density management and seamless parent engagement.
           </p>
         </section>
 
         {/* Categories Grid */}
-        <section className="section-container mb-16">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <FeatureCategory
-              icon="👥"
-              title="Student Management"
-              features={[
-                "Student Homework & Daily Diary",
-                "Biometric-ready Attendance",
-                "Detailed Academic Profiles",
-                "Performance Analytics",
-                "Automated ID Card Generation"
-              ]}
-            />
-            <FeatureCategory
-              icon="💰"
-              title="Financial Suite"
-              features={[
-                "WhatsApp Fee Reminders",
-                "GST-Compliant Invoicing",
-                "Partial Payment Tracking",
-                "Expense Categorization",
-                "Daily Revenue Snapshots"
-              ]}
-            />
-            <FeatureCategory
-              icon="📱"
-              title="Mobile Ecosystem"
-              features={[
-                "Exam Results & Digital Report Cards",
-                "Real-time Attendance Push Notifications",
-                "Online Fee Payment (UPI/Card/NetBanking)",
-                "Digital Leave Requests for Parents",
-                "Institute Gallery & Event Highlights"
-              ]}
-            />
+        <section className="section-container mb-20 px-4">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+            {categoriesData.map((category, idx) => (
+              <FeatureCategory
+                key={idx}
+                title={category.title}
+                desc={category.desc}
+                icon={category.icon}
+                colorClass={category.colorClass}
+                glowClass={category.glowClass}
+                features={category.features}
+              />
+            ))}
           </div>
         </section>
 
         <PowerSection />
 
         {/* Unique Animated CTA */}
-        <section className="section-container pb-2 pt-4">
-          <div className="relative overflow-hidden rounded-[2rem] bg-navy p-8 lg:p-10 text-center">
+        <section className="section-container pb-2 pt-4 px-4">
+          <div className="relative overflow-hidden rounded-[2rem] bg-navy p-8 lg:p-12 text-center">
             {/* Animated Background Elements */}
             <div className="absolute -top-24 -left-24 h-64 w-64 bg-primary/20 rounded-full blur-[80px] animate-pulse"></div>
             <div className="absolute -bottom-24 -right-24 h-64 w-64 bg-primary/10 rounded-full blur-[80px] animate-pulse-delayed"></div>
@@ -86,16 +116,16 @@ export default function FeaturesPage() {
             </div>
 
             <div className="relative z-10 max-w-3xl mx-auto">
-              <span className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-1 block">Ready to start?</span>
-              <h2 className="text-2xl lg:text-4xl font-bold text-white mb-5 tracking-tighter leading-tight">
+              <span className="text-xs font-black text-primary uppercase tracking-[0.4em] mb-2 block">Ready to start?</span>
+              <h2 className="text-3xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight leading-tight">
                 Experience the Future of <br />
-                <span className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-transparent italic">Institutional Management</span>
+                <span className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-transparent italic font-black">Institutional Management</span>
               </h2>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
                 <button 
                   onClick={() => setIsModalOpen(true)}
-                  className="group relative px-10 py-3.5 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-2xl shadow-primary/40 hover:scale-105 transition-all overflow-hidden"
+                  className="group relative px-10 py-3.5 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-2xl shadow-primary/40 hover:scale-105 transition-all overflow-hidden"
                 >
                   <span className="relative z-10">Request Free Demo</span>
                   <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -105,13 +135,13 @@ export default function FeaturesPage() {
 
                 <Link 
                   href="/contact"
-                  className="px-9 py-3.5 bg-white/5 border border-white/10 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm"
+                  className="px-9 py-3.5 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm"
                 >
                   Chat with Expert
                 </Link>
               </div>
 
-              <p className="mt-4 text-xs text-white/40 font-medium tracking-wide">
+              <p className="mt-5 text-xs text-white/40 font-medium tracking-wide">
                 Join 500+ Institutes Growing with Tuoora ERP. No Credit Card Required.
               </p>
             </div>
@@ -138,19 +168,39 @@ export default function FeaturesPage() {
   );
 }
 
-function FeatureCategory({ icon, title, features }) {
+function FeatureCategory({ title, desc, icon: Icon, colorClass, glowClass, features }) {
   return (
-    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
-      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">{icon}</div>
-      <h3 className="text-lg font-bold text-navy mb-4 tracking-tight">{title}</h3>
-      <ul className="space-y-2">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-center gap-3">
-            <div className="h-1.5 w-1.5 rounded-full bg-primary/30"></div>
-            <span className="text-sm text-gray-500 font-medium">{feature}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="relative p-8 rounded-3xl bg-white border border-slate-200/60 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between overflow-hidden">
+      {/* Glow Effect */}
+      <div className={`absolute -right-10 -bottom-10 h-32 w-32 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 opacity-30 group-hover:opacity-80 ${glowClass}`}></div>
+      
+      <div>
+        <div className="flex items-center gap-4 mb-6">
+          <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border shadow-sm group-hover:scale-105 transition-transform duration-300 ${colorClass}`}>
+            <Icon className="w-5 h-5 stroke-[2]" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-navy tracking-tight">{title}</h3>
+            <p className="text-[11px] text-slate-400 font-medium leading-none mt-1">{desc}</p>
+          </div>
+        </div>
+
+        <div className="h-px bg-slate-100 w-full mb-6" />
+
+        <ul className="space-y-4 mb-2">
+          {features.map((feature, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <div className="h-5 w-5 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 group-hover:border-primary/30 group-hover:text-primary transition-colors duration-300">
+                <Check className="w-2.5 h-2.5 stroke-[3]" />
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold text-slate-800 leading-snug">{feature.title}</h4>
+                <p className="text-[11px] text-slate-400 font-normal leading-relaxed mt-0.5">{feature.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

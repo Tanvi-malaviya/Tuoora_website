@@ -26,33 +26,31 @@ const faqs = [
   },
 ];
 
-const plans = ["Starter", "Professional", "Enterprise"];
+const plans = ["Monthly Flex", "Half-Year Pro", "Annual Elite", "Free Plan"];
 
 const features = [
   {
     category: "Student Management",
     items: [
-      { title: "Student Database", values: [true, true, true] },
-      { title: "Attendance (App/Web)", values: [true, true, true] },
-      { title: "ID Card Generation", values: [false, true, true] },
-      { title: "Batch Management", values: ["Limited", "Unlimited", "Unlimited"] },
+      { title: "Student Database", values: [true, true, true, true] },
+      { title: "Attendance (App/Web)", values: [true, true, true, true] },
+      { title: "ID Card Generation", values: [true, true, true, true] },
+      { title: "Batch Management", values: ["Unlimited", "Up to 5,000", "Unlimited", "Unlimited"] },
     ],
   },
   {
     category: "Financial Suite",
     items: [
-      { title: "Fee Tracking", values: [true, true, true] },
-      { title: "WhatsApp Reminders", values: [true, true, true] },
-      { title: "Expense Manager", values: [false, true, true] },
-      { title: "GST Invoicing", values: [false, true, true] },
-      { title: "Tally Integration", values: [false, false, true] },
+      { title: "Fee Tracking", values: [true, true, true, true] },
+      { title: "WhatsApp Reminders", values: [true, true, true, true] },
+      { title: "Expense Manager", values: [true, true, true, true] },
+      { title: "GST Invoicing", values: [true, true, true, true] },
+      { title: "Tally Integration", values: [true, false, true, true] },
     ],
   },
 ];
 
 export default function Pricing() {
-   const [isYearly, setIsYearly] = useState(true);
-
    return (
       <div className="min-h-screen bg-white">
          <Navbar />
@@ -65,139 +63,57 @@ export default function Pricing() {
                   Plans that scale with <br />
                   <span className="text-primary italic">Your Ambition.</span>
                </h1>
-
-               {/* Pricing Toggle */}
-               <div className="flex items-center justify-center gap-4 mt-3">
-                  <span className={`text-[10px] font-bold uppercase tracking-widest ${!isYearly ? 'text-navy' : 'text-gray-300'}`}>Monthly</span>
-                  <button
-                     onClick={() => setIsYearly(!isYearly)}
-                     className="w-10 h-5 rounded-full bg-gray-100 p-1 relative transition-colors"
-                  >
-                     <div className={`absolute top-1 h-3 w-3 rounded-full bg-primary transition-all ${isYearly ? 'right-1' : 'left-1'}`}></div>
-                  </button>
-                  <div className="flex items-center gap-2">
-                     <span className={`text-[10px] font-bold uppercase tracking-widest ${isYearly ? 'text-navy' : 'text-gray-300'}`}>Yearly</span>
-                     <span className="bg-green-100 text-green-600 text-[8px] font-black px-2 py-0.5 rounded-full uppercase">Save 20%</span>
-                  </div>
-               </div>
+               <p className="text-gray-400 text-sm max-w-md mx-auto">
+                  Scalable solutions for individual schools to large university networks.
+               </p>
             </section>
 
             {/* Pricing Cards */}
-            <section className="section-container mb-6 px-4 py-5">
-               <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-start">
+            <section className="section-container px-4 py-5">
+               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
                   <PricingCard
-                     title="Starter"
-                     price={isYearly ? "799" : "999"}
-                     desc="Perfect for small coaching centers."
-                     features={["Up to 100 Students", "Basic Fee Tracking", "Attendance via App", "WhatsApp Alerts"]}
+                     title="Monthly Flex"
+                     price="2,500"
+                     duration="30 DAYS"
+                     desc="Flexible monthly billing for dynamic schools."
+                     features={["Unlimited Students", "Complete Financial Suite", "WhatsApp Notifications", "Priority Email Support"]}
                      isPopular={false}
                   />
                   <PricingCard
-                     title="Professional"
-                     price={isYearly ? "1999" : "2499"}
+                     title="Half-Year Pro"
+                     price="11,000"
+                     duration="180 DAYS"
                      desc="Most popular for growing institutes."
-                     features={["Unlimited Students", "Advanced Financials", "Staff Payroll", "Inventory Logic", "Exam Management"]}
+                     features={["Up to 5,000 Students", "Advanced Analytics", "Staff Payroll & Expenses", "Priority 24/7 Call Support"]}
                      isPopular={true}
                   />
                   <PricingCard
-                     title="Enterprise"
-                     price="Custom"
-                     desc="For multi-branch schools & universities."
-                     features={["Multi-branch Sync", "White-label Mobile App", "Priority API Access", "Dedicated Server", "On-site Training"]}
+                     title="Annual Elite"
+                     price="17,000"
+                     duration="365 DAYS"
+                     desc="Premium features for large university networks."
+                     features={["Unlimited Students", "Dedicated Account Manager", "Custom Integrations", "SLA Guarantees & API Access"]}
+                     isPopular={false}
+                  />
+                  <PricingCard
+                     title="Free Plan"
+                     price="0"
+                     duration="30 DAYS"
+                     desc="Try out Tuoora for 1 month free."
+                     features={["Up to 100 Students", "Basic Fee Tracking", "Attendance (App/Web)", "Standard Email Support"]}
                      isPopular={false}
                   />
                </div>
             </section>
 
-            {/* Compare All Features Section */}
-      <section className="section-container pt-16 pb-8">
-      
-      {/* Heading */}
-      <div className="text-center mb-14">
-        <h2 className="text-3xl lg:text-4xl font-black text-navy tracking-tight">
-          Compare All Features
-        </h2>
-        <p className="text-gray-400 text-sm mt-2">
-          Pick the plan that fits your institute best
-        </p>
-      </div>
-
-      <div className="relative overflow-hidden rounded-3xl border border-gray-100 shadow-xl">
-
-        {/* Glow Background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
-
-        {/* Header */}
-        <div className="grid grid-cols-4 bg-white sticky top-0 z-10">
-          <div className="p-5 font-bold text-gray-500 text-xs uppercase tracking-widest">
-            Features
-          </div>
-
-          {plans.map((plan, i) => (
-            <div key={i} className="p-5 text-center relative group">
-              
-              <div className="text-sm font-bold text-navy">{plan}</div>
-
-              {/* Hover underline animation */}
-              <div className="h-[2px] w-0 bg-primary mx-auto mt-2 transition-all duration-300 group-hover:w-10" />
-            </div>
-          ))}
-        </div>
-
-        {/* Body */}
-        {features.map((section, idx) => (
-          <div key={idx}>
-
-            {/* Category Title */}
-            <div className="bg-gray-50/60 px-5 py-3 text-xs font-black uppercase text-gray-400 tracking-wider">
-              {section.category}
-            </div>
-
-            {/* Rows */}
-            {section.items.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-4 items-center border-t border-gray-100 hover:bg-primary/5 transition"
-              >
-                {/* Feature Name */}
-                <div className="p-5 text-sm font-medium text-gray-700">
-                  {item.title}
-                </div>
-
-                {/* Values */}
-                {item.values.map((val, j) => (
-                  <div key={j} className="p-5 text-center">
-
-                    {typeof val === "boolean" ? (
-                      val ? (
-                        <Check className="mx-auto text-green-500 w-5 h-5" />
-                      ) : (
-                        <X className="mx-auto text-gray-300 w-5 h-5" />
-                      )
-                    ) : (
-                      <span className="text-xs font-semibold text-gray-500">
-                        {val}
-                      </span>
-                    )}
-
-                  </div>
-                ))}
-              </motion.div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </section>
+          
+     
 
             {/* FAQ Preview - High Density */}
-            <section className="section-container pt-8 pb-16 border-t border-gray-100">
+            <section className="section-container pt-2">
 
       {/* Heading */}
-      <div className="text-center mb-10">
+      <div className="text-center mb-5">
         <h3 className="text-2xl font-black text-navy tracking-tight">
           Quick Answers
         </h3>
@@ -279,44 +195,50 @@ export default function Pricing() {
    );
 }
 
-function PricingCard({ title, price, desc, features, isPopular }) {
+function PricingCard({ title, price, duration, desc, features, isPopular }) {
    return (
-      <div className={`relative p-6 rounded-3xl transition-all duration-500 border mx-auto w-full max-w-sm md:max-w-none ${isPopular ? 'bg-navy border-navy  md:scale-105 z-10' : 'bg-white border-gray-100 hover:shadow-xl'}`}>
+      <div className={`relative p-6 rounded-2xl transition-all duration-300 border flex flex-col justify-between bg-white ${
+         isPopular 
+            ? 'border-primary shadow-lg shadow-primary/5 ring-1 ring-primary/20 scale-[1.02] md:scale-105 z-10' 
+            : 'border-slate-200/60 hover:border-slate-300 shadow-sm hover:shadow-md'
+      }`}>
          {isPopular && (
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full shadow-lg">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
                Recommended
             </div>
          )}
 
-         <div className="mb-6">
-            <h3 className={`text-base font-black uppercase tracking-widest mb-1 ${isPopular ? 'text-primary' : 'text-navy'}`}>{title}</h3>
-            <p className={`text-xs font-medium ${isPopular ? 'text-white/40' : 'text-gray-400'}`}>{desc}</p>
+         <div>
+            <div className="mb-5">
+               <span className={`text-[10px] font-bold uppercase tracking-widest ${isPopular ? 'text-primary' : 'text-slate-400'}`}>
+                  {title}
+               </span>
+               <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">{desc}</p>
+            </div>
+
+            <div className="mb-6 flex items-baseline gap-1">
+               <span className="text-3xl font-extrabold text-slate-900 tracking-tight">
+                  ₹{price}
+               </span>
+               <span className="text-xs font-semibold text-slate-400">/{duration}</span>
+            </div>
+
+            <div className="h-px bg-slate-100 w-full mb-6" />
+
+            <ul className="space-y-3.5 mb-2">
+               {features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                     <div className="h-4 w-4 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                     </div>
+                     <span className="text-xs font-medium text-slate-600 leading-relaxed">{feature}</span>
+                  </li>
+               ))}
+            </ul>
          </div>
-
-         <div className="mb-6 flex items-baseline gap-1">
-            <span className={`text-4xl font-black ${isPopular ? 'text-white' : 'text-navy'}`}>
-               {price === "Custom" ? "" : "₹"}{price}
-            </span>
-            {price !== "Custom" && <span className={`text-xs font-bold ${isPopular ? 'text-white/40' : 'text-gray-400'}`}>/month</span>}
-         </div>
-
-         <ul className="space-y-3 mb-4">
-            {features.map((feature, i) => (
-               <li key={i} className="flex items-center gap-3">
-                  <div className={`h-1 w-1 rounded-full ${isPopular ? 'bg-primary' : 'bg-primary/40'}`}></div>
-                  <span className={`text-xs font-medium ${isPopular ? 'text-white/70' : 'text-gray-500'}`}>{feature}</span>
-               </li>
-            ))}
-         </ul>
-
-         <Link href="/contact" className="block w-full">
-            <button className={`w-full py-3 text-xs font-black uppercase tracking-widest rounded-xl transition-all ${isPopular ? 'bg-primary text-white shadow-xl shadow-primary/20' : 'bg-gray-50 text-navy hover:bg-primary hover:text-white'}`}>
-               {price === "Custom" ? "Contact Us" : "Get Started"}
-            </button>
-         </Link>
 
          {/* Background Accent */}
-         {isPopular && <div className="absolute -bottom-10 -right-10 h-32 w-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>}
+         {isPopular && <div className="absolute -bottom-10 -right-10 h-32 w-32 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>}
       </div>
    );
 }
