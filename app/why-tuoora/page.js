@@ -1,11 +1,15 @@
 'use client';
+import { useState } from 'react';
+import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 export default function WhyTuoora() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
+      <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       
       <main className="pt-14 pb-8">
         {/* Hero Section */}
@@ -187,14 +191,20 @@ export default function WhyTuoora() {
                     <span className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-transparent italic">Institutional Management</span>
                  </h2>
                  <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
-                    <button className="group relative px-10 py-3.5 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-2xl shadow-primary/40 hover:scale-105 transition-all overflow-hidden">
+                    <button 
+                       onClick={() => setIsModalOpen(true)}
+                       className="group relative px-10 py-3.5 bg-primary text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-2xl shadow-primary/40 hover:scale-105 transition-all overflow-hidden"
+                    >
                        <span className="relative z-10">Request Free Demo</span>
                        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                        <div className="absolute inset-0 rounded-xl border-4 border-primary/50 animate-ping opacity-20"></div>
                     </button>
-                    <button className="px-9 py-3.5 bg-white/5 border border-white/10 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <Link 
+                       href="/contact"
+                       className="px-9 py-3.5 bg-white/5 border border-white/10 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm"
+                    >
                        Chat with Expert
-                    </button>
+                    </Link>
                  </div>
               </div>
            </div>

@@ -5,7 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
-export default function Navbar({ isModalOpen, setIsModalOpen }) {
+export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpen: externalSetIsModalOpen }) {
+   const [localIsModalOpen, setLocalIsModalOpen] = useState(false);
+   const isModalOpen = externalIsModalOpen !== undefined ? externalIsModalOpen : localIsModalOpen;
+   const setIsModalOpen = externalSetIsModalOpen !== undefined ? externalSetIsModalOpen : setLocalIsModalOpen;
    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
    const [scrolled, setScrolled] = useState(false);
    const pathname = usePathname();
