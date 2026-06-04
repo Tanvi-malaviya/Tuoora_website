@@ -1,55 +1,98 @@
 'use client'
 import { useState } from 'react';
 import Link from "next/link";
-import { Users, Wallet, Smartphone, Check } from "lucide-react";
+import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Check } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PowerSection from "@/components/PowerSection";
 
 const categoriesData = [
   {
-    title: "Student Management",
-    desc: "Seamless administration database and automated student cycle monitoring.",
-    icon: Users,
+    title: "Student & Batch Management",
+    desc: "Complete student lifecycle — from enrollment to ID card, attendance, and parent connectivity.",
+    icon: GraduationCap,
     colorClass: "text-indigo-600 bg-indigo-50 border-indigo-100",
     glowClass: "bg-indigo-500/10",
     features: [
-      { title: "Student Homework & Daily Diary", desc: "Share tasks, classwork updates, and daily diaries instantly with parents." },
-      { title: "Biometric-ready Attendance", desc: "Integrate directly with biometric hardware for real-time check-in tracking." },
-      { title: "Detailed Academic Profiles", desc: "Keep a 360-degree history of files, contact info, and registration details." },
-      { title: "Performance Analytics", desc: "View auto-generated charts showing test progress, class ranks, and historical trends." },
-      { title: "Automated ID Card Generation", desc: "Design and print bulk QR-coded student ID cards with a single click." }
+      { title: "Student Registry & Enrollment", desc: "Full academic database with name, photo, enrollment ID, batch info, and registration dates. Auto-generated 6-digit institute code used in student IDs." },
+      { title: "Smart Batch & Course Allocation", desc: "Group students by batch with capacity limits, classroom assignment, schedule days, and multi-batch support per student." },
+      { title: "QR-Based ID Card System", desc: "Generate printable student ID cards with QR codes. Public API endpoint allows instant ID verification by scanning." },
+      { title: "Birthday Tracker", desc: "Admin dashboard highlights today's birthday students for personalized outreach and relationship building." },
+      { title: "Daily Updates & Class Diary", desc: "Post class topics, notes, and updates to specific batches or all students. Parents and students see them instantly in the app." },
     ]
   },
   {
-    title: "Financial Suite",
-    desc: "Robust expense tracking, automated invoice generation, and collection ledger.",
+    title: "Fee Collection & Financial Suite",
+    desc: "Automated billing cycles, UPI payments, GST invoicing, and granular expense ledgers.",
     icon: Wallet,
     colorClass: "text-emerald-600 bg-emerald-50 border-emerald-100",
     glowClass: "bg-emerald-500/10",
     features: [
-      { title: "WhatsApp Fee Reminders", desc: "Send automated, gentle payment reminders directly to parent WhatsApp numbers." },
-      { title: "GST-Compliant Invoicing", desc: "Generate professional tax-ready invoices, receipts, and split payment ledgers." },
-      { title: "Partial Payment Tracking", desc: "Manage flexible fee structures, installment setups, and outstanding balances." },
-      { title: "Expense Categorization", desc: "Log vendor payments, utility bills, and salaries to track net profitability." },
-      { title: "Daily Revenue Snapshots", desc: "View real-time collections and bank transfer reports on a clean dashboard." }
+      { title: "UPI & QR Code Payments", desc: "Institute uploads UPI ID and QR code once. Students pay directly via GPay/PhonePe deep link or QR scan from the mobile app." },
+      { title: "Structured Fee Cycle Engine", desc: "Configure monthly, term-based, or yearly fee schedules. Set automated discount rules, sibling discounts, and scholarship deductions." },
+      { title: "Partial Payment & Installments", desc: "Enable flexible split-payment schedules. Track partial payments, outstanding balances, and automated balance checks." },
+      { title: "GST Invoicing & PDF Receipts", desc: "Auto-generate GST-compliant invoices and downloadable PDF receipts after every payment. Supports Tally integration for accounting." },
+      { title: "WhatsApp Fee Reminders", desc: "Automated WhatsApp, SMS, and push notification reminders sent before and on due dates via WhatsApp Business Cloud API." },
     ]
   },
   {
-    title: "Mobile Ecosystem",
-    desc: "Unified parent-teacher communication app with instant notifications and payments.",
-    icon: Smartphone,
-    colorClass: "text-primary bg-orange-50 border-orange-100",
-    glowClass: "bg-primary/10",
+    title: "Attendance & Homework",
+    desc: "Batch-wise attendance tracking, homework submission, grading, and performance reports.",
+    icon: Layers,
+    colorClass: "text-blue-600 bg-blue-50 border-blue-100",
+    glowClass: "bg-blue-500/10",
     features: [
-      { title: "Exam Results & Digital Report Cards", desc: "Publish exam marks and beautiful, downloadable digital report cards." },
-      { title: "Real-time Attendance Push Notifications", desc: "Notify parents instantly when a student arrives or leaves the campus." },
-      { title: "Online Fee Payment (UPI/Card/NetBanking)", desc: "Accept instant payments via integrated gateways with automated receipting." },
-      { title: "Digital Leave Requests for Parents", desc: "Allow parents to submit leave notes through the app for teacher approval." },
-      { title: "Institute Gallery & Event Highlights", desc: "Share school announcements, news, images, and video galleries easily." }
+      { title: "Batch Attendance Tracker", desc: "Mark student attendance per batch (Present, Absent, Leave) via web or mobile. Auto-calculates attendance percentage." },
+      { title: "Homework with File Attachments", desc: "Create homework assignments with PDF/image attachments. Students submit solutions digitally from the mobile app." },
+      { title: "Homework Grading & Scores", desc: "Record individual scores per student or bulk-grade an entire batch. Send instant WhatsApp reminders for pending submissions." },
+      { title: "Attendance Reports & Export", desc: "Generate batch-wise attendance reports filterable by date range. Export to Excel for record-keeping." },
+      { title: "Performance Reports", desc: "Homework and exam performance reports per student — exportable to Excel. View subject-wise and batch-wise analytics." },
+    ]
+  },
+  {
+    title: "Staff HR & Payroll",
+    desc: "End-to-end management of institute employees, attendance logs, and payroll processing.",
+    icon: Briefcase,
+    colorClass: "text-amber-600 bg-amber-50 border-amber-100",
+    glowClass: "bg-amber-500/10",
+    features: [
+      { title: "Staff Directory & Departments", desc: "Maintain centralized profiles for staff, receptionists, and admins. Assign department roles and access levels." },
+      { title: "Staff Attendance Tracker", desc: "Monitor daily check-in/check-out logs. Calculate precise work hours for payroll computation." },
+      { title: "Automated Salary Processing", desc: "Build monthly salary sheets, apply bonuses or deductions, and track payout statuses with one click." },
+      { title: "PDF Salary Slip Export", desc: "Generate and download pay slips with full itemized breakdown for every staff member." },
+      { title: "Expense Tracking & Categories", desc: "Category-wise expense management with monthly analysis charts, dashboard summary, and profitability stats." },
+    ]
+  },
+  {
+    title: "Notifications & Communication",
+    desc: "3-channel communication via in-app alerts, Firebase FCM push, and WhatsApp Cloud API.",
+    icon: MessageSquare,
+    colorClass: "text-teal-600 bg-teal-50 border-teal-100",
+    glowClass: "bg-teal-500/10",
+    features: [
+      { title: "WhatsApp Business Cloud API", desc: "Send fee reminders, homework alerts, OTP, and announcements via official Meta WhatsApp Cloud API. Per-institute API configuration." },
+      { title: "Firebase FCM Push Notifications", desc: "Deliver background push notifications to Android and iOS devices even when the app is closed." },
+      { title: "In-App Notification Center", desc: "Real-time alerts stored in database with read/unread tracking. Students and parents see them inside the mobile app." },
+      { title: "Targeted Broadcast System", desc: "Send notifications to specific students, a batch, all parents, all students, or everyone at once. Includes attachment support." },
+      { title: "Notification History & Stats", desc: "View full notification logs with recipient delivery stats and read-rate tracking per message." },
+    ]
+  },
+  {
+    title: "CRM, Leads & Subscription",
+    desc: "Leads pipeline, enrollment conversion, Razorpay subscriptions, and multi-tenant access.",
+    icon: Target,
+    colorClass: "text-rose-600 bg-rose-50 border-rose-100",
+    glowClass: "bg-rose-500/10",
+    features: [
+      { title: "Leads CRM Pipeline", desc: "Log walk-ins, inquiries, and online leads. Track pipeline stages (Cold → Warm → Hot → Enrolled) with notes and follow-up history." },
+      { title: "Enrollment Conversion Engine", desc: "Convert confirmed leads into enrolled students with automatic batch allocation and account creation." },
+      { title: "Razorpay Subscription Plans", desc: "Manage plan tiers (Monthly Flex, Half-Year Pro, Annual Elite, Free Trial). Integrate Razorpay for payment verification." },
+      { title: "30-Day Free Trial Auto-Setup", desc: "Every new institute gets an automatic Free Plan on registration — no credit card required. Go live within 24 hours." },
+      { title: "Multi-Tenant Sanctum Auth", desc: "Three separate auth guards for Institute Admin, Student, and Parent. Token-based access with 1-hour access tokens and 24-hour refresh tokens." },
     ]
   }
 ];
+
 
 export default function FeaturesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -66,11 +109,11 @@ export default function FeaturesPage() {
 
       <main className="pt-24 pb-12">
         {/* Features Hero */}
-        <section className="section-container text-center mb-10 relative">
-          <div className="inline-block rounded-full bg-primary/5 px-4 py-1 text-xs font-bold text-primary uppercase tracking-[0.3em] border border-primary/10 mb-4">
+        <section className="section-container text-center mb-4 relative">
+          <div className="inline-block rounded-full bg-primary/5 px-4 py-1 text-xs font-bold text-primary uppercase tracking-[0.3em] border border-primary/10 ">
             Platform Capabilities
           </div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-navy tracking-tight mb-4 leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-navy tracking-tight mb-2 leading-tight">
             Everything you need to <br />
             <span className="text-primary italic font-black">Scale</span> your Institute.
           </h1>
@@ -81,8 +124,8 @@ export default function FeaturesPage() {
         </section>
 
         {/* Categories Grid */}
-        <section className="section-container mb-20 px-4">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+        <section className="section-container px-4">
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3 items-stretch">
             {categoriesData.map((category, idx) => (
               <FeatureCategory
                 key={idx}
@@ -170,9 +213,9 @@ export default function FeaturesPage() {
 
 function FeatureCategory({ title, desc, icon: Icon, colorClass, glowClass, features }) {
   return (
-    <div className="relative p-8 rounded-3xl bg-white border border-slate-200/60 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between overflow-hidden">
+    <div className="relative p-8 rounded-3xl bg-white border border-slate-200/60   transition-all duration-300 group flex flex-col justify-between">
       {/* Glow Effect */}
-      <div className={`absolute -right-10 -bottom-10 h-32 w-32 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 opacity-30 group-hover:opacity-80 ${glowClass}`}></div>
+      {/* <div className={`absolute -right-10 -bottom-10 h-32 w-32 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 opacity-30 group-hover:opacity-80 ${glowClass}`}></div> */}
       
       <div>
         <div className="flex items-center gap-4 mb-6">

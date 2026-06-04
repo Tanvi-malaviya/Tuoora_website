@@ -1,117 +1,215 @@
+'use client';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ModulesPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const allModules = [
     {
       id: "students",
       icon: <UsersIcon />,
       title: "Student Management",
-      desc: "Comprehensive registry with full academic and personal history tracking.",
-      features: ["KYC Digital Admission", "Biometric ID Generation", "Progress Report Cards", "Disciplinary Logs", "Automatic Promotions", "Alumni Database", "Parent/Guardian Linking", "Transfer Certificate (TC) Gen"]
+      badge: "Core",
+      desc: "Complete student lifecycle from enrollment to ID card generation.",
+      features: [
+        "Student registry with photo & enrollment ID",
+        "Auto-generated 6-digit institute code",
+        
+        "Batch assignment & multi-batch support",
+        "Birthday tracker on admin dashboard",
+        "Student profile photo upload",
+      
+        "Excel export of student list",
+      ]
     },
     {
-      id: "staff",
-      icon: <StaffIcon />,
-      title: "Staff & Teacher Hub",
-      desc: "Faculty workload management and automated payroll processing system.",
-      features: ["Workload Optimization", "Real-time Attendance", "Automated Payroll", "Document Management", "Performance Reviews", "Leave Management", "Staff Directory", "Experience Letters"]
-    },
-    {
-      id: "finance",
+      id: "fees",
       icon: <FinanceIcon />,
-      title: "Financial Suite",
-      desc: "End-to-end fee collection and institutional expense auditing tool.",
-      features: ["Dynamic Fee Structure", "Integrated Payments", "GST Ready Invoicing", "Partial Payments", "Income/Expense Ledger", "Daily Cashbook", "Defaulter Tracking", "Financial Audits"]
+      title: "Fee Collection & Payments",
+      badge: "Financial",
+      desc: "UPI, QR code, and GST-compliant fee management for institutes.",
+      features: [
+        "UPI ID & QR code payment setup",
+       
+        "Monthly, term & yearly fee schedules",
+        "Partial payments & installment tracking",
+        "GST-compliant invoicing",
+        "PDF receipt auto-generation (DOMPDF)",
+        "Outstanding balance dashboard",
+        "Tally-compatible financial exports",
+      ]
     },
     {
       id: "attendance",
       icon: <AttendanceIcon />,
-      title: "Smart Attendance",
-      desc: "Automated presence tracking for students/staff with instant push alerts.",
-      features: ["Batch-wise Marking", "WhatsApp Absence Alerts", "Monthly Percentage", "Staff In/Out Logs", "Late-coming Penalties", "Holiday Calendar", "Attendance Recovery", "Mobile Marking"]
+      title: "Attendance Tracking",
+      badge: "Academic",
+      desc: "Batch-wise daily attendance with automated percentage calculation.",
+      features: [
+        "Mark Present / Absent  per batch",
+        "Mark from web dashboard or mobile app",
+        "Auto attendance percentage calculation",
+        "Date-range filter for records",
+        "WhatsApp alert on absence",
+        "Batch-wise attendance report",
+        "Export attendance to Excel",
+        
+      ]
     },
     {
-      id: "community",
-      icon: <FeedIcon />,
-      title: "Community Feed",
-      desc: "Modern social ecosystem for engagement and institutional updates.",
-      features: ["Image/Video Gallery", "Interactive Polls", "Announcement Hub", "Engagement Metrics", "Privacy Controls", "Branded Mobile Feed", "Event RSVP", "Moderation Tools"]
+      id: "homework",
+      icon: <NotebookIcon />,
+      title: "Homework Managment",
+      badge: "Academic",
+      desc: "Assign, receive, grade, and remind — complete homework lifecycle.",
+      features: [
+        "Create homework with PDF/image attachment",
+        "Students submit solutions via mobile app",
+        "Individual score entry per student",
+        "Bulk batch grading support",
+        "WhatsApp reminder to pending students",
+        "Homework submission history",
+        "Performance report per student",
+        "Export grades to Excel",
+      ]
+    },
+    {
+      id: "staff",
+      icon: <StaffIcon />,
+      title: "Staff HR & Payroll",
+      badge: "HR",
+      desc: "End-to-end HR management with payroll, attendance, and salary slips.",
+      features: [
+        "Staff directory with department roles",
+        "Custom staff access levels",
+        "Daily check-in / check-out logs",
+        "Work hour calculation for payroll",
+        "Monthly salary sheet generation",
+        "Bonus & deduction management",
+        "PDF salary slip export",
+        "Staff Excel export",
+      ]
+    },
+    {
+      id: "notifications",
+      icon: <WhatsappIcon />,
+      title: "Notifications & Alerts",
+      badge: "Communication",
+      desc: "3-channel communication: In-App, FCM Push, and WhatsApp Cloud API.",
+      features: [
+        "WhatsApp Business Cloud API integration",
+        "Firebase FCM push to Android & iOS",
+        "In-app notification center with read tracking",
+        "Send to specific student / batch / all",
+        "Notification with file attachments",
+        "Fee due & homework reminders",
+        "Delivery & read-rate stats",
+        "Per-institute WhatsApp API config",
+      ]
     },
     {
       id: "reports",
       icon: <ReportsIcon />,
       title: "Reports & Analytics",
-      desc: "Data-driven insights to monitor growth and operational health.",
-      features: ["Revenue Trend Charts", "Attendance Heatmaps", "Expense Breakdown", "Student Growth Map", "Daily Ops Summary", "Custom Report Builder", "Performance Ranking", "Export to PDF/Excel"]
+      badge: "Analytics",
+      desc: "Fee, attendance, and performance reports with Excel export.",
+      features: [
+        "Fee collection summary dashboard",
+        "Paid vs outstanding breakdown",
+        "Batch-wise attendance report",
+        "Student performance report",
+        "Expense analysis charts",
+        "Monthly revenue trends",
+        "Export all reports to Excel",
+        "Dashboard overview cards",
+      ]
     },
     {
       id: "expenses",
       icon: <ExpenseIcon />,
       title: "Expense Management",
-      desc: "Track every rupee spent with categorized auditing and receipt logs.",
-      features: ["Category Spending", "Receipt Scanning", "Monthly Budgeting", "Vendor Management", "Profit/Loss Analysis", "Petty Cash Log", "Audit Trail", "Tax Deductions"]
+      badge: "Financial",
+      desc: "Category-wise expense tracking with monthly analysis and summary.",
+      features: [
+        "Create custom expense categories",
+        "Record and track all institute expenses",
+        "Monthly expense analysis charts",
+        "Dashboard expense summary card",
+        "Vendor & utility bill categorization",
+        "Profitability tracking",
+        "Add/edit/delete expense entries",
+        "Export expense data",
+      ]
     },
     {
-      id: "whatsapp",
-      icon: <WhatsappIcon />,
-      title: "Updates & WhatsApp",
-      desc: "Automated communication using official Meta Business API channels.",
-      features: ["Fee Reminders", "Bulk Event SMS", "Direct Parent Chat", "Brand Verification", "Push Notifications", "Auto-Responses", "Attachment Support", "History Logs"]
+      id: "crm",
+      icon: <FeedIcon />,
+      title: "CRM & Leads Pipeline",
+      badge: "CRM",
+      desc: "Manage prospective student leads and convert them to enrollments.",
+      features: [
+        "Log walk-ins, calls & online inquiries",
+        "Pipeline stages: Cold → Warm → Hot → Enrolled",
+        "Add notes & follow-up history per lead",
+        "Lead-to-student conversion",
+        "Auto batch allocation on enrollment",
+        "Account creation on conversion",
+        "Shared team lead visibility",
+        "Delete & update lead records",
+      ]
     },
-    {
-      id: "homework",
-      icon: <NotebookIcon />,
-      title: "Learning Center",
-      desc: "Bridge the gap between class and home with digital assignment tools.",
-      features: ["Voice/Image Uploads", "Digital Submission Portal", "Online Quizzes & Exams", "Batch Resource Sharing", "Library Management", "Grade Tracking", "Resource History", "Teacher Notes"]
-    }
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFDFD]">
-      <Navbar />
-      
-      <main className="pt-22 pb-8">
+      <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+
+      <main className="pt-24 pb-8">
         {/* Header */}
-        <section className="section-container mb-3">
+        <section className="section-container mb-6">
           <div className="max-w-2xl">
-             <div className="inline-block rounded-full bg-primary/5 px-3 py-0.5 text-[8px] font-bold text-primary uppercase tracking-[0.3em] mb-2 border border-primary/10">
-              Operational Intelligence
+            <div className="inline-block rounded-full bg-primary/5 px-3 py-0.5 text-[8px] font-bold text-primary uppercase tracking-[0.3em] mb-2 border border-primary/10">
+              All Modules
             </div>
-            <h1 className="text-3xl font-bold text-navy tracking-tighter mb-1">
-              Comprehensive <span className="text-primary">Module</span> Catalog
+            <h1 className="text-3xl font-bold text-navy tracking-tighter mb-2">
+              Every Tool Your Institute <span className="text-primary italic">Needs.</span>
             </h1>
-            <p className="text-xs text-gray-500 font-light leading-relaxed">
-              Every tool you need to run a modern institute, integrated into a single high-performance dashboard.
+            <p className="text-xs text-gray-500 font-light leading-relaxed max-w-xl">
+              9 production-ready modules covering students, fees, staff HR, attendance, homework, CRM, notifications, expenses, and analytics — all in one dashboard.
             </p>
           </div>
         </section>
 
         {/* Modules List */}
         <section className="section-container">
-          <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {allModules.map((mod) => (
-              <div key={mod.id} className="p-4 rounded-[1.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all group relative overflow-hidden">
+              <div key={mod.id} className="p-5 rounded-[1.5rem] bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-[2rem] group-hover:bg-primary/10 transition-colors"></div>
-                
-                <div className="flex items-center gap-3 mb-3 relative z-10">
-                  <div className="h-8 w-8 rounded-lg bg-surface flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <div className="w-5 h-5">{mod.icon}</div>
+
+                <div className="flex items-start gap-3 mb-3 relative z-10">
+                  <div className="h-9 w-9 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                    <div className="w-4 h-4">{mod.icon}</div>
                   </div>
-                  <h2 className="text-base font-bold text-navy tracking-tight">{mod.title}</h2>
+                  <div>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <h2 className="text-sm font-black text-navy tracking-tight">{mod.title}</h2>
+                      <span className="text-[7px] font-black uppercase tracking-widest bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">{mod.badge}</span>
+                    </div>
+                    <p className="text-[9px] text-gray-400 font-medium leading-relaxed">{mod.desc}</p>
+                  </div>
                 </div>
-                
-                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-4 leading-relaxed">
-                  {mod.desc}
-                </p>
-                
-                <div className="grid grid-cols-1 gap-2">
+
+                <div className="h-px bg-gray-50 mb-3" />
+
+                <div className="grid grid-cols-1 gap-1.5">
                   {mod.features.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3 p-1 rounded-md hover:bg-gray-50 transition-colors">
-                      <div className="h-1.5 w-1.5 rounded-full bg-primary/40"></div>
-                      <span className="text-[11px] font-bold text-navy/80 uppercase tracking-tight">{feature}</span>
+                    <div key={i} className="flex items-center gap-2.5">
+                      <div className="h-1.5 w-1.5 rounded-full bg-primary/40 shrink-0"></div>
+                      <span className="text-[10px] font-medium text-slate-600">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -120,21 +218,31 @@ export default function ModulesPage() {
           </div>
         </section>
 
-        {/* Comparison CTA */}
+        {/* CTA */}
         <section className="section-container mt-10">
           <div className="bg-navy rounded-[2.5rem] p-10 text-white relative overflow-hidden">
             <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-4 tracking-tight">Need a custom module?</h2>
-                <p className="text-sm text-gray-400 font-light max-w-md">
-                  Tuoora is built on a modular architecture. If your institute has a unique workflow, 
-                  our engineering team can build custom solutions tailored for you.
+                <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-3">Get Started</span>
+                <h2 className="text-2xl lg:text-3xl font-bold mb-3 tracking-tight">
+                  Start your 30-day <span className="text-primary italic">free trial.</span>
+                </h2>
+                <p className="text-sm text-gray-400 font-light max-w-md leading-relaxed">
+                  No credit card required. Our team migrates your existing student and fee records within 24 hours — completely free.
                 </p>
               </div>
-              <div className="flex lg:justify-end gap-4">
-                 <Link href="/contact">
-                    <button className="bg-primary px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary/20">Contact Sales</button>
-                 </Link>
+              <div className="flex lg:justify-end gap-4 flex-wrap">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-primary px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-105 transition-all"
+                >
+                  Request Free Demo
+                </button>
+                <Link href="/contact">
+                  <button className="bg-white/5 border border-white/10 px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
+                    Contact Sales
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="absolute top-0 right-0 h-full w-1/3 bg-primary/5 -skew-x-12 translate-x-1/2"></div>
@@ -146,6 +254,7 @@ export default function ModulesPage() {
     </div>
   );
 }
+
 
 // SVG Icons
 const UsersIcon = () => (

@@ -18,13 +18,12 @@ export default function Footer() {
     resources: [
       { name: "Help Center (FAQ)", href: "/faq" },
       { name: "Contact Support", href: "/contact" },
-      { name: "Documentation", href: "#" },
-      { name: "Release Notes", href: "#" },
+    
     ],
     legal: [
       { name: "Privacy Policy", href: "#" },
       { name: "Terms of Service", href: "#" },
-      { name: "Refund Policy", href: "#" },
+    
     ]
   };
 
@@ -49,7 +48,7 @@ export default function Footer() {
               The world's most sophisticated institutional ERP infrastructure. Empowering the next generation of global education.
             </p>
             
-            <div className="space-y-3">
+            {/* <div className="space-y-3">
                <h4 className="text-[10px] font-black text-navy/40 uppercase tracking-[0.3em]">Join our ecosystem</h4>
                <div className="flex p-1 bg-gray-50 border border-gray-100 rounded-2xl focus-within:border-primary/50 focus-within:shadow-lg focus-within:shadow-primary/5 transition-all">
                   <input 
@@ -61,7 +60,7 @@ export default function Footer() {
                     Join
                   </button>
                </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Links Grid */}
@@ -95,15 +94,15 @@ export default function Footer() {
                 <h4 className="text-[10px] font-black text-navy uppercase tracking-[0.3em] mb-6">Get in Touch</h4>
                 <ul className="space-y-4">
                   <li>
-                    <a href="mailto:support@tuoora.com" className="group block">
+                    <a href="mailto:info@tuoora.com" className="group block">
                       <div className="text-[10px] font-black text-navy/30 uppercase tracking-widest mb-1">Email Support</div>
-                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">support@tuoora.com</div>
+                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">info@tuoora.com</div>
                     </a>
                   </li>
                   <li>
-                    <a href="tel:+919876543210" className="group block">
+                    <a href="tel:+919104081291" className="group block">
                       <div className="text-[10px] font-black text-navy/30 uppercase tracking-widest mb-1">Direct Call</div>
-                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">+91 98765 43210</div>
+                      <div className="text-sm font-bold text-navy/90 group-hover:text-primary transition-colors">+91 91040 81291</div>
                     </a>
                   </li>
                 </ul>

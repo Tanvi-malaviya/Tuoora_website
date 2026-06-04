@@ -27,10 +27,11 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
       phone: '',
       institute_name: '',
       email: '',
-      designation: 'Principal / Director'
+      designation: ''
    });
    const [isSubmitting, setIsSubmitting] = useState(false);
    const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
    const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -41,9 +42,10 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
       e.preventDefault();
       setIsSubmitting(true);
       setSubmitStatus(null);
-      
+
       try {
-         const response = await fetch('http://127.0.0.1:8000/api/book-demo', {
+         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://tuoora.com';
+         const response = await fetch(`${apiBaseUrl}/api/book-demo`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json',
@@ -51,9 +53,9 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
             },
             body: JSON.stringify(formData),
          });
-         
+
          const data = await response.json();
-         
+
          if (response.ok) {
             setSubmitStatus('success');
             setTimeout(() => {
@@ -64,8 +66,9 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                   phone: '',
                   institute_name: '',
                   email: '',
-                  designation: 'Principal / Director'
+                  designation: ''
                });
+               setIsDropdownOpen(false);
             }, 2500);
          } else {
             setSubmitStatus('error');
@@ -90,14 +93,14 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
       <>
          {/* Floating Island Navbar */}
          <div className="fixed top-0 left-0 right-0 z-50 flex justify-center p-4 transition-all duration-500">
-            <motion.nav 
+            <motion.nav
                initial={{ y: -100, opacity: 0 }}
                animate={{ y: 0, opacity: 1 }}
                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                className={`
                   relative flex items-center justify-between px-6 transition-all duration-500 ease-in-out
-                  ${scrolled 
-                     ? 'h-14 w-full max-w-4xl rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.06)]' 
+                  ${scrolled
+                     ? 'h-14 w-full max-w-4xl rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.06)]'
                      : 'h-16 w-full max-w-6xl rounded-[2rem] bg-white border border-gray-100 shadow-sm'
                   }
                `}
@@ -105,10 +108,10 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                {/* Logo Area */}
                <Link href="/" className="flex items-center gap-2 group">
                   <div className={`relative transition-all duration-500 ${scrolled ? 'h-6 w-20' : 'h-7 w-24'} group-hover:scale-105`}>
-                     <Image 
-                        src="/logo3.png" 
-                        alt="Tuoora Logo" 
-                        fill 
+                     <Image
+                        src="/logo3.png"
+                        alt="Tuoora Logo"
+                        fill
                         className="object-contain"
                         priority
                      />
@@ -120,9 +123,9 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                   {navLinks.map((link) => {
                      const isActive = pathname === link.href;
                      return (
-                        <Link 
+                        <Link
                            key={link.name}
-                           href={link.href} 
+                           href={link.href}
                            className={`
                               relative px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 rounded-full
                               ${isActive ? 'text-primary' : 'text-gray-500 hover:text-navy hover:bg-gray-50/50'}
@@ -130,7 +133,7 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                         >
                            {link.name}
                            {isActive && (
-                              <motion.span 
+                              <motion.span
                                  layoutId="activeTab"
                                  className="absolute bottom-1 left-1/2 -translate-x-1/2 h-[3px] w-4 bg-primary rounded-full"
                                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -139,10 +142,10 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                         </Link>
                      );
                   })}
-                  
+
                   <div className="h-4 w-[1px] bg-gray-200 mx-3"></div>
-                  
-                  <motion.button 
+
+                  <motion.button
                      whileHover={{ scale: 1.05 }}
                      whileTap={{ scale: 0.95 }}
                      onClick={() => setIsModalOpen(true)}
@@ -156,7 +159,7 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                </div>
 
                {/* Mobile Toggle Button */}
-               <button 
+               <button
                   className={`
                      md:hidden flex flex-col gap-1.5 items-end justify-center w-8 h-8 transition-all
                      ${isMobileMenuOpen ? 'rotate-90' : ''}
@@ -171,7 +174,7 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                {/* Animated Mobile Menu */}
                <AnimatePresence>
                   {isMobileMenuOpen && (
-                     <motion.div 
+                     <motion.div
                         initial={{ opacity: 0, y: -20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
@@ -185,8 +188,8 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                                  animate={{ opacity: 1, x: 0 }}
                                  transition={{ delay: idx * 0.05 }}
                               >
-                                 <Link 
-                                    href={link.href} 
+                                 <Link
+                                    href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`
                                        flex items-center px-4 py-4 rounded-xl text-xs font-black uppercase tracking-[0.2em] transition-all
@@ -197,7 +200,7 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                                  </Link>
                               </motion.div>
                            ))}
-                           <button 
+                           <button
                               onClick={() => {
                                  setIsMobileMenuOpen(false);
                                  setIsModalOpen(true);
@@ -218,31 +221,31 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
             {isModalOpen && (
                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
                   {/* Backdrop with balanced transparency */}
-                  <div 
-                     className="absolute inset-0 bg-navy/65 backdrop-blur-md" 
+                  <div
+                     className="absolute inset-0 bg-navy/65 backdrop-blur-md"
                      onClick={() => setIsModalOpen(false)}
                   />
-                  
+
                   {/* Modal Container (No Animation) */}
-                  <div 
+                  <div
                      className="relative w-full max-w-3xl bg-white rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[500px]"
                   >
                      {/* Left Panel: Brand Visuals (Desktop Only) */}
-                     <div className="hidden md:flex md:w-[38%] bg-navy relative overflow-hidden flex-col justify-between p-10">
+                     <div className="hidden md:flex md:w-[38%] bg-gradient-to-br from-[#0b0f19] via-[#111827] to-[#0f172a] relative overflow-hidden flex-col justify-between p-10">
                         {/* Abstract Background Shapes */}
                         <div className="absolute top-0 right-0 w-48 h-48 bg-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
-                        
+
                         <div className="relative z-10">
                            <div className="mb-8" />
-                           
+
                            <div className="space-y-4">
                               <span className="inline-block px-3 py-1 bg-white/10 text-primary text-[8px] font-black uppercase tracking-[0.4em] rounded-full">Institutional Tour</span>
-                              <h2 className="text-2xl font-bold text-white tracking-tight leading-tight">The Future of <br/><span className="text-primary">Institute</span> Growth.</h2>
+                              <h2 className="text-2xl font-bold text-white tracking-tight leading-tight">The Future of <br /><span className="text-primary">Institute</span> Growth.</h2>
                               <p className="text-white/50 text-[11px] leading-relaxed max-w-[220px]">Experience the most advanced ERP ecosystem for modern education.</p>
                            </div>
                         </div>
 
-                         <div className="space-y-4 relative z-10">
+                        <div className="space-y-4 relative z-10">
                            {[
                               { title: "Smart Ecosystem", desc: "Automated workflows." },
                               { title: "Institutional Security", desc: "Grade protection." },
@@ -263,11 +266,11 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
 
                      {/* Right Panel: The Form */}
                      <div className="w-full md:w-[62%] bg-white p-8 md:p-10 relative">
-                        <button 
-                           onClick={() => setIsModalOpen(false)} 
+                        <button
+                           onClick={() => setIsModalOpen(false)}
                            className="absolute top-6 right-6 text-gray-300 hover:text-navy transition-colors z-20"
                         >
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                         </button>
 
                         <div className="max-w-sm mx-auto">
@@ -280,98 +283,89 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                  <div className="space-y-1">
                                     <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
-                                    <input 
-                                       type="text" 
+                                    <input
+                                       type="text"
                                        name="full_name"
                                        required
                                        value={formData.full_name}
                                        onChange={handleInputChange}
-                                       placeholder="e.g. Rahul Sharma" 
-                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm" 
+                                       placeholder="e.g. Rahul Sharma"
+                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm"
                                     />
                                  </div>
                                  <div className="space-y-1">
                                     <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number</label>
-                                    <input 
-                                       type="tel" 
+                                    <input
+                                       type="tel"
                                        name="phone"
                                        required
                                        value={formData.phone}
                                        onChange={handleInputChange}
-                                       placeholder="+91 00000 00000" 
-                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm" 
+                                       placeholder="+91 00000 00000"
+                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm"
                                     />
                                  </div>
                               </div>
 
-                               <div className="space-y-1">
+                              <div className="space-y-1">
                                  <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Institute Name</label>
-                                 <input 
-                                    type="text" 
+                                 <input
+                                    type="text"
                                     name="institute_name"
                                     required
                                     value={formData.institute_name}
                                     onChange={handleInputChange}
-                                    placeholder="e.g. Tuoora Academy" 
-                                    className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm" 
+                                    placeholder="e.g. Tuoora Academy"
+                                    className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm"
                                  />
                               </div>
 
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                  <div className="space-y-1">
                                     <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Work Email</label>
-                                    <input 
-                                       type="email" 
+                                    <input
+                                       type="email"
                                        name="email"
                                        required
                                        value={formData.email}
                                        onChange={handleInputChange}
-                                       placeholder="admin@institute.com" 
-                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm" 
+                                       placeholder="admin@institute.com"
+                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm"
                                     />
                                  </div>
                                  <div className="space-y-1">
                                     <label className="text-[9px] font-black text-gray-400 uppercase tracking-widest ml-1">Designation</label>
-                                    <div className="relative">
-                                       <select 
-                                          name="designation"
-                                          value={formData.designation}
-                                          onChange={handleInputChange}
-                                          className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer shadow-sm"
-                                       >
-                                          <option>Principal / Director</option>
-                                          <option>Administrator</option>
-                                          <option>Owner</option>
-                                       </select>
-                                       <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-                                       </div>
-                                    </div>
+                                    <input
+                                       type="text"
+                                       name="designation"
+                                       value={formData.designation}
+                                       onChange={handleInputChange}
+                                       placeholder="e.g. Principal, Director, Owner"
+                                       className="w-full px-4 py-3 bg-gray-50/50 border border-gray-100 rounded-xl text-[10px] font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-gray-300 shadow-sm"
+                                    />
                                  </div>
                               </div>
 
-                               <button 
+                              <button
                                  type="submit"
                                  disabled={isSubmitting}
-                                 className={`group relative w-full py-4 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-xl shadow-xl transition-all duration-300 mt-2 overflow-hidden ${
-                                    submitStatus === 'success' ? 'bg-green-500 shadow-green-500/20' : 
-                                    submitStatus === 'error' ? 'bg-red-500 shadow-red-500/20' : 
-                                    'bg-navy shadow-navy/20 hover:bg-primary'
-                                 }`}
+                                 className={`group relative w-full py-4 text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-xl shadow-xl transition-all duration-300 mt-2 overflow-hidden ${submitStatus === 'success' ? 'bg-green-500 shadow-green-500/20' :
+                                    submitStatus === 'error' ? 'bg-red-500 shadow-red-500/20' :
+                                       'bg-navy shadow-navy/20 hover:bg-primary'
+                                    }`}
                               >
                                  <span className="relative z-10">
-                                    {isSubmitting ? 'Processing...' : 
-                                     submitStatus === 'success' ? 'Request Sent!' : 
-                                     submitStatus === 'error' ? 'Try Again' : 
-                                     'Confirm Walkthrough'}
+                                    {isSubmitting ? 'Processing...' :
+                                       submitStatus === 'success' ? 'Request Sent!' :
+                                          submitStatus === 'error' ? 'Try Again' :
+                                             'Confirm Walkthrough'}
                                  </span>
                                  <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
                               </button>
 
-                               <p 
-                                 className={`text-center text-[9px] font-bold uppercase tracking-widest ${
-                                    submitStatus === 'error' ? 'text-red-500' : 'text-gray-400'
-                                 }`}
+                              <p
+                                 className={`text-center text-[9px] font-bold uppercase tracking-widest ${submitStatus === 'error' ? 'text-red-500' : 'text-gray-400'
+                                    }`}
                               >
                                  {submitStatus === 'error' ? 'Something went wrong. Please check your data.' : 'Priority response: Within 2 hours'}
                               </p>

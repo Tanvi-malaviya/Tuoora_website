@@ -199,7 +199,7 @@ export default function FloatingActions() {
 
                 {/* WhatsApp Button */}
                 <motion.a
-                    href="https://wa.me/919910256145?text=Hello%20Tuoora%20Team,%20I'm%20interested%20in%20learning%20more%20about%20the%20ERP."
+                    href="https://wa.me/919104081291?text=Hello%20Tuoora%20Team,%20I'm%20interested%20in%20learning%20more%20about%20the%20ERP."
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
