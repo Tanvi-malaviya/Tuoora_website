@@ -67,7 +67,7 @@ export default function FAQ() {
          questions: [
             { q: "Can I generate report cards?", a: "Yes. Tuoora supports customizable report card templates that pull data directly from exam results and attendance records." },
             { q: "Does it support automated exam scheduling?", a: "Yes. Our exam module helps you schedule tests, assign rooms, and notify students automatically via the app." },
-            { q: "Can teachers upload study material?", a: "Teachers can upload PDFs, videos, and assignments to the student portal for instant access." }
+            { q: "Can staff members upload study material?", a: "Staff members can upload PDFs, videos, and assignments to the student portal for instant access." }
          ]
       },
       {
@@ -224,7 +224,7 @@ export default function FAQ() {
 
                       {/* Right Actions */}
                       <div className="lg:col-span-5 flex flex-col gap-3">
-                         <a href="https://wa.me/919876543210" target="_blank" className="group/btn relative w-full overflow-hidden px-8 py-5 bg-primary text-white rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center">
+                         <a href="https://wa.me/919104081291" target="_blank" className="group/btn relative w-full overflow-hidden px-8 py-5 bg-primary text-white rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center">
                             <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500"></div>
                             <div className="flex items-center justify-center gap-3">
                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
@@ -233,11 +233,11 @@ export default function FAQ() {
                          </a>
                          
                          <div className="grid grid-cols-2 gap-3">
-                            <a href="tel:+919876543210" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/call">
+                            <a href="tel:+919104081291" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/call">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover/call:scale-110 transition-transform"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/call:text-white transition-colors">Call Now</span>
                             </a>
-                            <a href="mailto:support@tuoora.com" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/mail">
+                            <a href="mailto:info@tuoora.com" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/mail">
                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover/mail:scale-110 transition-transform"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                                <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/mail:text-white transition-colors">Email Us</span>
                             </a>
