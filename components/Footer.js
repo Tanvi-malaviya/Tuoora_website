@@ -21,8 +21,9 @@ export default function Footer() {
     
     ],
     legal: [
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms of Service", href: "#" },
+     { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Terms of Service", href: "/terms-conditions" },
+      { name: "Refund Policy", href: "#" },
     
     ]
   };
