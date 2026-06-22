@@ -1,7 +1,23 @@
 'use client';
+
 import { useState } from 'react';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+   Sparkles, 
+   HelpCircle, 
+   CreditCard, 
+   GraduationCap, 
+   ShieldCheck, 
+   ChevronDown, 
+   Search, 
+   X, 
+   ArrowRight, 
+   MessageSquare, 
+   Phone, 
+   Mail 
+} from 'lucide-react';
 
 export default function FAQ() {
    const [activeIndex, setActiveIndex] = useState(null);
@@ -9,76 +25,117 @@ export default function FAQ() {
    const [selectedCategory, setSelectedCategory] = useState("All");
 
    const categories = [
-      {
-         name: "All",
-         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /><path d="M5 3v4" /><path d="M19 17v4" /><path d="M3 5h4" /><path d="M17 19h4" /></svg>
-         )
-      },
-      {
-         name: "General",
-         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21h18" /><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3" /><path d="M19 21V11" /><path d="M5 21V11" /><path d="M9 21v-4a3 3 0 0 1 6 0v4" /></svg>
-         )
-      },
-      {
-         name: "Payments & Fees",
-         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" /><line x1="2" x2="22" y1="10" y2="10" /></svg>
-         )
-      },
-      {
-         name: "Academic & Exams",
-         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /><path d="M8 6h10" /><path d="M8 10h10" /><path d="M8 14h10" /></svg>
-         )
-      },
-      {
-         name: "Security & Data",
-         icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" /><path d="m9 12 2 2 4-4" /></svg>
-         )
-      }
+      { name: "All", iconComponent: Sparkles },
+      { name: "General", iconComponent: HelpCircle },
+      { name: "Payments & Fees", iconComponent: CreditCard },
+      { name: "Academic & Exams", iconComponent: GraduationCap },
+      { name: "Communication & Alerts", iconComponent: MessageSquare },
+      // { name: "Administration & Security", iconComponent: ShieldCheck }
    ];
 
    const faqs = [
       {
          category: "General",
          questions: [
-            { q: "What is Tuoora ERP?", a: "Tuoora is a modern, high-density institutional management software designed to automate administration, fee collection, and student tracking for schools and coaching centers." },
-            { q: "Do I need technical knowledge to use it?", a: "No. Tuoora is built for simplicity. We provide a zero-training interface that anyone who uses a smartphone can easily navigate." },
-            { q: "How long does it take to set up?", a: "Usually within 24 hours. Our migration experts handle your data sync, and your institute can go live almost instantly." },
-            { q: "Can I manage multiple branches?", a: "Yes. Tuoora Enterprise supports multi-branch management with a unified dashboard to track performance across all locations." },
-            { q: "Does Tuoora work on mobile browsers?", a: "Yes. Our interface is fully responsive, meaning you can access the full admin dashboard from any smartphone or tablet browser." }
+            { 
+               q: "What is Tuoora ?", 
+               a: "Tuoora is a comprehensive, multi-tenant Education ERP and Tuition SaaS platform designed for coaching centers, schools, and educational institutes to streamline their academic operations, communication, and billing." 
+            },
+            { 
+               q: "Do I need technical training to manage my institute?", 
+               a: "No. The platform features an intuitive, zero-training web panel for administrative staff and teachers, alongside dedicated mobile apps for students and parents." 
+            },
+            { 
+               q: "How long does the setup and migration take?", 
+               a: "You can go live in under 24 hours. Our technical migration team will assist in importing your existing student directories, batch schedules, and fee structures." 
+            },
+            { 
+               q: "Is there a mobile app available?", 
+               a: "Yes, we offer dedicated Student mobile apps for tracking homework, viewing attendance reports, receiving notifications, and paying fees." 
+            }
          ]
       },
       {
          category: "Payments & Fees",
          questions: [
-            { q: "Does it support GST invoicing?", a: "Yes. Tuoora automatically generates GST-compliant invoices and tax reports that can be integrated with Tally or other accounting software." },
-            { q: "How do parents pay fees?", a: "Parents can pay via the FeeEasy app using UPI, Credit Cards, Debit Cards, or Net Banking. We support all major Indian payment gateways." },
-            { q: "Are automated fee reminders sent?", a: "Absolutely. You can set up automated WhatsApp, SMS, and Push notifications to be sent before and on the due date." },
-            { q: "Can I set up custom fee structures?", a: "Yes. You can create complex fee structures including sibling discounts, scholarships, and one-time registration fees." },
-            { q: "Is there a penalty calculation for late fees?", a: "Yes. You can define grace periods and automated late fee calculations (fixed or percentage-based) per batch." }
+            { 
+               q: "How can parents pay school or tuition fees?", 
+               a: "Parents can pay fees online through the mobile app using UPI, Credit/Debit cards, and Net Banking." 
+            },
+            { 
+               q: "Can we register offline payments like cash or bank transfers?", 
+               a: "Yes. Admins can manually register cash, cheque, or direct bank transfer payments in the billing hub to keep all accounts consolidated." 
+            },
+            { 
+               q: "Does the system generate invoices and receipts?", 
+               a: "Absolutely. The system automatically creates downloadable PDF receipts for every successful transaction using our high-fidelity document generation engine." 
+            }
          ]
       },
       {
          category: "Academic & Exams",
          questions: [
-            { q: "Can I generate report cards?", a: "Yes. Tuoora supports customizable report card templates that pull data directly from exam results and attendance records." },
-            { q: "Does it support automated exam scheduling?", a: "Yes. Our exam module helps you schedule tests, assign rooms, and notify students automatically via the app." },
-            { q: "Can staff members upload study material?", a: "Staff members can upload PDFs, videos, and assignments to the student portal for instant access." }
+            { 
+               q: "How does Batch and Attendance management work?", 
+               a: "Admins can organize students into specific batches track daily attendance and automatically trigger notification alerts to parents." 
+            },
+            { 
+               q: "What is the Homework Module?", 
+               a: "Institutes can publish homework tasks, attach resource documents, review online submissions from students, grade their work, and share progress updates instantly." 
+            },
+            { 
+               q: "What are \"Daily Teaching Logs\"?", 
+               a: "Teaching logs allow instructors to record the topics and curriculum covered in each session, which are immediately accessible to parents and students for review." 
+            },
+            { 
+               q: "Can the platform generate academic reports and cards?", 
+               a: "Yes. Tuoora dynamically compiles exam results, homework grades, and attendance rates to produce detailed performance cards." 
+            }
          ]
       },
       {
-         category: "Security & Data",
+         category: "Communication & Alerts",
          questions: [
-            { q: "Is my institutional data safe?", a: "Yes. We use AES-256 bank-grade encryption. Each institute's data is isolated in a multi-tenant architecture to ensure 100% privacy." },
-            { q: "Do you take backups?", a: "We perform automated daily backups to secure cloud servers, ensuring you never lose your records." },
-            { q: "Can I export my data at any time?", a: "Yes. You own your data. You can export student lists, financial reports, and academic records to Excel or PDF format whenever you need." }
+            { 
+               q: "Does the platform support real-time chat?", 
+               a: "Yes. The system has built-in 1-to-1 messaging and channel broadcasts powered by secure WebSockets for real-time interaction between parents, students, and coordinators." 
+            },
+            { 
+               q: "How are parents notified of emergency notices or holidays?", 
+               a: "You can broadcast announcements globally or per batch using FCM Push Notifications and WhatsApp alerts." 
+            }
          ]
-      }
+      },
+      // {
+      //    category: "Administration & Security",
+      //    questions: [
+      //       { 
+      //          q: "How are staff members, schedules, and payrolls managed?", 
+      //          a: "The platform includes an HR suite to track staff attendance, log daily check-ins/outs, manage roles with custom permissions, and generate monthly salary sheets." 
+      //       },
+      //       { 
+      //          q: "What is the Sales Pipeline / CRM module?", 
+      //          a: "It is a dedicated leads tracker where admins can register prospective students, set lead priorities (Cold, Warm, Hot), record follow-up logs, and track conversions." 
+      //       },
+      //       { 
+      //          q: "Is our institutional and student data secure?", 
+      //          a: "Yes. We employ a secure multi-tenant architecture to ensure absolute data isolation. All communications and databases are guarded using bank-grade AES-256 encryption." 
+      //       },
+      //       { 
+      //          q: "Are there automatic database backups?", 
+      //          a: "Yes. Automated daily backups are captured and stored in redundant, secure cloud servers to ensure zero data loss." 
+      //       }
+      //    ]
+      // }
    ];
+
+   const getCategoryCount = (categoryName) => {
+      if (categoryName === "All") {
+         return faqs.reduce((acc, curr) => acc + curr.questions.length, 0);
+      }
+      const cat = faqs.find(c => c.category === categoryName);
+      return cat ? cat.questions.length : 0;
+   };
 
    const filteredFaqs = faqs.map(group => ({
       ...group,
@@ -90,105 +147,202 @@ export default function FAQ() {
       })
    })).filter(group => group.questions.length > 0);
 
+   const totalResults = filteredFaqs.reduce((acc, curr) => acc + curr.questions.length, 0);
+
    return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white overflow-x-hidden relative">
          <Navbar />
 
-         <main className="pt-24 pb-8">
+         {/* Premium Glowing Mesh Backgrounds */}
+         <div className="absolute top-0 left-0 w-full h-[600px] pointer-events-none overflow-hidden -z-10">
+            <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] animate-pulse duration-[8s]" />
+            <div className="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-orange-400/5 rounded-full blur-[120px]" />
+         </div>
+
+         <main className="pt-32 pb-8">
             {/* Search Hero */}
-            <section className="section-container text-center mb-5">
-               <span className="text-[10px] font-black pt-4 text-primary uppercase tracking-[0.4em] block">Help Center</span>
-               <h1 className="text-3xl lg:text-5xl font-bold text-navy tracking-tighter mb-3">
+            <section className="section-container text-center px-4">
+               <motion.span 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-[10px] font-black text-primary uppercase tracking-[0.4em] block mb-2"
+               >
+                  Help Center
+               </motion.span>
+               
+               <motion.h1 
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="text-3xl lg:text-5xl font-bold text-navy tracking-tighter mb-6"
+               >
                   Common <span className="text-primary italic">Questions.</span>
-               </h1>
-               <div className="max-w-xl mx-auto relative group">
-                  <input
-                     type="text"
-                     placeholder="Search for questions (e.g. GST, Backups)"
-                     className="w-full px-5 py-3 bg-gray-50 border border-gray-100 rounded-2xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm group-hover:shadow-lg placeholder:text-gray-300"
-                     value={searchQuery}
-                     onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+               </motion.h1>
+
+               <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="max-w-xl mx-auto relative group"
+               >
+                  <div className="absolute inset-0 bg-primary/5 rounded-2xl blur-md opacity-0 group-focus-within:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div className="relative flex items-center bg-gray-50/80 backdrop-blur-sm border border-slate-100 rounded-2xl px-5 py-4 focus-within:bg-white focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/15 transition-all duration-300 shadow-sm hover:shadow-md">
+                     <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
+                     <input
+                        type="text"
+                        placeholder="Search for questions (e.g. WhatsApp, Payments, Backup, CRM)"
+                        className="w-full bg-transparent text-xs font-bold text-slate-800 placeholder-slate-300 focus:outline-none"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                     />
+                     {searchQuery && (
+                        <button
+                           onClick={() => setSearchQuery("")}
+                           className="p-1 rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors mr-2"
+                        >
+                           <X className="w-3.5 h-3.5" />
+                        </button>
+                     )}
+                     <span className="text-[9px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md uppercase tracking-wider shrink-0">
+                        {totalResults} {totalResults === 1 ? 'result' : 'results'}
+                     </span>
                   </div>
-               </div>
+               </motion.div>
             </section>
 
-            {/* Category Navigation */}
-            <section className="section-container mb-12">
-               <div className="flex flex-wrap justify-center gap-3">
-                  {categories.map((cat) => (
-                     <button
-                        key={cat.name}
-                        onClick={() => setSelectedCategory(cat.name)}
-                        className={`flex items-center gap-2 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${selectedCategory === cat.name
-                              ? 'bg-navy text-white shadow-xl shadow-navy/20 scale-105'
-                              : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
-                           }`}
-                     >
-                        <span className={`${selectedCategory === cat.name ? 'text-primary' : 'text-gray-300'}`}>{cat.icon}</span>
-                        {cat.name}
-                     </button>
-                  ))}
-               </div>
-            </section>
-
-            {/* FAQ List */}
-            <section className="section-container mb-6">
-               <div className="max-w-3xl mx-auto space-y-6">
-                  {filteredFaqs.length > 0 ? (
-                     filteredFaqs.map((group, groupIdx) => (
-                        <div key={groupIdx}>
-                           <div className="flex items-center gap-4 mb-3">
-                              <h3 className="text-[15px] font-black text-navy uppercase tracking-[0.3em] whitespace-nowrap">{group.category}</h3>
-                              <div className="h-px w-full bg-gray-100"></div>
-                           </div>
-                           <div className="space-y-3">
-                              {group.questions.map((faq, idx) => {
-                                 const itemIndex = `${groupIdx}-${idx}`;
-                                 const isOpen = activeIndex === itemIndex;
-
-                                 return (
-                                    <div
-                                       key={idx}
-                                       className={`border rounded-2xl transition-all duration-300 ${isOpen
-                                             ? 'bg-white border-primary shadow-2xl shadow-primary/10'
-                                             : 'bg-white border-gray-100 hover:border-gray-200'
-                                          }`}
-                                    >
-                                       <button
-                                          onClick={() => setActiveIndex(isOpen ? null : itemIndex)}
-                                          className="w-full px-6 py-5 flex items-center justify-between text-left"
-                                       >
-                                          <span className={`text-xs md:text-sm font-bold tracking-tight ${isOpen ? 'text-navy' : 'text-gray-700'}`}>{faq.q}</span>
-                                          <div className={`p-1 rounded-full transition-all duration-300 ${isOpen ? 'bg-primary text-white rotate-180' : 'bg-gray-50 text-gray-300'}`}>
-                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-                                          </div>
-                                       </button>
-                                       {isOpen && (
-                                          <div className="px-6 pb-6">
-                                             <p className="text-sm text-gray-500 leading-relaxed font-medium">
-                                                {faq.a}
-                                             </p>
-                                          </div>
-                                       )}
-                                    </div>
-                                 );
-                              })}
-                           </div>
+            {/* Split Layout (Category Navigation & FAQs) */}
+            <section className="section-container px-4 py-6 mb-12">
+               <div className="flex flex-col lg:flex-row gap-8 items-start">
+                  
+                  {/* Sidebar Column */}
+                  <div className="w-full lg:w-80 shrink-0">
+                     <div className="lg:sticky lg:top-28 space-y-6">
+                        <div className="bg-slate-50/50 backdrop-blur-sm border border-slate-100/70 p-5 rounded-3xl space-y-2.5 shadow-sm">
+                           <span className="text-[10px] font-black text-navy/40 uppercase tracking-[0.2em] px-3 block mb-1">Categories</span>
+                           {categories.map((cat) => {
+                              const isActive = selectedCategory === cat.name;
+                              const count = getCategoryCount(cat.name);
+                              const Icon = cat.iconComponent;
+                              return (
+                                 <button
+                                    key={cat.name}
+                                    onClick={() => {
+                                       setSelectedCategory(cat.name);
+                                       setActiveIndex(null); // Reset open accordion index when category switches
+                                    }}
+                                    className={`relative w-full flex items-center justify-between px-4 py-3 rounded-2xl text-[10px] font-black uppercase tracking-wider transition-all duration-300 overflow-hidden ${
+                                       isActive 
+                                          ? 'text-white' 
+                                          : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/50'
+                                    }`}
+                                 >
+                                    {isActive && (
+                                       <motion.div
+                                          layoutId="activeCategoryBg"
+                                          className="absolute inset-0 bg-navy z-0"
+                                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                       />
+                                    )}
+                                    <span className="relative z-10 flex items-center gap-3">
+                                       <Icon className={`w-4 h-4 ${isActive ? 'text-primary' : 'text-slate-400'}`} />
+                                       {cat.name}
+                                    </span>
+                                    <span className={`relative z-10 text-[9px] font-bold px-2 py-0.5 rounded-full ${
+                                       isActive ? 'bg-primary text-white' : 'bg-slate-200/70 text-slate-500'
+                                    }`}>
+                                       {count}
+                                    </span>
+                                 </button>
+                              );
+                           })}
                         </div>
-                     ))
-                  ) : (
-                     <div className="text-center py-20">
-                        <p className="text-sm font-bold text-gray-400">No questions found matching "{searchQuery}"</p>
+                        
+                        {/* Live Support Indicator Card */}
+                        <div className="bg-gradient-to-br from-navy to-slate-900 text-white p-6 rounded-3xl relative overflow-hidden shadow-lg border border-white/5">
+                           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
+                           <div className="flex items-center gap-2 mb-3">
+                              <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse shrink-0" />
+                              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-green-400">Live Support Status</span>
+                           </div>
+                           <h4 className="text-sm font-black uppercase tracking-wider mb-2">Our Experts are Online</h4>
+                           <p className="text-xs text-white/50 leading-relaxed font-light mb-4">
+                              Need instant answers or help setting up your institute database?
+                           </p>
+                           <a href="https://wa.me/919104081291" target="_blank" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-primary hover:text-orange-400 transition-colors group">
+                              Ask on WhatsApp <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                           </a>
+                        </div>
                      </div>
-                  )}
+                  </div>
+
+                  {/* FAQ List (Right Column) */}
+                  <div className="flex-1 w-full">
+                     <AnimatePresence mode="wait">
+                        {filteredFaqs.length > 0 ? (
+                           <motion.div
+                              key={selectedCategory + searchQuery}
+                              initial="hidden"
+                              animate="show"
+                              variants={{
+                                 hidden: { opacity: 0 },
+                                 show: {
+                                    opacity: 1,
+                                    transition: {
+                                       staggerChildren: 0.05
+                                    }
+                                 }
+                              }}
+                              className="space-y-8"
+                           >
+                              {filteredFaqs.map((group, groupIdx) => (
+                                 <div key={group.category} className="space-y-4">
+                                    {selectedCategory === "All" && (
+                                       <div className="flex items-center gap-4 py-2">
+                                          <h3 className="text-[11px] font-black text-navy uppercase tracking-[0.3em] whitespace-nowrap">{group.category}</h3>
+                                          <div className="h-[1px] w-full bg-slate-100" />
+                                       </div>
+                                    )}
+                                    
+                                    <div className="space-y-3.5">
+                                       {group.questions.map((faq, idx) => {
+                                          const itemIndex = `${group.category}-${idx}`;
+                                          const isOpen = activeIndex === itemIndex;
+                                          return (
+                                             <FAQAccordionItem
+                                                key={idx}
+                                                q={faq.q}
+                                                a={faq.a}
+                                                isOpen={isOpen}
+                                                onToggle={() => setActiveIndex(isOpen ? null : itemIndex)}
+                                             />
+                                          );
+                                       })}
+                                    </div>
+                                 </div>
+                              ))}
+                           </motion.div>
+                        ) : (
+                           <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-center py-20 bg-slate-50/30 rounded-3xl border border-dashed border-slate-200"
+                           >
+                              <HelpCircle className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+                              <p className="text-sm font-bold text-slate-400">No questions found matching "{searchQuery}"</p>
+                              <button onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }} className="mt-3 text-[10px] font-black uppercase text-primary hover:underline">
+                                 Reset Filters
+                              </button>
+                           </motion.div>
+                        )}
+                     </AnimatePresence>
+                  </div>
+
                </div>
             </section>
 
-            {/* Support CTA - New Design */}
-            <section className="section-container">
+            {/* Support CTA */}
+            <section className="section-container px-4">
                <div className="relative group overflow-hidden rounded-[2.5rem] bg-navy border border-white/5 shadow-2xl transition-all duration-500 hover:shadow-primary/10">
                   {/* Dynamic Mesh Background */}
                   <div className="absolute top-0 right-0 h-full w-1/2 bg-gradient-to-l from-primary/10 to-transparent pointer-events-none"></div>
@@ -222,27 +376,27 @@ export default function FAQ() {
                         </p>
                      </div>
 
-                      {/* Right Actions */}
-                      <div className="lg:col-span-5 flex flex-col gap-3">
-                         <a href="https://wa.me/919104081291" target="_blank" className="group/btn relative w-full overflow-hidden px-8 py-5 bg-primary text-white rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center">
-                            <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500"></div>
-                            <div className="flex items-center justify-center gap-3">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
-                               <span className="text-[11px] font-black uppercase tracking-[0.2em]">Chat with Experts</span>
-                            </div>
-                         </a>
-                         
-                         <div className="grid grid-cols-2 gap-3">
-                            <a href="tel:+919104081291" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/call">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover/call:scale-110 transition-transform"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                               <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/call:text-white transition-colors">Call Now</span>
-                            </a>
-                            <a href="mailto:info@tuoora.com" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/mail">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover/mail:scale-110 transition-transform"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                               <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/mail:text-white transition-colors">Email Us</span>
-                            </a>
-                         </div>
-                      </div>
+                     {/* Right Actions */}
+                     <div className="lg:col-span-5 flex flex-col gap-3">
+                        <a href="https://wa.me/919104081291" target="_blank" className="group/btn relative w-full overflow-hidden px-8 py-5 bg-primary text-white rounded-2xl transition-all duration-300 hover:scale-[1.02] active:scale-95 text-center">
+                           <div className="absolute inset-0 bg-white/10 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-500"></div>
+                           <div className="flex items-center justify-center gap-3">
+                              <MessageSquare className="w-4.5 h-4.5" />
+                              <span className="text-[11px] font-black uppercase tracking-[0.2em]">Chat with Experts</span>
+                           </div>
+                        </a>
+                        
+                        <div className="grid grid-cols-2 gap-3">
+                           <a href="tel:+919104081291" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/call">
+                              <Phone className="w-4 h-4 text-primary group-hover/call:scale-110 transition-transform" />
+                              <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/call:text-white transition-colors">Call Now</span>
+                           </a>
+                           <a href="mailto:info@tuoora.com" className="flex flex-col items-center gap-2 px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl hover:bg-white/10 transition-all group/mail">
+                              <Mail className="w-4 h-4 text-primary group-hover/mail:scale-110 transition-transform" />
+                              <span className="text-[9px] font-black uppercase tracking-widest text-white/60 group-hover/mail:text-white transition-colors">Email Us</span>
+                           </a>
+                        </div>
+                     </div>
                   </div>
                </div>
             </section>
@@ -250,5 +404,57 @@ export default function FAQ() {
 
          <Footer />
       </div>
+   );
+}
+
+function FAQAccordionItem({ q, a, isOpen, onToggle }) {
+   return (
+      <motion.div
+         variants={{
+            hidden: { opacity: 0, y: 15 },
+            show: { opacity: 1, y: 0 }
+         }}
+         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+         className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
+            isOpen
+               ? 'border-primary bg-white shadow-lg shadow-primary/5'
+               : 'border-slate-100 bg-white hover:border-slate-300 shadow-sm'
+         }`}
+      >
+         <button
+            onClick={onToggle}
+            className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+         >
+            <span className={`text-xs md:text-sm font-bold tracking-tight transition-colors duration-300 ${
+               isOpen ? 'text-navy' : 'text-slate-700'
+            }`}>
+               {q}
+            </span>
+            <div className={`p-1.5 rounded-full transition-all duration-300 shrink-0 ml-4 ${
+               isOpen ? 'bg-primary text-white rotate-180' : 'bg-slate-50 text-slate-400'
+            }`}>
+               <ChevronDown className="w-3.5 h-3.5 stroke-[2.5]" />
+            </div>
+         </button>
+         
+         <motion.div
+            initial={false}
+            animate={{
+               height: isOpen ? "auto" : 0,
+               opacity: isOpen ? 1 : 0
+            }}
+            transition={{
+               height: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+               opacity: { duration: 0.2, delay: isOpen ? 0.05 : 0 }
+            }}
+            className="overflow-hidden"
+         >
+            <div className="px-6 pb-6 pt-1 border-t border-slate-50/50">
+               <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium">
+                  {a}
+               </p>
+            </div>
+         </motion.div>
+      </motion.div>
    );
 }

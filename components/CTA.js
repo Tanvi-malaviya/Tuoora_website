@@ -31,7 +31,7 @@ export default function CTA({ setIsModalOpen }) {
             </h2>
 
             <p className="text-white/50 text-sm md:text-base max-w-xl mx-auto mb-8 font-medium">
-              Join 1,200+ institutions already using Tuoora to automate their operations and scale faster.
+              Join 10+ institutions already using Tuoora to automate their operations and scale faster.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -43,7 +43,7 @@ export default function CTA({ setIsModalOpen }) {
               </button>
               
               <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
+                {/* <div className="flex -space-x-2">
                   {[1,2].map(i => (
                     <div key={i} className="h-8 w-8 rounded-full border-2 border-navy bg-gray-200 overflow-hidden">
                       <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" className="w-full h-full object-cover grayscale" />
@@ -53,7 +53,7 @@ export default function CTA({ setIsModalOpen }) {
                 <div className="text-left leading-none">
                   <div className="text-white font-bold text-xs">1.2k+ Institutes</div>
                   <div className="text-white/30 text-[8px] uppercase font-black tracking-widest mt-1">Trust Tuoora</div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

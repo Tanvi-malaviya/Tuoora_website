@@ -145,17 +145,42 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
 
                   <div className="h-4 w-[1px] bg-gray-200 mx-3"></div>
 
+                  <Link 
+                     href="https://institute.tuoora.com/login"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="mr-2"
+                  >
+                     <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`
+                           px-5 py-2.5 border border-navy/20 text-navy text-[10px] font-black uppercase tracking-widest rounded-xl 
+                           hover:border-navy hover:bg-navy/5 transition-all duration-300
+                        `}
+                     >
+                        Login
+                     </motion.button>
+                  </Link>
+                  
+                  <Link 
+                     href="https://institute.tuoora.com/register"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="mr-2"
+                  >
                   <motion.button
                      whileHover={{ scale: 1.05 }}
                      whileTap={{ scale: 0.95 }}
-                     onClick={() => setIsModalOpen(true)}
+                   
                      className={`
                         px-6 py-2.5 bg-navy text-white text-[10px] font-black uppercase tracking-widest rounded-xl 
                         shadow-lg shadow-navy/10 hover:bg-primary transition-all duration-300
                      `}
                   >
-                     Book Demo
+                     Register
                   </motion.button>
+                  </Link>
                </div>
 
                {/* Mobile Toggle Button */}
@@ -200,12 +225,23 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
                                  </Link>
                               </motion.div>
                            ))}
+                           
+                           <Link
+                              href="https://institute.tuoora.com/login"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="w-full mt-4 py-4 border border-navy/20 text-navy text-[10px] font-black uppercase tracking-widest rounded-xl text-center hover:bg-navy/5 active:scale-95 transition-all block"
+                           >
+                              Login
+                           </Link>
+
                            <button
                               onClick={() => {
                                  setIsMobileMenuOpen(false);
                                  setIsModalOpen(true);
                               }}
-                              className="w-full mt-4 py-5 bg-navy text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-navy/20 active:scale-95 transition-all"
+                              className="w-full mt-2.5 py-5 bg-navy text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-xl shadow-navy/20 active:scale-95 transition-all"
                            >
                               Request A Demo
                            </button>
