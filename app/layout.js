@@ -16,6 +16,8 @@ export const metadata = {
 };
 
 import FloatingActions from "../components/FloatingActions";
+import CustomCursor from "../components/CustomCursor";
+import LoaderWrapper from "../components/LoaderWrapper";
 
 export default function RootLayout({ children }) {
   return (
@@ -24,8 +26,11 @@ export default function RootLayout({ children }) {
       className={`${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        {children}
+        <LoaderWrapper>
+          {children}
+        </LoaderWrapper>
         <FloatingActions />
+        <CustomCursor />
       </body>
     </html>
   );

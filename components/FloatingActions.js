@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function FloatingActions() {
     const [isVisible, setIsVisible] = useState(false);
@@ -181,7 +182,7 @@ export default function FloatingActions() {
                 </AnimatePresence>
 
                 {/* Main Chatbot Button */}
-                <motion.button
+                {/* <motion.button
                     onClick={() => setIsChatOpen(!isChatOpen)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -195,21 +196,48 @@ export default function FloatingActions() {
                             <path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
                         </svg>
                     )}
-                </motion.button>
+                </motion.button> */}
 
                 {/* WhatsApp Button */}
-                <motion.a
-                    href="https://wa.me/919104081291?text=Hello%20Tuoora%20Team,%20I'm%20interested%20in%20learning%20more%20about%20the%20ERP."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-12 h-12 flex items-center justify-center bg-[#25D366] text-white rounded-2xl shadow-xl shadow-green-500/10 transition-all"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-11.7 8.38 8.38 0 0 1 3.8.9L21 3z"/><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z"/><path d="M14 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z"/><path d="M9.5 15.5c.5.5 2.5 1.5 4.5 0"/>
-                    </svg>
-                </motion.a>
+              <motion.a
+
+href="https://wa.me/919104081291?text=Hello%20Tuoora%20Team,%20I'm%20interested%20in%20learning%20more%20about%20the%20ERP."
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+whileHover={{
+scale:1.08,
+y:-4
+}}
+
+whileTap={{
+scale:.95
+}}
+
+className="
+w-12
+h-12
+flex
+items-center
+justify-center
+bg-[#25D366]
+text-white
+rounded-2xl
+shadow-xl
+shadow-green-500/20
+transition-all
+"
+
+>
+
+<FaWhatsapp
+size={26}
+/>
+
+
+</motion.a>
             </div>
         </div>
     );
