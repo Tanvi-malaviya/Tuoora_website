@@ -95,124 +95,96 @@ export default function Contact() {
             <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-navy/5 rounded-full blur-[100px]" />
          </div>
 
-         <main className="relative pt-24 pb-12">
-            <div className="section-container relative z-10">
+         <main className="relative pt-36 pb-20">
+             <div className="section-container relative z-10">
                <div className="max-w-6xl mx-auto">
 
-                  {/* High-Impact Hero Header */}
-                  <motion.div
-                     initial={{ opacity: 0, y: 30 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     transition={{ duration: 0.8 }}
-                     className="mb-6 text-center lg:text-left"
-                  >
-                     <span className="inline-flex items-center gap-2 px-3 py-1 bg-navy text-white text-[9px] font-black uppercase tracking-[0.4em] rounded-full mb-2">
-                        <span className="h-1 w-1 bg-primary rounded-full animate-pulse"></span>
-                        Connect With Us
-                     </span>
-                     <h1 className="text-4xl lg:text-5xl font-black text-navy tracking-tighter leading-tight mb-2">
-                        Let's start your <span className="text-primary italic relative">
-                           transformation
-                           <motion.span
-                              initial={{ scaleX: 0 }}
-                              animate={{ scaleX: 1 }}
-                              transition={{ delay: 0.8, duration: 1 }}
-                              className="absolute bottom-1 left-0 w-full h-2 bg-primary/10 -z-10 origin-left"
-                           />
-                        </span>
-                     </h1>
-                     <p className="text-gray-400 text-sm font-medium max-w-xl mx-auto lg:mx-0 mb-6">
-                        Experience the next generation of institutional intelligence.
-                        Choose your intent below to get started.
-                     </p>
+                   {/* High-Impact Hero Header */}
+                   <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8 }}
+                      className="mb-10 text-left max-w-5xl mx-auto"
+                   >
+                      <span className="inline-flex items-center gap-2 px-3 py-1 bg-navy text-white text-[9px] font-black uppercase tracking-[0.4em] rounded-full mb-3">
+                         <span className="h-1 w-1 bg-primary rounded-full animate-pulse"></span>
+                         Connect With Us
+                      </span>
+                      <h1 className="text-4xl lg:text-5xl font-black text-navy tracking-tighter leading-tight mb-2">
+                         Let's start your <span className="text-primary italic relative">
+                            transformation
+                            <motion.span
+                               initial={{ scaleX: 0 }}
+                               animate={{ scaleX: 1 }}
+                               transition={{ delay: 0.8, duration: 1 }}
+                               className="absolute bottom-1 left-0 w-full h-2 bg-primary/10 -z-10 origin-left"
+                            />
+                         </span>
+                      </h1>
+                      <p className="text-gray-400 text-sm font-medium max-w-2xl">
+                         Experience the next generation of institutional intelligence.
+                         Choose your intent below to get started.
+                      </p>
+                   </motion.div>
 
-                     {/* Relocated Floating Contact Nodes - Compact & Accessible */}
-                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                        {[
-                           { label: 'Hotline', value: '+91 91040 81291', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z' },
-                           { label: 'Email', value: 'info@tuoora.com', icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6' },
-                           { label: 'HQ', value: 'Ahmedabad, Gujarat', icon: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z' },
-                           { label: 'WhatsApp', value: '+91 91040 81291', icon: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-7.6 8.38 8.38 0 0 1 3.8.9L21 3z' }
-                        ].map((item, i) => (
-                           <motion.div
-                              key={i}
-                              whileHover={{ y: -5, scale: 1.01 }}
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.6 + (i * 0.1) }}
-                              className="p-3.5 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-100 hover:border-primary/20 hover:shadow-md transition-all cursor-pointer flex items-center gap-4 text-left"
-                           >
-                              <div className="h-8 w-8 rounded-lg bg-slate-50 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
-                              </div>
-                              <div className="min-w-0">
-                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block transition-colors truncate">{item.label}</span>
-                                 <p className="text-sm font-black text-navy tracking-tight truncate">{item.value}</p>
-                              </div>
-                           </motion.div>
-                        ))}
-                     </div>
-                  </motion.div>
+                   {/* Split Layout */}
+                   <div className="flex flex-col lg:flex-row gap-8 items-stretch max-w-5xl mx-auto text-left mt-10">
 
-                  {/* Split Flex Layout */}
-                  <div className="flex flex-col lg:flex-row gap-8 items-start text-left">
+                      {/* Left: Contact Info (Stacked Cards) */}
+                      <div className="w-full lg:w-80 shrink-0 flex flex-col gap-4">
+                         {[
+                            { 
+                               label: 'Hotline', 
+                               value: '+91 91040 81291', 
+                               desc: 'Speak directly with our academic coordinators.',
+                               icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z',
+                               color: 'text-orange-500 bg-orange-500/10',
+                               href: 'tel:+919104081291'
+                            },
+                            { 
+                               label: 'Email Support', 
+                               value: 'info@tuoora.com', 
+                               desc: 'Get support or billing answers in 12 minutes.',
+                               icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6',
+                               color: 'text-primary bg-primary/10',
+                               href: 'mailto:info@tuoora.com'
+                            },
+                            { 
+                               label: 'HQ Address', 
+                               value: 'Ahmedabad, Gujarat', 
+                               desc: 'Visit our regional headquarters for in-person demo.',
+                               icon: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+                               color: 'text-green-500 bg-green-500/10',
+                               href: 'https://maps.google.com/?q=Ahmedabad,+Gujarat'
+                            }
+                         ].map((item, i) => (
+                            <motion.a
+                               href={item.href}
+                               target={item.href.startsWith('http') ? '_blank' : undefined}
+                               key={i}
+                               whileHover={{ y: -5, scale: 1.01 }}
+                               initial={{ opacity: 0, y: 15 }}
+                               animate={{ opacity: 1, y: 0 }}
+                               transition={{ delay: 0.1 * i }}
+                               className="p-5 rounded-[2rem] bg-white/95 backdrop-blur-sm border border-slate-100/90 hover:border-primary/20 hover:shadow-lg transition-all flex flex-col gap-3 text-left group"
+                            >
+                               <div className="flex items-center gap-4">
+                                  <div className={`h-11 w-11 rounded-2xl flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform shrink-0`}>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
+                                  </div>
+                                  <div className="min-w-0">
+                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">{item.label}</span>
+                                     <p className="text-sm font-black text-navy tracking-tight truncate">{item.value}</p>
+                                  </div>
+                               </div>
+                               <p className="text-[11px] text-slate-400 font-medium leading-relaxed">{item.desc}</p>
+                            </motion.a>
+                         ))}
+                      </div>
 
-                     {/* Left: Tuoora Pulse Dashboard (3D Tilt Card) */}
-                     <div className="w-full lg:w-80 shrink-0">
-                        <TiltCard className="p-6 rounded-[2.5rem] bg-navy text-white relative overflow-hidden shadow-2xl border border-white/5 h-full">
-                           {/* Background Glow */}
-                           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
-
-                           <div className="relative z-10">
-                              <div className="flex items-center gap-3 mb-4">
-                                 <div className="h-2 w-2 rounded-full bg-green-500 animate-ping"></div>
-                                 <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/50">System Live Hub</span>
-                              </div>
-
-                              <h3 className="text-2xl font-bold tracking-tighter mb-4 leading-tight">
-                                 We're ready to <br />
-                                 <span className="text-primary italic">fuel your growth.</span>
-                              </h3>
-
-                              <div className="space-y-3">
-                                 {[
-                                    { label: 'Avg Response Time', value: '12 Mins', sub: 'Across all channels' },
-                                    { label: 'Experts Online', value: '24/7', sub: 'Dedicated support desk' },
-                                    { label: 'Data Migration', value: '24 Hours', sub: 'Guaranteed transition' }
-                                 ].map((stat, i) => (
-                                    <motion.div
-                                       key={i}
-                                       initial={{ opacity: 0, x: -20 }}
-                                       animate={{ opacity: 1, x: 0 }}
-                                       transition={{ delay: 0.5 + (i * 0.1) }}
-                                       className="flex justify-between items-end border-b border-white/5 pb-3"
-                                    >
-                                       <div>
-                                          <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-1">{stat.label}</p>
-                                          <p className="text-xs text-white/40 font-medium uppercase tracking-tighter">{stat.sub}</p>
-                                       </div>
-                                       <p className="text-xl font-black text-white">{stat.value}</p>
-                                    </motion.div>
-                                 ))}
-                              </div>
-
-                              <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-4">
-                                 <div className="flex -space-x-3">
-                                    {[1, 2, 3, 4].map(i => (
-                                       <img key={i} src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 50}`} className="h-10 w-10 rounded-full border-4 border-navy bg-gray-800" alt="Avatar" />
-                                    ))}
-                                 </div>
-                                 <p className="text-[9px] font-black uppercase tracking-widest text-white/30">
-                                    Trusted by 500+ <br /> Institutes
-                                 </p>
-                              </div>
-                           </div>
-                        </TiltCard>
-                     </div>
-
-                     {/* Right: Glassmorphism Contextual Form (3D Tilt Card) */}
-                     <div className="flex-1 w-full">
-                        <TiltCard className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.06)] overflow-hidden relative">
+                      {/* Right: Glassmorphism Contextual Form (3D Tilt Card) */}
+                      <div className="flex-1 w-full">
+                         <TiltCard className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.06)] overflow-hidden relative">
                            <AnimatePresence>
                               {submitStatus === 'success' && (
                                  <motion.div
@@ -240,19 +212,18 @@ export default function Contact() {
                               )}
                            </AnimatePresence>
 
-                           {/* Banner Area - Simplified */}
-                           <div className="bg-slate-50/50 p-6 lg:p-8 relative overflow-hidden border-b border-slate-100">
-                              <div className="relative z-10">
-                                 <h2 className="text-3xl lg:text-4xl font-black text-navy mb-3 tracking-tighter leading-none">
-                                    Send us a <br />
-                                    <span className="text-primary italic">message.</span>
-                                 </h2>
-                                 <p className="text-sm text-slate-400 max-w-md leading-relaxed font-medium">
-                                    Have questions about our high-density ERP? Our institutional experts
-                                    are standing by to help you scale your institute.
-                                 </p>
-                              </div>
-                           </div>
+                            {/* Banner Area - Simplified */}
+                            <div className="bg-slate-50/50 p-6 lg:p-8 relative overflow-hidden border-b border-slate-100">
+                               <div className="relative z-10 text-left">
+                                  <h2 className="text-3xl lg:text-4xl font-black text-navy mb-3 tracking-tighter leading-none">
+                                     Send us a <span className="text-primary italic">message.</span>
+                                  </h2>
+                                  <p className="text-sm text-slate-400 max-w-md leading-relaxed font-medium">
+                                     Have questions about our high-density ERP? Our institutional experts
+                                     are standing by to help you scale your institute.
+                                  </p>
+                               </div>
+                            </div>
 
                            {/* Interactive Form Fields */}
                            <div className="p-6 lg:p-8">
@@ -358,9 +329,9 @@ export default function Contact() {
                                  </div>
                               </form>
                            </div>
-                        </TiltCard>
-                     </div>
-                  </div>
+                         </TiltCard>
+                      </div>
+                   </div>
 
                </div>
             </div>
