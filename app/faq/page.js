@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { motion, AnimatePresence } from 'framer-motion';
+import TechBackground from "../../components/TechBackground";
 import { 
    Sparkles, 
    HelpCircle, 
@@ -150,16 +151,11 @@ export default function FAQ() {
    const totalResults = filteredFaqs.reduce((acc, curr) => acc + curr.questions.length, 0);
 
    return (
-      <div className="min-h-screen bg-white overflow-x-hidden relative">
-         <Navbar />
+    <div className="min-h-screen bg-white relative overflow-x-clip">
+       <Navbar />
+       <TechBackground />
 
-         {/* Premium Glowing Mesh Backgrounds */}
-         <div className="absolute top-0 left-0 w-full h-[600px] pointer-events-none overflow-hidden -z-10">
-            <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] animate-pulse duration-[8s]" />
-            <div className="absolute top-[20%] right-[10%] w-[600px] h-[600px] bg-orange-400/5 rounded-full blur-[120px]" />
-         </div>
-
-         <main className="pt-32 pb-8">
+       <main className="relative z-10 pt-32 pb-8">
             {/* Search Hero */}
             <section className="section-container text-center px-4">
                <motion.span 
@@ -216,8 +212,8 @@ export default function FAQ() {
                <div className="flex flex-col lg:flex-row gap-8 items-start">
                   
                   {/* Sidebar Column */}
-                  <div className="w-full lg:w-80 shrink-0">
-                     <div className="lg:sticky lg:top-28 space-y-6">
+                  <div className="w-full lg:w-80 shrink-0 lg:sticky lg:top-28 lg:self-start">
+                     <div className="space-y-6">
                         <div className="bg-slate-50/50 backdrop-blur-sm border border-slate-100/70 p-5 rounded-3xl space-y-2.5 shadow-sm">
                            <span className="text-[10px] font-black text-navy/40 uppercase tracking-[0.2em] px-3 block mb-1">Categories</span>
                            {categories.map((cat) => {

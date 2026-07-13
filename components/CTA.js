@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function CTA({ setIsModalOpen }) {
   return (
-    <section className="relative py-8 bg-white overflow-hidden">
+    <section className="relative py-8 bg-transparent overflow-hidden">
       <div className="section-container relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}

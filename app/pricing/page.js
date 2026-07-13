@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import TechBackground from "../../components/TechBackground";
 
 import { motion } from 'framer-motion';
 import { ShieldCheck, ArrowUpCircle, Headphones } from 'lucide-react';
@@ -65,15 +66,21 @@ export default function Pricing() {
       fetchPlans();
    }, []);
 
-   const activePlansList = plansData.length > 0 ? plansData : defaultPlans;
+   const activePlansList = (plansData.length > 0 ? plansData : defaultPlans)
+      .filter(plan => {
+         const priceNum = parseFloat(plan.price || 0);
+         const nameLower = (plan.name || '').toLowerCase();
+         return priceNum > 0 && !nameLower.includes('free');
+      });
 
    return (
-      <div className="min-h-screen bg-white overflow-x-hidden">
-         <Navbar />
+    <div className="min-h-screen bg-white relative overflow-hidden">
+       <Navbar />
+       <TechBackground />
 
-         <main className="pt-32 pb-8">
+       <main className="relative z-10 pt-30 pb-4">
             {/* Simple Sober Hero */}
-            <section className="section-container text-center mb-8 px-4">
+            <section className="section-container text-center mb-4 px-4">
                <motion.span
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -97,7 +104,7 @@ export default function Pricing() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-gray-400 text-sm max-w-md mx-auto"
+                  className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1"
                >
                   Scalable solutions for individual schools to large university networks.
                </motion.p>
@@ -105,9 +112,9 @@ export default function Pricing() {
 
             {/* Pricing Cards Grid with Sober Wave Animations */}
             <section className="section-container px-4 py-5">
-               <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+               <div className="grid md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 max-w-5xl mx-auto">
                   {loading ? (
-                     Array.from({ length: 4 }).map((_, i) => (
+                     Array.from({ length: 3 }).map((_, i) => (
                         <div key={i} className="animate-pulse p-6 rounded-2xl border border-slate-100 bg-slate-50/50 flex flex-col h-40 justify-between">
                            <div className="h-4 bg-slate-200 rounded w-1/3"></div>
                            <div className="h-8 bg-slate-200 rounded w-2/3"></div>
@@ -125,7 +132,7 @@ export default function Pricing() {
                               plan.name.toLowerCase().includes('premium') ||
                               plan.name.toLowerCase().includes('pro') ||
                               plan.name.toLowerCase().includes('elite') ||
-                              (activePlansList.length >= 3 && i === 2)
+                              (activePlansList.length >= 3 && i === 1)
                            }
                            delayIndex={i}
                         />
@@ -135,7 +142,7 @@ export default function Pricing() {
             </section>
 
             {/* FAQ Preview - Sober High Density */}
-            <section className="section-container pt-8">
+            {/* <section className="section-container pt-8">
                <div className="text-center mb-10">
                   <h3 className="text-2xl font-black text-navy tracking-tight">
                      Frequently Asked Questions
@@ -175,7 +182,7 @@ export default function Pricing() {
                      );
                   })}
                </div>
-            </section>
+            </section> */}
 
             {/* Migration Support Section */}
             <section className="section-container pb-6 pt-16">

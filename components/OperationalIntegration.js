@@ -30,74 +30,100 @@ export default function OperationalIntegration() {
   ];
 
   return (
-    <section className="py-12 bg-[#FDFDFD] overflow-hidden">
+    <section className="py-6 bg-transparent overflow-hidden">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 lg:items-center">
 
           {/* LEFT: Visual Mockup */}
-          <div className="relative group order-2 lg:order-1">
+          <div className="relative group order-2 lg:order-1 flex items-center justify-center p-4">
             {/* Background Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-primary/10 rounded-full blur-[90px] pointer-events-none z-0"></div>
+            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-teal-500/10 rounded-full blur-[80px] pointer-events-none z-0"></div>
 
-            <div className="relative rounded-[2.5rem] bg-white border border-gray-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] p-4 md:p-8 overflow-hidden">
-              {/* Decorative Gradient Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-navy/5 opacity-50"></div>
-
-              {/* Laptop & Mobile Illustration Area */}
-              <div className="relative z-10 flex flex-col items-center w-full">
-                <div className="relative w-full max-w-md my-6 aspect-[4/3]">
-                  {/* Desktop Mockup */}
-                  <div className="absolute top-0 left-0 w-[82%] rounded-xl bg-white border border-gray-200/80 shadow-2xl overflow-hidden transition-all duration-500 transform group-hover:-translate-y-1">
-                    {/* Browser Header */}
-                    <div className="bg-gray-50 border-b border-gray-100 px-3 py-1.5 flex flex-row items-center gap-1.5 shrink-0">
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-400"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-400"></div>
-                      <div className="h-2.5 w-20 bg-gray-200/50 rounded-sm ml-2 hidden sm:block"></div>
-                    </div>
-                    {/* Screenshot */}
-                    <div className="relative bg-gray-50 overflow-hidden">
-                      <img src="/image.png" alt="Tuoora ERP Dashboard" className="w-full h-auto block" />
-                    </div>
-                  </div>
-
-                  {/* Mobile Mockup */}
-                  <div className="absolute right-0 bottom-4 w-[35%] z-20 transition-all duration-700 transform group-hover:scale-105 group-hover:-translate-y-2 animate-float">
-                    {/* Phone frame */}
-                    <div className="relative rounded-[1.5rem] md:rounded-[2.2rem] border-[5px] md:border-[7px] border-slate-900 bg-slate-900 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] overflow-hidden aspect-[9/19]">
-                      {/* Dynamic Island */}
-                      <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-8 md:w-12 h-2 md:h-3 bg-black rounded-full z-30"></div>
-                      {/* Screenshot */}
-                      <div className="w-full h-full bg-gray-900 overflow-hidden">
-                        <img src="/mobile-dashboard.png" alt="Tuoora Mobile Dashboard" className="w-full h-full object-cover object-top" />
-                      </div>
-                    </div>
-                  </div>
+            {/* Interactive 3D Composition Wrapper */}
+            <div className="relative w-full max-w-lg transform lg:perspective-[2500px] lg:rotate-y-[15deg] lg:rotate-x-[5deg] select-none">
+              
+              {/* Main Desktop Dashboard Mockup */}
+              <div className="relative rounded-2xl overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.2)] border border-slate-200/50 bg-white/80 backdrop-blur-md p-1.5 z-10">
+                {/* Custom Mac-Style Chrome Window Header */}
+                <div className="h-6 w-full bg-slate-50/80 flex items-center gap-1.5 px-4 border-b border-slate-100/50 select-none shrink-0">
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#ff5f56]"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#ffbd2e]"></div>
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#27c93f]"></div>
+                  <span className="text-[8px] text-slate-400 font-bold ml-3 tracking-wider">tuoora.com/dashboard</span>
                 </div>
-
-                {/* Floating Labels */}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-primary/20 hidden xl:flex items-center gap-2 animate-bounce-slow z-30">
-                  <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse"></div>
-                  <span className="text-[10px] font-black text-navy uppercase tracking-widest">Automate</span>
-                </div>
-
-                <div className="absolute top-1/3 -right-4 bg-navy/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-white/10 hidden xl:flex items-center gap-2 animate-float z-30">
-                  <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-                  <span className="text-[10px] font-black text-white uppercase tracking-widest">Collaborate</span>
-                </div>
-
-                <div className="absolute bottom-12 left-8 bg-white/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-gray-100 hidden xl:flex items-center gap-2 animate-float-delayed z-30">
-                  <div className="h-2 w-2 rounded-full bg-blue-400 animate-pulse"></div>
-                  <span className="text-[10px] font-black text-navy uppercase tracking-widest">Audit</span>
-                </div>
-
-                <div className="mt-4 text-center">
-                  <h4 className="text-lg font-black text-navy tracking-[0.2em] uppercase leading-tight">
-                    Complete <br />
-                    <span className="text-primary">Operational</span> Integration
-                  </h4>
+                
+                {/* Screenshot viewport */}
+                <div className="relative bg-white aspect-[19/9] overflow-hidden p-0.5">
+                  <img src="/image.png" alt="Tuoora ERP Dashboard" className="w-full h-full object-contain" />
+                  
+                  {/* Laser Scanning Bar */}
+                  <motion.div
+                    className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/80 to-transparent shadow-[0_0_12px_rgba(249,115,22,0.8)] z-20 pointer-events-none"
+                    animate={{ top: ["0%", "100%", "0%"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                  
+                  {/* Glass Glare */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.08] pointer-events-none z-10" />
                 </div>
               </div>
+
+              {/* Floating Mobile Phone Mockup */}
+              <motion.div 
+                className="absolute -right-8 -bottom-10 w-[38%] z-20"
+                animate={{ y: [-8, 8, -8] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {/* Sleek Mobile Frame */}
+                <div className="relative rounded-[1.8rem] border-[6px] border-slate-900 bg-slate-900 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.35)] overflow-hidden aspect-[9/19]">
+                  {/* Dynamic Island */}
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-10 h-2.5 bg-black rounded-full z-30"></div>
+                  {/* Screenshot */}
+                  <div className="w-full h-full bg-gray-900 overflow-hidden">
+                    <img src="/mobile-dashboard.png" alt="Tuoora Mobile Dashboard" className="w-full h-full object-cover object-top" />
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 1 - Left Top */}
+              {/* <motion.div 
+                className="absolute -left-12 top-10 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-slate-100/50 z-20 flex items-center gap-2.5"
+                animate={{ y: [4, -4, 4] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              >
+                <div className="h-5 w-5 rounded-lg bg-emerald-500/10 flex items-center justify-center text-xs">🚀</div>
+                <div className="text-left">
+                  <div className="text-[7px] font-black text-slate-400 uppercase tracking-wider leading-none">Automated</div>
+                  <div className="text-[10px] font-black text-navy leading-none mt-0.5">WhatsApp Alerts</div>
+                </div>
+              </motion.div> */}
+
+              {/* Floating Badge 2 - Right Top */}
+              {/* <motion.div 
+                className="absolute -right-6 -top-6 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border border-slate-100/50 z-20 flex items-center gap-2.5"
+                animate={{ y: [-4, 4, -4] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              >
+                <div className="h-5 w-5 rounded-lg bg-primary/10 flex items-center justify-center text-xs">📈</div>
+                <div className="text-left">
+                  <div className="text-[7px] font-black text-slate-400 uppercase tracking-wider leading-none">Multi-Branch</div>
+                  <div className="text-[10px] font-black text-navy leading-none mt-0.5">Real-time Sync</div>
+                </div>
+              </motion.div> */}
+
+              {/* Floating Badge 3 - Left Bottom */}
+              {/* <motion.div 
+                className="absolute -left-8 -bottom-6 bg-white/90 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-100/50 z-20 flex items-center gap-2.5"
+                animate={{ y: [6, -6, 6] }}
+                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              >
+                <div className="h-5 w-5 rounded-lg bg-teal-500/10 flex items-center justify-center text-xs">🔒</div>
+                <div className="text-left">
+                  <div className="text-[7px] font-black text-slate-400 uppercase tracking-wider leading-none">Security</div>
+                  <div className="text-[10px] font-black text-navy leading-none mt-0.5">100% Encrypted</div>
+                </div>
+              </motion.div> */}
             </div>
           </div>
 
@@ -147,7 +173,7 @@ export default function OperationalIntegration() {
                   hidden: { opacity: 0, filter: "blur(8px)" },
                   visible: { opacity: 1, filter: "blur(0px)", transition: { duration: 0.8, delay: 0.3 } }
                 }}
-                className="text-sm sm:text-base text-gray-400 font-light max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1 lg:mx-0"
               >
                 Stop struggling with multiple tools. Tuoora brings everything under one roof, helping you focus on education while we handle the rest.
               </motion.p>

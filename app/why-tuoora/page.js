@@ -3,11 +3,14 @@ import { useState } from 'react';
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import TechBackground from "../../components/TechBackground";
 
 export default function WhyTuoora() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modules = [
+    // ... (modules content unchanged, just keeping code clean)
+
     { icon: "🎓", title: "Student Management", desc: "Complete student database with ID card generation, batch assignment, birthday tracking, and bulk enrollment." },
     { icon: "💰", title: "Fees & Payments", desc: "UPI, QR code, multi-gateway support. GST invoicing, PDF receipts, partial payments, and automated WhatsApp reminders." },
     { icon: "📋", title: "Attendance Tracking", desc: "Batch-wise daily attendance via app or web. Automated reports with percentage calculation." },
@@ -15,34 +18,46 @@ export default function WhyTuoora() {
     { icon: "👥", title: "Staff Management", desc: "Staff CRUD with department roles, salary processing, attendance tracking, and printable salary slips." },
     { icon: "📣", title: "Notifications", desc: "In-app, FCM push, and WhatsApp Business API — send to students, parents, or everyone at once." },
     { icon: "📊", title: "Reports & Analytics", desc: "Fee reports, attendance reports, performance reports — all exportable to Excel. Dashboard summary cards." },
-   //  { icon: "🏢", title: "Multi-Branch CRM", desc: "Manage leads, track follow-ups, add notes, and convert prospects to students. Full CRM pipeline." },
+    //  { icon: "🏢", title: "Multi-Branch CRM", desc: "Manage leads, track follow-ups, add notes, and convert prospects to students. Full CRM pipeline." },
     { icon: "💸", title: "Expenses Tracker", desc: "Category-wise expense management with monthly analysis charts and dashboard summary." },
     { icon: "📝", title: "Daily Updates", desc: "Post class topics, notes, and homework to specific batches or all students — with attachment support." },
     { icon: "🔔", title: "Subscription System", desc: "Plan management with Razorpay integration, renewal requests, screenshot uploads, and trial plans." },
     { icon: "📱", title: "Mobile App (Tuoora)", desc: "Android & iOS apps for students, parents, and admins — fee payment, homework, attendance, notifications." },
+    { icon: "🌐", title: "Institute Website", desc: "Every institute gets a free branded website — auto-synced with your panel data, live instantly, no code needed." },
   ];
 
   const userTypes = [
     {
       role: "Institute Admin",
-      desc: "Full web dashboard access. Manage students, fees, staff, reports, and all settings.",
-      features: ["Student & Batch CRUD", "Fee entry & receipts", "Staff payroll", "WhatsApp & push notifications", "Analytics & Excel exports"],
-      color: "bg-navy text-white",
+      desc: "Full web dashboard access. Manage students, batches, fees, staff, expense ledgers, and CRM inquiries in one place.",
+      features: [
+        "Student registry & smart batch allocation",
+        "UPI & Structured fee cycle settings",
+        "Expense tracking & monthly analysis",
+        "Staff directory, attendance & payroll slips",
+        // "QR-based ID card generator with verification",
+        // "Official WhatsApp Business Cloud API alerts",
+        "Firebase FCM background push notifications",
+        // "Multi-branch CRM pipeline & conversion metrics"
+      ],
+      color: "bg-navy text-white border border-navy",
       badge: "bg-primary text-white",
     },
     {
       role: "Student",
-      desc: "Mobile app access to fee records, attendance, homework, and institute updates.",
-      features: ["View & download receipts", "Attendance % tracker", "Submit homework", "UPI fee payment", "Real-time notifications"],
+      desc: "Dedicated mobile app access. Stay updated with fees, daily attendance, class homework, and important announcements.",
+      features: [
+        "One-tap UPI fee payments (GPay/PhonePe)",
+        "Instant PDF receipt downloads",
+        "Homework tracker with digital file uploads",
+        "Real-time attendance percentage tracking",
+        "Daily updates, notes & batch-wise diary",
+        "FCM instant push notifications on key alerts",
+        "Personalized birthday wishes on dashboard",
+        "Subject-wise test performance reports"
+      ],
       color: "bg-white text-navy border border-gray-100",
       badge: "bg-navy text-white",
-    },
-    {
-      role: "Parent",
-      desc: "Monitor children's fees, attendance, homework status, and receive instant alerts.",
-      features: ["Children fee overview", "Record payment", "Attendance history", "Daily class updates", "Push notifications"],
-      color: "bg-white text-navy border border-gray-100",
-      badge: "bg-gray-800 text-white",
     },
   ];
 
@@ -51,17 +66,18 @@ export default function WhyTuoora() {
     { label: "Database", value: "MySQL" },
     { label: "Auth", value: "Laravel Sanctum" },
     { label: "Push", value: "Firebase FCM" },
-    { label: "WhatsApp", value: "WhatsApp Cloud API" },
-   //  { label: "Payments", value: "Razorpay + UPI" },
+    { label: "Realtime", value: "Pusher SDK WebSockets" },
+    //  { label: "Payments", value: "Razorpay + UPI" },
     { label: "Storage", value: "Local + Symlink" },
     { label: "Email", value: "Laravel Mail SMTP" },
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <TechBackground />
 
-      <main className="pt-24 pb-8">
+      <main className="relative z-10 pt-24 pb-8">
 
         {/* Hero */}
         <section className="section-container text-center mb-10 relative pt-4">
@@ -71,8 +87,8 @@ export default function WhyTuoora() {
             One Platform. Every Module. <br />
             <span className="text-primary italic">Built for Real Institutes.</span>
           </h1>
-          <p className="text-gray-500 max-w-2xl mx-auto text-xs font-light leading-relaxed">
-            Tuoora is not a generic ERP. It's a purpose-built SaaS platform for coaching institutes and schools — 
+          <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">
+            Tuoora is not a generic ERP. It's a purpose-built SaaS platform for coaching institutes and schools —
             with fee automation, WhatsApp alerts, mobile apps, and 24-hour data migration support.
           </p>
         </section>
@@ -99,18 +115,18 @@ export default function WhyTuoora() {
         <section className="section-container mb-12">
           <div className="text-center mb-8">
             <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2">Multi-Role Platform</span>
-            <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">Designed for 3 Types of Users</h2>
-            <p className="text-gray-400 text-xs mt-2 max-w-xl mx-auto">Each role gets a dedicated login, separate API endpoints, and a tailored interface — with Sanctum token authentication.</p>
+            <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">Designed for 2 Types of Users</h2>
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">Each role gets a dedicated login, separate API endpoints, and a tailored interface — with Sanctum token authentication.</p>
           </div>
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {userTypes.map((u, i) => (
-              <div key={i} className={`p-7 rounded-2xl shadow-sm ${u.color} relative overflow-hidden group`}>
+              <div key={i} className={`p-7 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 ${u.color} relative overflow-hidden group`}>
                 <span className={`text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${u.badge} inline-block mb-4`}>{u.role}</span>
                 <p className="text-[11px] leading-relaxed mb-5 opacity-70">{u.desc}</p>
                 <ul className="space-y-2">
                   {u.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-[10px] font-bold opacity-80">
-                      <span className="h-1 w-1 rounded-full bg-primary shrink-0"></span>
+                    <li key={j} className="flex items-center gap-2 text-[10px] font-bold opacity-85">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0"></span>
                       {f}
                     </li>
                   ))}
@@ -121,7 +137,7 @@ export default function WhyTuoora() {
         </section>
 
         {/* UPI Payment System */}
-        <section className="bg-[#FDFDFD] border-y border-gray-100 py-12 mb-12">
+        {/* <section className="bg-transparent border-y border-gray-100 py-12 mb-12">
           <div className="section-container">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -130,8 +146,8 @@ export default function WhyTuoora() {
                   Students pay fees <br />
                   <span className="text-primary italic">directly from the app.</span>
                 </h2>
-                <p className="text-xs text-gray-400 leading-relaxed mb-6">
-                  Institute admin uploads their UPI ID and QR code once. Students and parents see a live payment screen 
+                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1 mb-6">
+                  Institute admin uploads their UPI ID and QR code once. Students and parents see a live payment screen
                   with one-tap GPay/PhonePe deep link, scannable QR, and UPI ID copy option.
                 </p>
                 <div className="space-y-3">
@@ -164,19 +180,19 @@ export default function WhyTuoora() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Notification System */}
         <section className="section-container mb-12">
           <div className="text-center mb-8">
             <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2">Communication</span>
-            <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">3-Channel Notification System</h2>
+            <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">3-Channel Communication Hub</h2>
           </div>
           <div className="grid lg:grid-cols-3 gap-6">
             {[
               { icon: "📱", title: "In-App Notifications", desc: "Real-time alerts inside the student and parent mobile app. Stored in database with read/unread tracking.", tag: "Always Free" },
               { icon: "🔔", title: "FCM Push Notifications", desc: "Firebase Cloud Messaging delivers background push notifications even when the app is closed.", tag: "Background Alerts" },
-              { icon: "💬", title: "WhatsApp Business API", desc: "Send fee reminders, homework alerts, and announcements via WhatsApp Cloud API. Per-institute configuration.", tag: "Highest Open Rate" },
+              { icon: "💬", title: "Real-time Direct Chat", desc: "Instant 1-to-1 messaging between students and institute coordinators, powered by Pusher WebSockets.", tag: "Pusher Realtime" },
             ].map((n, i) => (
               <div key={i} className="p-7 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group overflow-hidden relative">
                 <div className="absolute -bottom-2 -right-2 h-12 w-12 bg-primary/5 rounded-full group-hover:scale-[6] transition-transform duration-700"></div>
@@ -190,7 +206,7 @@ export default function WhyTuoora() {
         </section>
 
         {/* ROI + Stats Banner */}
-        <section className="bg-navy py-12 overflow-hidden relative mb-12">
+        {/* <section className="bg-navy py-12 overflow-hidden relative mb-12">
           <div className="absolute -top-20 -right-20 h-64 w-64 bg-primary/20 rounded-full blur-[80px]"></div>
           <div className="section-container relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -202,9 +218,9 @@ export default function WhyTuoora() {
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-5">
                   {[
-                    { stat: "80%", label: "Time Saved", note: "WhatsApp + push automation replaces manual calling" },
+                    { stat: "80%", label: "Time Saved", note: "Push & in-app alerts automation replaces manual calling" },
                     { stat: "24hrs", label: "Data Migration", note: "Full student/fee records moved by our team for free" },
-                    { stat: "3 Apps", label: "One Platform", note: "Admin web + Student mobile + Parent mobile" },
+                    { stat: "2 Apps", label: "Unified Suite", note: "Admin Web Panel + Student Mobile App" },
                     { stat: "AES-256", label: "Encryption", note: "Bank-grade security with daily automated backups" },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4 items-start">
@@ -238,14 +254,14 @@ export default function WhyTuoora() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Tech Stack */}
-        <section className="section-container mb-12">
+        {/* <section className="section-container mb-12">
           <div className="text-center mb-8">
             <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2">Under the Hood</span>
             <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">Enterprise-Grade Tech Stack</h2>
-            <p className="text-gray-400 text-xs mt-2 max-w-xl mx-auto">Every layer is built for reliability, speed, and security. No shortcuts taken.</p>
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">Every layer is built for reliability, speed, and security. No shortcuts taken.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {techStack.map((t, i) => (
@@ -255,7 +271,7 @@ export default function WhyTuoora() {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* 3-Step Onboarding */}
         <section className="section-container mb-12">
@@ -291,7 +307,7 @@ export default function WhyTuoora() {
                 Start your 30-day Free Trial. <br />
                 <span className="bg-gradient-to-r from-primary to-orange-300 bg-clip-text text-transparent italic">No credit card. No commitment.</span>
               </h2>
-              <p className="text-white/40 text-xs mb-6 max-w-lg mx-auto">Our team handles your entire data migration within 24 hours — student records, fees, and batch history — for free.</p>
+              <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1 mb-6">Our team handles your entire data migration within 24 hours — student records, fees, and batch history — for free.</p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
                 <button
                   onClick={() => setIsModalOpen(true)}

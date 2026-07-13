@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Check } from "lucide-react";
+import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Globe, Check } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PowerSection from "@/components/PowerSection";
+import TechBackground from "../../components/TechBackground";
+
 
 const categoriesData = [
   {
@@ -98,6 +100,21 @@ const categoriesData = [
       { title: "30-Day Free Trial Auto-Setup", desc: "Every new institute gets an automatic Free Plan on registration — no credit card required. Go live within 24 hours." },
       { title: "Multi-Tenant Sanctum Auth", desc: "Three separate auth guards for Institute Admin, Student, and Parent. Token-based access with 1-hour access tokens and 24-hour refresh tokens." }
     ]
+  },
+  {
+    id: "website",
+    title: "Institute Website",
+    desc: "Every Tuoora institute gets a free, branded, mobile-ready website — auto-powered by your panel data.",
+    icon: Globe,
+    colorClass: "text-sky-600 bg-sky-50 border-sky-100",
+    glowClass: "bg-sky-500/10",
+    features: [
+      { title: "Auto-Branded Landing Page", desc: "Your institute name, logo, and contact details are pulled directly from your Tuoora panel and displayed on your own public website — no manual setup." },
+      // { title: "Batch & Fee Structure Display", desc: "Prospective students can browse your available batches, timings, subjects, and fee structures right from your public website." },
+      // { title: "Admission Enquiry Form", desc: "Built-in enquiry form on your website captures student details and pushes them directly into your Tuoora CRM leads pipeline." },
+      { title: "Custom Domain Support", desc: "Point your own domain (e.g., yourinstitute.com) to your Tuoora website. Or use your free subdomain at yourname.tuoora.com instantly." },
+      { title: "Zero Hosting Cost — Forever", desc: "The website is fully hosted and maintained by Tuoora as part of every plan. No server bills, no third-party hosting, no technical maintenance needed." }
+    ]
   }
 ];
 
@@ -121,12 +138,8 @@ export default function FeaturesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-x-clip">
-      {/* Global Tech Grid Backdrop */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35 pointer-events-none -z-20"></div>
-
-      {/* Hero Glowing Blob */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-primary/10 to-transparent blur-[120px] pointer-events-none -z-10"></div>
+    <div className="min-h-screen bg-white selection:bg-primary/30 relative overflow-x-clip">
+      <TechBackground />
 
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 
@@ -139,11 +152,10 @@ export default function FeaturesPage() {
             <button
               key={idx}
               onClick={() => scrollToSection(category.title)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${
-                isActive
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${isActive
                   ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
                   : "bg-slate-50 text-slate-600 border-slate-100"
-              }`}
+                }`}
             >
               <Icon className="w-3.5 h-3.5" />
               {category.title.split(" ")[0]}
@@ -152,7 +164,7 @@ export default function FeaturesPage() {
         })}
       </div>
 
-      <main className="pt-24 pb-12">
+      <main className="relative z-10 pt-24 pb-12">
         {/* Features Hero */}
         <section className="section-container text-center mb-16 relative px-4">
           <motion.span
@@ -163,7 +175,7 @@ export default function FeaturesPage() {
           >
             Platform Capabilities
           </motion.span>
-          
+
           <h1 className="text-4xl sm:text-6xl font-extrabold text-navy tracking-tight mb-4 leading-tight">
             <span className="block overflow-hidden py-1">
               <motion.span
@@ -199,7 +211,7 @@ export default function FeaturesPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-base font-light leading-relaxed"
+            className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1"
           >
             Explore the deep architectural features of Tuoora ERP.
             Designed for high-density management and seamless parent engagement.
@@ -207,14 +219,14 @@ export default function FeaturesPage() {
         </section>
 
         {/* Split Screen Scroll Spy Bento Layout */}
-        <section className="section-container px-4 mb-28">
+        <section className="section-container px-4 mb-10">
           <div className="grid lg:grid-cols-12 gap-12">
-            
+
             {/* LEFT Sticky Sidebar Navigation */}
             <div className="hidden lg:block lg:col-span-4 sticky top-32 self-start pl-4">
               <div className="relative pl-8">
                 {/* Laser Connector Path */}
-                <div className="absolute left-0 top-6 bottom-6 w-[2px] bg-slate-100">
+                <div className="absolute left-0 top-5 bottom-5 w-[2px] bg-slate-100">
                   <motion.div
                     className="absolute top-0 left-0 right-0 bg-gradient-to-b from-primary to-orange-500 rounded-full"
                     style={{
@@ -226,7 +238,7 @@ export default function FeaturesPage() {
                 </div>
 
                 {/* Nav list */}
-                <div className="space-y-6">
+                <div className="space-y-2">
                   {categoriesData.map((category, idx) => {
                     const Icon = category.icon;
                     const isActive = activeSection === idx;
@@ -237,30 +249,27 @@ export default function FeaturesPage() {
                         className="relative flex items-center gap-5 w-full text-left focus:outline-none group"
                       >
                         {/* Interactive Bullet Dot */}
-                        <div className={`absolute left-[-42px] w-5 h-5 rounded-full border-2 flex items-center justify-center bg-white transition-all duration-300 ${
-                          isActive
+                        <div className={`absolute left-[-42px] w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center bg-white transition-all duration-300 ${isActive
                             ? "border-primary scale-110 shadow-[0_0_8px_rgba(255,107,38,0.4)]"
                             : "border-slate-200 group-hover:border-slate-400"
-                        }`}>
-                          {isActive && <div className="w-2 h-2 rounded-full bg-primary" />}
+                          }`}>
+                          {isActive && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
                         </div>
 
                         {/* Card menu item */}
-                        <div className={`p-4 rounded-2xl border w-full transition-all duration-300 flex items-center gap-4 bg-white ${
-                          isActive
-                            ? "border-primary/20 shadow-[0_15px_30px_rgba(255,107,38,0.04)]"
+                        <div className={`py-2 px-3 rounded-xl border w-full transition-all duration-300 flex items-center gap-3 bg-white ${isActive
+                            ? "border-primary/20 shadow-[0_12px_25px_-5px_rgba(255,107,38,0.04)]"
                             : "border-slate-100 group-hover:border-slate-200 group-hover:shadow-[0_10px_20px_-10px_rgba(0,0,0,0.02)]"
-                        }`}>
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${category.colorClass}`}>
-                            <Icon className="w-4 h-4" />
+                          }`}>
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${category.colorClass}`}>
+                            <Icon className="w-3.5 h-3.5" />
                           </div>
-                          <div>
-                            <h4 className={`text-xs font-black uppercase tracking-wider transition-colors ${
-                              isActive ? "text-primary" : "text-navy group-hover:text-slate-800"
-                            }`}>
+                          <div className="min-w-0">
+                            <h4 className={`text-[10px] font-black uppercase tracking-wider transition-colors truncate ${isActive ? "text-primary" : "text-navy group-hover:text-slate-800"
+                              }`}>
                               {category.title}
                             </h4>
-                            <p className="text-[10px] text-slate-400 font-light mt-0.5 line-clamp-1">
+                            <p className="text-[9px] text-slate-400 font-light mt-0.5 truncate">
                               {category.desc}
                             </p>
                           </div>
@@ -285,7 +294,7 @@ export default function FeaturesPage() {
                     className="scroll-mt-36"
                   >
                     {/* Category Header */}
-                    <div className="flex items-center gap-4 mb-8">
+                    <div className="flex items-center gap-4 mb-4">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 border shadow-sm ${category.colorClass}`}>
                         <Icon className="w-5 h-5 stroke-[2]" />
                       </div>
@@ -314,13 +323,12 @@ export default function FeaturesPage() {
                               borderColor: "rgba(255,107,38,0.2)",
                               boxShadow: "0 20px 40px rgba(255,107,38,0.03)"
                             }}
-                            className={`relative p-6 rounded-3xl bg-[#FCFCFD]/60 border border-slate-200/50 backdrop-blur-sm transition-all duration-300 group flex flex-col justify-between overflow-hidden ${
-                              isFullWidth ? "md:col-span-2" : "md:col-span-1"
-                            }`}
+                            className={`relative p-6 rounded-3xl bg-[#FCFCFD]/60 border border-slate-200/50 backdrop-blur-sm transition-all duration-300 group flex flex-col justify-between overflow-hidden ${isFullWidth ? "md:col-span-2" : "md:col-span-1"
+                              }`}
                           >
                             {/* Inner ambient glow */}
                             <div className={`absolute -right-10 -bottom-10 h-28 w-28 rounded-full blur-3xl pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-40 ${category.glowClass}`}></div>
-                            
+
                             <div>
                               <div className="flex items-start gap-4 mb-4">
                                 <div className="h-6 w-6 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 shrink-0 mt-0.5 group-hover:border-primary/30 group-hover:text-primary group-hover:bg-primary/5 transition-all duration-300">
@@ -370,7 +378,7 @@ export default function FeaturesPage() {
               </h2>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
-                <button 
+                <button
                   onClick={() => setIsModalOpen(true)}
                   className="group relative px-10 py-3.5 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-2xl shadow-primary/40 hover:scale-105 transition-all overflow-hidden"
                 >
@@ -380,7 +388,7 @@ export default function FeaturesPage() {
                   <div className="absolute inset-0 rounded-xl border-4 border-primary/50 animate-ping opacity-20"></div>
                 </button>
 
-                <Link 
+                <Link
                   href="/contact"
                   className="px-9 py-3.5 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-white/10 transition-colors backdrop-blur-sm"
                 >
@@ -388,9 +396,9 @@ export default function FeaturesPage() {
                 </Link>
               </div>
 
-              <p className="mt-5 text-xs text-white/40 font-medium tracking-wide">
+              {/* <p className="mt-5 text-xs text-white/40 font-medium tracking-wide">
                 Join 500+ Institutes Growing with Tuoora ERP. No Credit Card Required.
-              </p>
+              </p> */}
             </div>
 
             <style jsx>{`

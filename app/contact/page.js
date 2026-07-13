@@ -1,385 +1,538 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import TechBackground from "../../components/TechBackground";
+import { Phone, Mail, MapPin, ArrowRight, CheckCircle, Sparkles, MessageSquare, Send } from 'lucide-react';
 
-export default function Contact() {
-   const [isModalOpen, setIsModalOpen] = useState(false);
-   const [formData, setFormData] = useState({
-      full_name: '',
-      phone: '',
-      institute_name: '',
-      email: '',
-      designation: 'Contact Form Inquiry',
-      message: ''
-   });
-   const [isSubmitting, setIsSubmitting] = useState(false);
-   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
-
-   // Spotlight cursor tracker
-   const mouseX = useMotionValue(0);
-   const mouseY = useMotionValue(0);
-   const springX = useSpring(mouseX, { stiffness: 80, damping: 20 });
-   const springY = useSpring(mouseY, { stiffness: 80, damping: 20 });
-
-   const handleMouseMove = (e) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
-   };
-
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setIsSubmitting(true);
-      setSubmitStatus(null);
-
-      try {
-         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://tuoora.com';
-         const response = await fetch(`${apiBaseUrl}/api/book-demo`, {
-            method: 'POST',
-            headers: {
-               'Content-Type': 'application/json',
-               'Accept': 'application/json'
-            },
-            body: JSON.stringify(formData),
-         });
-
-         if (response.ok) {
-            setSubmitStatus('success');
-            setFormData({
-               full_name: '',
-               phone: '',
-               institute_name: '',
-               email: '',
-               designation: 'Contact Form Inquiry',
-               message: ''
-            });
-            // Reset success message after 5 seconds
-            setTimeout(() => setSubmitStatus(null), 5000);
-         } else {
-            setSubmitStatus('error');
-         }
-      } catch (error) {
-         console.error("Submission error:", error);
-         setSubmitStatus('error');
-      } finally {
-         setIsSubmitting(false);
-      }
-   };
-
-   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData(prev => ({ ...prev, [name]: value }));
-   };
-
-   return (
-      <div 
-         onMouseMove={handleMouseMove}
-         className="min-h-screen bg-white selection:bg-primary selection:text-white relative overflow-hidden"
-      >
-         <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-
-         {/* Animated Background Mesh Glow */}
-         <div className="absolute inset-0 pointer-events-none -z-10">
-            <motion.div 
-               style={{
-                  left: springX,
-                  top: springY,
-                  transform: 'translate(-50%, -50%)',
-               }}
-               className="absolute w-[450px] h-[450px] bg-primary/5 rounded-full blur-[100px]"
-            />
-            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
-            <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-navy/5 rounded-full blur-[100px]" />
-         </div>
-
-         <main className="relative pt-36 pb-20">
-             <div className="section-container relative z-10">
-               <div className="max-w-6xl mx-auto">
-
-                   {/* High-Impact Hero Header */}
-                   <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.8 }}
-                      className="mb-10 text-left max-w-5xl mx-auto"
-                   >
-                      <span className="inline-flex items-center gap-2 px-3 py-1 bg-navy text-white text-[9px] font-black uppercase tracking-[0.4em] rounded-full mb-3">
-                         <span className="h-1 w-1 bg-primary rounded-full animate-pulse"></span>
-                         Connect With Us
-                      </span>
-                      <h1 className="text-4xl lg:text-5xl font-black text-navy tracking-tighter leading-tight mb-2">
-                         Let's start your <span className="text-primary italic relative">
-                            transformation
-                            <motion.span
-                               initial={{ scaleX: 0 }}
-                               animate={{ scaleX: 1 }}
-                               transition={{ delay: 0.8, duration: 1 }}
-                               className="absolute bottom-1 left-0 w-full h-2 bg-primary/10 -z-10 origin-left"
-                            />
-                         </span>
-                      </h1>
-                      <p className="text-gray-400 text-sm font-medium max-w-2xl">
-                         Experience the next generation of institutional intelligence.
-                         Choose your intent below to get started.
-                      </p>
-                   </motion.div>
-
-                   {/* Split Layout */}
-                   <div className="flex flex-col lg:flex-row gap-8 items-stretch max-w-5xl mx-auto text-left mt-10">
-
-                      {/* Left: Contact Info (Stacked Cards) */}
-                      <div className="w-full lg:w-80 shrink-0 flex flex-col gap-4">
-                         {[
-                            { 
-                               label: 'Hotline', 
-                               value: '+91 91040 81291', 
-                               desc: 'Speak directly with our academic coordinators.',
-                               icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z',
-                               color: 'text-orange-500 bg-orange-500/10',
-                               href: 'tel:+919104081291'
-                            },
-                            { 
-                               label: 'Email Support', 
-                               value: 'info@tuoora.com', 
-                               desc: 'Get support or billing answers in 12 minutes.',
-                               icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6',
-                               color: 'text-primary bg-primary/10',
-                               href: 'mailto:info@tuoora.com'
-                            },
-                            { 
-                               label: 'HQ Address', 
-                               value: 'Ahmedabad, Gujarat', 
-                               desc: 'Visit our regional headquarters for in-person demo.',
-                               icon: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
-                               color: 'text-green-500 bg-green-500/10',
-                               href: 'https://maps.google.com/?q=Ahmedabad,+Gujarat'
-                            }
-                         ].map((item, i) => (
-                            <motion.a
-                               href={item.href}
-                               target={item.href.startsWith('http') ? '_blank' : undefined}
-                               key={i}
-                               whileHover={{ y: -5, scale: 1.01 }}
-                               initial={{ opacity: 0, y: 15 }}
-                               animate={{ opacity: 1, y: 0 }}
-                               transition={{ delay: 0.1 * i }}
-                               className="p-5 rounded-[2rem] bg-white/95 backdrop-blur-sm border border-slate-100/90 hover:border-primary/20 hover:shadow-lg transition-all flex flex-col gap-3 text-left group"
-                            >
-                               <div className="flex items-center gap-4">
-                                  <div className={`h-11 w-11 rounded-2xl flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform shrink-0`}>
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d={item.icon} /></svg>
-                                  </div>
-                                  <div className="min-w-0">
-                                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">{item.label}</span>
-                                     <p className="text-sm font-black text-navy tracking-tight truncate">{item.value}</p>
-                                  </div>
-                               </div>
-                               <p className="text-[11px] text-slate-400 font-medium leading-relaxed">{item.desc}</p>
-                            </motion.a>
-                         ))}
-                      </div>
-
-                      {/* Right: Glassmorphism Contextual Form (3D Tilt Card) */}
-                      <div className="flex-1 w-full">
-                         <TiltCard className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.06)] overflow-hidden relative">
-                           <AnimatePresence>
-                              {submitStatus === 'success' && (
-                                 <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    className="absolute inset-0 z-50 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-8"
-                                 >
-                                    <motion.div
-                                       initial={{ scale: 0.5, opacity: 0 }}
-                                       animate={{ scale: 1, opacity: 1 }}
-                                       className="h-20 w-20 bg-green-500 rounded-full flex items-center justify-center text-white mb-6 shadow-2xl shadow-green-200"
-                                    >
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                                    </motion.div>
-                                    <h3 className="text-3xl font-black text-navy mb-2 tracking-tighter">Request Sent!</h3>
-                                    <p className="text-gray-500 font-medium">We'll get back to you in approximately 12 minutes.</p>
-                                    <button
-                                       onClick={() => setSubmitStatus(null)}
-                                       className="mt-8 text-xs font-black text-primary uppercase tracking-widest hover:underline"
-                                    >
-                                       Send another request
-                                    </button>
-                                 </motion.div>
-                              )}
-                           </AnimatePresence>
-
-                            {/* Banner Area - Simplified */}
-                            <div className="bg-slate-50/50 p-6 lg:p-8 relative overflow-hidden border-b border-slate-100">
-                               <div className="relative z-10 text-left">
-                                  <h2 className="text-3xl lg:text-4xl font-black text-navy mb-3 tracking-tighter leading-none">
-                                     Send us a <span className="text-primary italic">message.</span>
-                                  </h2>
-                                  <p className="text-sm text-slate-400 max-w-md leading-relaxed font-medium">
-                                     Have questions about our high-density ERP? Our institutional experts
-                                     are standing by to help you scale your institute.
-                                  </p>
-                               </div>
-                            </div>
-
-                           {/* Interactive Form Fields */}
-                           <div className="p-6 lg:p-8">
-                              <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
-                                 <div className="space-y-1.5 group">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">Full Name</label>
-                                    <input
-                                       type="text"
-                                       name="full_name"
-                                       required
-                                       value={formData.full_name}
-                                       onChange={handleChange}
-                                       placeholder="Rahul Sharma"
-                                       className="w-full py-3 bg-slate-50/50 border border-slate-100 focus:border-primary rounded-2xl px-6 text-xs font-bold text-navy outline-none focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all duration-300 placeholder:text-slate-300"
-                                    />
-                                 </div>
-                                 <div className="space-y-1.5 group">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">Phone Number</label>
-                                    <input
-                                       type="tel"
-                                       name="phone"
-                                       required
-                                       value={formData.phone}
-                                       onChange={handleChange}
-                                       placeholder="+91 00000 00000"
-                                       className="w-full py-3 bg-slate-50/50 border border-slate-100 focus:border-primary rounded-2xl px-6 text-xs font-bold text-navy outline-none focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all duration-300 placeholder:text-slate-300"
-                                    />
-                                 </div>
-                                 <div className="space-y-1.5 group">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">Institute Name</label>
-                                    <input
-                                       type="text"
-                                       name="institute_name"
-                                       required
-                                       value={formData.institute_name}
-                                       onChange={handleChange}
-                                       placeholder="Tuoora Academy"
-                                       className="w-full py-3 bg-slate-50/50 border border-slate-100 focus:border-primary rounded-2xl px-6 text-xs font-bold text-navy outline-none focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all duration-300 placeholder:text-slate-300"
-                                    />
-                                 </div>
-                                 <div className="space-y-1.5 group">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">Work Email</label>
-                                    <input
-                                       type="email"
-                                       name="email"
-                                       required
-                                       value={formData.email}
-                                       onChange={handleChange}
-                                       placeholder="rahul@institute.com"
-                                       className="w-full py-3 bg-slate-50/50 border border-slate-100 focus:border-primary rounded-2xl px-6 text-xs font-bold text-navy outline-none focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all duration-300 placeholder:text-slate-300"
-                                    />
-                                 </div>
-                                 <div className="sm:col-span-2 space-y-1.5 group">
-                                    <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1 group-focus-within:text-primary transition-colors">Your Message (Optional)</label>
-                                    <textarea
-                                       name="message"
-                                       value={formData.message}
-                                       onChange={handleChange}
-                                       rows="2"
-                                       placeholder="Any specific requirements?"
-                                       className="w-full py-3 bg-slate-50/50 border border-slate-100 focus:border-primary rounded-2xl px-6 text-xs font-bold text-navy outline-none focus:bg-white focus:ring-4 focus:ring-primary/5 transition-all duration-300 placeholder:text-slate-300 resize-none"
-                                    ></textarea>
-                                 </div>
-
-                                 <div className="sm:col-span-2 pt-3 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-slate-100 mt-2">
-                                    <div className="flex items-center gap-4">
-                                       <div className="flex -space-x-3">
-                                          {[1, 2, 3].map(i => (
-                                             <motion.img
-                                                whileHover={{ y: -5, zIndex: 10 }}
-                                                key={i}
-                                                src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 100}`}
-                                                alt="Expert"
-                                                className="h-10 w-10 rounded-full border-4 border-white bg-slate-50 shadow-sm cursor-pointer"
-                                             />
-                                          ))}
-                                       </div>
-                                       <div>
-                                          <p className="text-[9px] font-black text-navy uppercase tracking-widest">Experts Online</p>
-                                          <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Avg Response: 12 Mins</p>
-                                       </div>
-                                    </div>
-
-                                    <motion.button
-                                       disabled={isSubmitting}
-                                       whileHover={{ scale: 1.03 }}
-                                       whileTap={{ scale: 0.97 }}
-                                       className={`w-full sm:w-auto group/btn relative overflow-hidden px-12 py-5 rounded-2xl shadow-2xl transition-all duration-300 ${isSubmitting ? 'bg-slate-300 cursor-not-allowed text-slate-500' :
-                                             submitStatus === 'error' ? 'bg-red-500 text-white' : 'bg-primary text-white shadow-primary/30'
-                                          }`}
-                                    >
-                                       <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-0 transition-transform duration-500 pointer-events-none"></div>
-                                       <div className="flex items-center gap-3 relative z-10">
-                                          <span className="text-xs font-black uppercase tracking-[0.2em]">
-                                             {isSubmitting ? 'Processing...' :
-                                                submitStatus === 'error' ? 'Try Again' : 'Confirm Walkthrough'}
-                                          </span>
-                                          {!isSubmitting && (
-                                             <svg xmlns="http://www.w3.org/2000/svg" className="group-hover/btn:translate-x-1 transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                                          )}
-                                       </div>
-                                    </motion.button>
-                                 </div>
-                              </form>
-                           </div>
-                         </TiltCard>
-                      </div>
-                   </div>
-
-               </div>
-            </div>
-         </main>
-
-         <Footer />
-      </div>
-   );
+// ─── Animated Floating Orb ───────────────────────────────────────────────────
+function FloatingOrb({ size, color, delay, x, y, duration }) {
+  return (
+    <motion.div
+      className={`absolute rounded-full blur-[80px] pointer-events-none ${color}`}
+      style={{ width: size, height: size, left: x, top: y }}
+      animate={{ y: [0, -30, 0], x: [0, 15, 0], scale: [1, 1.1, 1] }}
+      transition={{ duration, delay, repeat: Infinity, ease: 'easeInOut' }}
+    />
+  );
 }
 
-// 3D Card Tilt Component using Framer Motion
-function TiltCard({ children, className }) {
-   const x = useMotionValue(0);
-   const y = useMotionValue(0);
+// ─── Magnetic Card (hover follows cursor) ────────────────────────────────────
+function MagneticCard({ children, className }) {
+  const cardRef = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const rotX = useSpring(useTransform(y, [-60, 60], [6, -6]), { stiffness: 200, damping: 30 });
+  const rotY = useSpring(useTransform(x, [-60, 60], [-6, 6]), { stiffness: 200, damping: 30 });
 
-   const rotateX = useSpring(useTransform(y, [-300, 300], [5, -5]), { stiffness: 150, damping: 25 });
-   const rotateY = useSpring(useTransform(x, [-300, 300], [-5, 5]), { stiffness: 150, damping: 25 });
+  const handleMove = (e) => {
+    const rect = cardRef.current.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  };
+  const handleLeave = () => { x.set(0); y.set(0); };
 
-   const handleMouseMove = (e) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
-      const mouseX = e.clientX - rect.left - width / 2;
-      const mouseY = e.clientY - rect.top - height / 2;
-      x.set(mouseX);
-      y.set(mouseY);
-   };
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ rotateX: rotX, rotateY: rotY, transformStyle: 'preserve-3d', perspective: 1000 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-   const handleMouseLeave = () => {
-      x.set(0);
-      y.set(0);
-   };
+// ─── Typing Headline ──────────────────────────────────────────────────────────
+function TypewriterText({ words }) {
+  const [index, setIndex] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
 
-   return (
+  useEffect(() => {
+    const current = words[index];
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setDisplayed(current.slice(0, displayed.length + 1));
+        if (displayed.length + 1 === current.length) {
+          setTimeout(() => setIsDeleting(true), 1400);
+        }
+      } else {
+        setDisplayed(current.slice(0, displayed.length - 1));
+        if (displayed.length === 0) {
+          setIsDeleting(false);
+          setIndex((i) => (i + 1) % words.length);
+        }
+      }
+    }, isDeleting ? 45 : 80);
+    return () => clearTimeout(timeout);
+  }, [displayed, isDeleting, index, words]);
+
+  return (
+    <span className="text-primary italic">
+      {displayed}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.5, repeat: Infinity }}
+        className="inline-block w-[3px] h-[0.9em] bg-primary ml-1 align-middle rounded-sm"
+      />
+    </span>
+  );
+}
+
+// ─── Floating Input Field ─────────────────────────────────────────────────────
+function FloatingField({ label, children }) {
+  return (
+    <div className="group relative">
+      <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1.5 group-focus-within:text-primary transition-colors duration-300">
+        {label}
+      </label>
+      {children}
       <motion.div
-         onMouseMove={handleMouseMove}
-         onMouseLeave={handleMouseLeave}
-         style={{ 
-            rotateX, 
-            rotateY, 
-            transformStyle: "preserve-3d",
-            perspective: 1200
-         }}
-         className={className}
-      >
-         <div style={{ transform: "translateZ(10px)" }} className="h-full w-full">
-            {children}
-         </div>
-      </motion.div>
-   );
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary to-orange-400 rounded-full"
+        initial={{ scaleX: 0 }}
+        whileFocusWithin={{ scaleX: 1 }}
+        style={{ originX: 0 }}
+        transition={{ duration: 0.3 }}
+      />
+    </div>
+  );
+}
+
+// ─── Contact Info Card ────────────────────────────────────────────────────────
+const contactItems = [
+  {
+    icon: Phone,
+    label: 'Call Directly',
+    value: '+91 91040 81291',
+    sub: 'Mon–Sat, 9am – 7pm IST',
+    color: 'from-orange-500 to-primary',
+    bg: 'bg-orange-50 border-orange-100',
+    href: 'tel:+919104081291',
+  },
+  {
+    icon: Mail,
+    label: 'Email Support',
+    value: 'info@tuoora.com',
+    sub: 'Avg. response in 12 minutes',
+    color: 'from-violet-500 to-indigo-500',
+    bg: 'bg-violet-50 border-violet-100',
+    href: 'mailto:info@tuoora.com',
+  },
+  {
+    icon: MapPin,
+    label: 'Headquarters',
+    value: 'Ahmedabad, Gujarat',
+    sub: 'Available for in-person demos',
+    color: 'from-emerald-500 to-teal-500',
+    bg: 'bg-emerald-50 border-emerald-100',
+    href: 'https://maps.google.com/?q=Ahmedabad,+Gujarat',
+  },
+];
+
+// ─── Main Page ────────────────────────────────────────────────────────────────
+export default function Contact() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    full_name: '', phone: '', institute_name: '', email: '',
+    designation: 'Contact Form Inquiry', message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [focusedField, setFocusedField] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    try {
+      const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://tuoora.com';
+      const res = await fetch(`${apiBaseUrl}/api/book-demo`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setSubmitStatus('success');
+        setFormData({ full_name: '', phone: '', institute_name: '', email: '', designation: 'Contact Form Inquiry', message: '' });
+        setTimeout(() => setSubmitStatus(null), 6000);
+      } else setSubmitStatus('error');
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const inputClass = "w-full px-4 py-3.5 bg-white/60 backdrop-blur-sm border border-slate-200/80 rounded-xl text-sm font-semibold text-navy placeholder:text-slate-300 outline-none focus:border-primary/50 focus:bg-white focus:ring-4 focus:ring-primary/8 transition-all duration-300";
+
+  return (
+    <div className="min-h-screen bg-[#FDFDFD] selection:bg-primary/20 overflow-hidden relative">
+      <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <TechBackground />
+
+      {/* ── Hero Section ── */}
+      <section className="relative min-h-[52vh] bg-navy overflow-hidden flex items-end pb-0">
+        {/* Animated orb lights */}
+        <FloatingOrb size={500} color="bg-primary/20" delay={0} x="60%" y="-10%" duration={8} />
+        <FloatingOrb size={350} color="bg-violet-500/10" delay={2} x="-5%" y="20%" duration={10} />
+        <FloatingOrb size={280} color="bg-orange-400/10" delay={4} x="40%" y="50%" duration={7} />
+
+        {/* Dot grid overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+
+        {/* Bottom fade into page */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#FDFDFD] to-transparent pointer-events-none z-10" />
+
+        <div className="section-container relative z-20 pt-36 pb-20 w-full">
+          <div className="max-w-4xl">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/15 rounded-full mb-6 backdrop-blur-sm"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-primary" />
+              <span className="text-[10px] font-black text-white/80 uppercase tracking-[0.3em]">Get in Touch</span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 35 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tighter leading-[1.05] mb-5"
+            >
+              Let's build something{' '}
+              <TypewriterText words={['remarkable.', 'together.', 'extraordinary.', 'that scales.']} />
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
+              className="text-white/50 text-base sm:text-lg font-medium leading-relaxed max-w-xl"
+            >
+              Talk to our institutional experts — get a live demo, migration walkthrough, or technical consultation. We respond in minutes.
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Main Content ── */}
+      <section className="section-container relative z-10 -mt-6 pb-12 px-4">
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+
+          {/* ── LEFT: Contact Info Cards ── */}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+            className="lg:col-span-4 flex flex-col gap-4"
+          >
+            {contactItems.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.a
+                  key={i}
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  variants={{ hidden: { opacity: 0, x: -30 }, show: { opacity: 1, x: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="group relative p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex gap-4 items-start overflow-hidden"
+                >
+                  {/* gradient left accent bar */}
+                  <motion.div
+                    className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${item.color} rounded-l-2xl`}
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    style={{ originY: 0 }}
+                  />
+                  {/* hover sweep */}
+                  <div className={`absolute inset-0 ${item.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`} />
+
+                  <div className={`relative z-10 h-11 w-11 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${item.color} text-white shadow-lg`}>
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div className="relative z-10 min-w-0">
+                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">{item.label}</span>
+                    <p className="text-sm font-black text-navy truncate mb-0.5">{item.value}</p>
+                    <p className="text-[10px] text-slate-400 font-medium">{item.sub}</p>
+                  </div>
+                  <ArrowRight className="relative z-10 w-4 h-4 text-slate-300 group-hover:text-primary group-hover:translate-x-1 transition-all ml-auto self-center shrink-0" />
+                </motion.a>
+              );
+            })}
+
+            {/* WhatsApp Quick Action */}
+            <motion.a
+              href="https://wa.me/919104081291"
+              target="_blank"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="relative overflow-hidden p-5 rounded-2xl bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white flex items-center gap-4 shadow-lg shadow-emerald-200/50 group"
+            >
+              <motion.div
+                className="absolute inset-0 bg-white/10"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: '100%' }}
+                transition={{ duration: 0.6 }}
+              />
+              <div className="h-11 w-11 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+                <MessageSquare className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[9px] font-black uppercase tracking-widest opacity-70">Instant Chat</p>
+                <p className="text-sm font-black">Chat on WhatsApp</p>
+                <p className="text-[10px] opacity-60 font-medium">Fastest way to reach us</p>
+              </div>
+              <ArrowRight className="ml-auto w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </motion.a>
+
+            {/* Live Support Status */}
+            {/* <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7 }}
+              className="p-4 rounded-2xl border border-slate-100 bg-white flex items-center gap-3"
+            >
+              <div className="flex -space-x-2">
+                {[1, 2, 3].map(i => (
+                  <img
+                    key={i}
+                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i + 20}`}
+                    alt="Expert"
+                    className="h-8 w-8 rounded-full border-2 border-white bg-slate-100"
+                  />
+                ))}
+              </div>
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 bg-green-500 rounded-full animate-pulse" />
+                  <span className="text-[9px] font-black text-navy uppercase tracking-wider">3 Experts Online</span>
+                </div>
+                <p className="text-[9px] text-slate-400 font-medium mt-0.5">Avg. response: 12 minutes</p>
+              </div>
+            </motion.div> */}
+          </motion.div>
+
+          {/* ── RIGHT: Contact Form ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-8"
+          >
+            <MagneticCard className="relative bg-white border border-slate-100 rounded-3xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+              {/* Success Overlay */}
+              <AnimatePresence>
+                {submitStatus === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute inset-0 z-50 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center text-center p-10"
+                  >
+                    <motion.div
+                      initial={{ scale: 0, rotate: -30 }}
+                      animate={{ scale: 1, rotate: 0 }}
+                      transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+                      className="h-24 w-24 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white mb-6 shadow-2xl shadow-emerald-200"
+                    >
+                      <CheckCircle className="w-12 h-12" />
+                    </motion.div>
+                    <motion.h3
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-3xl font-black text-navy tracking-tighter mb-2"
+                    >
+                      Message Sent!
+                    </motion.h3>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.35 }}
+                      className="text-slate-500 font-medium mb-8 max-w-xs"
+                    >
+                      Our experts will reach out within <span className="text-primary font-black">12 minutes</span>. Check your WhatsApp & email.
+                    </motion.p>
+                    <motion.button
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      onClick={() => setSubmitStatus(null)}
+                      className="text-xs font-black text-primary uppercase tracking-widest hover:underline"
+                    >
+                      Send Another Message
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Form Header */}
+              <div className="relative overflow-hidden px-8 pt-8 pb-7 border-b border-slate-100">
+                {/* Decorative background gradient */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
+                <div className="relative z-10 flex items-start justify-between">
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/5 border border-primary/10 rounded-full mb-3">
+                      <Send className="w-3 h-3 text-primary" />
+                      <span className="text-[9px] font-black text-primary uppercase tracking-[0.25em]">Send a Message</span>
+                    </div>
+                    <h2 className="text-2xl lg:text-3xl font-black text-navy tracking-tighter leading-tight">
+                      Book a Live <span className="text-primary italic">Demo Session</span>
+                    </h2>
+                    <p className="text-sm text-slate-400 font-medium mt-1.5 max-w-md">
+                      Fill in your details and we'll set up a personalised walkthrough of Tuoora ERP for your institute.
+                    </p>
+                  </div>
+                  {/* Animated step indicator */}
+                  <div className="hidden sm:flex flex-col items-end gap-1 shrink-0">
+                    <span className="text-[9px] font-black text-slate-300 uppercase tracking-wider">Avg. Setup Time</span>
+                    <span className="text-2xl font-black text-navy tracking-tighter">24<span className="text-primary text-sm ml-1">hrs</span></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Form Body */}
+              <form onSubmit={handleSubmit} className="p-8 grid sm:grid-cols-2 gap-6">
+
+                {/* Full Name */}
+                <div className="space-y-1.5">
+                  <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] group-focus-within:text-primary">Full Name *</label>
+                  <input
+                    type="text" name="full_name" required
+                    value={formData.full_name} onChange={handleChange}
+                    placeholder="Rahul Sharma"
+                    onFocus={() => setFocusedField('full_name')}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClass}
+                  />
+                </div>
+
+                {/* Phone */}
+                <div className="space-y-1.5">
+                  <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Phone Number *</label>
+                  <input
+                    type="tel" name="phone" required
+                    value={formData.phone} onChange={handleChange}
+                    placeholder="+91 98765 43210"
+                    onFocus={() => setFocusedField('phone')}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClass}
+                  />
+                </div>
+
+                {/* Institute Name */}
+                <div className="space-y-1.5">
+                  <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Institute Name *</label>
+                  <input
+                    type="text" name="institute_name" required
+                    value={formData.institute_name} onChange={handleChange}
+                    placeholder="Tuoora Academy"
+                    onFocus={() => setFocusedField('institute_name')}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClass}
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="space-y-1.5">
+                  <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Work Email *</label>
+                  <input
+                    type="email" name="email" required
+                    value={formData.email} onChange={handleChange}
+                    placeholder="rahul@institute.com"
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    className={inputClass}
+                  />
+                </div>
+
+                {/* Message */}
+                <div className="sm:col-span-2 space-y-1.5">
+                  <label className="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Message (Optional)</label>
+                  <textarea
+                    name="message" rows={3}
+                    value={formData.message} onChange={handleChange}
+                    placeholder="Tell us about your institute, student count, or specific features you need..."
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    className={`${inputClass} resize-none`}
+                  />
+                </div>
+
+                {/* Footer row */}
+                <div className="sm:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-5 pt-4 border-t border-slate-100">
+                  {/* Trust badges */}
+                  <div className="flex flex-wrap items-center gap-4">
+                    {['Free 30-Day Trial', 'No Credit Card', 'Setup in 24hrs'].map((badge, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.6 + i * 0.1 }}
+                        className="flex items-center gap-1.5"
+                      >
+                        <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                        <span className="text-[10px] font-bold text-slate-500">{badge}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Submit button */}
+                  <motion.button
+                    type="submit"
+                    disabled={isSubmitting}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                    className={`relative overflow-hidden group px-10 py-4 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 shadow-xl flex items-center gap-3 shrink-0 ${
+                      isSubmitting
+                        ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                        : submitStatus === 'error'
+                          ? 'bg-red-500 text-white shadow-red-200'
+                          : 'bg-primary text-white shadow-primary/30'
+                    }`}
+                  >
+                    {/* Shimmer */}
+                    {!isSubmitting && (
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full"
+                        animate={{ translateX: ['-100%', '200%'] }}
+                        transition={{ duration: 2, repeat: Infinity, repeatDelay: 1.5 }}
+                      />
+                    )}
+                    <span className="relative z-10">
+                      {isSubmitting ? 'Sending...' : submitStatus === 'error' ? 'Try Again' : 'Send Message'}
+                    </span>
+                    {!isSubmitting && (
+                      <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    )}
+                  </motion.button>
+                </div>
+              </form>
+            </MagneticCard>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
 }

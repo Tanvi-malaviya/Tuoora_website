@@ -66,10 +66,10 @@ export default function Security() {
 
         {/* Bottom Trust Badges */}
         <div className="mt-6 pt-4 border-t border-white/5 flex flex-wrap justify-center items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all">
-           <div className="flex items-center gap-2 text-white">
+           {/* <div className="flex items-center gap-2 text-white">
               <div className="h-1 w-1 rounded-full bg-primary"></div>
               <span className="text-[8px] font-bold uppercase tracking-widest">ISO 27001 Certified</span>
-           </div>
+           </div> */}
            <div className="flex items-center gap-2 text-white">
               <div className="h-1 w-1 rounded-full bg-primary"></div>
               <span className="text-[8px] font-bold uppercase tracking-widest">SSL Encrypted</span>
@@ -80,7 +80,7 @@ export default function Security() {
            </div>
            <div className="flex items-center gap-2 text-white">
               <div className="h-1 w-1 rounded-full bg-primary"></div>
-              <span className="text-[8px] font-bold uppercase tracking-widest">Daily Backups</span>
+              <span className="text-[8px] font-bold uppercase tracking-widest">Weekly Backups</span>
            </div>
         </div>
       </div>

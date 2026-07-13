@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { useState } from "react";
+import TechBackground from "../../components/TechBackground";
 
 export default function ModulesPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +19,7 @@ export default function ModulesPage() {
         "Student registry with photo & enrollment ID",
         "Auto-generated 6-digit institute code",
         
-        "Batch assignment & multi-batch support",
+        "Batch assignment",
         "Birthday tracker on admin dashboard",
         "Student profile photo upload",
       
@@ -36,10 +37,9 @@ export default function ModulesPage() {
        
         "Monthly, term & yearly fee schedules",
         "Partial payments & installment tracking",
-        "GST-compliant invoicing",
-        "PDF receipt auto-generation (DOMPDF)",
+        "PDF receipt auto-generation",
         "Outstanding balance dashboard",
-        "Tally-compatible financial exports",
+        
       ]
     },
     {
@@ -53,7 +53,7 @@ export default function ModulesPage() {
         "Mark from web dashboard or mobile app",
         "Auto attendance percentage calculation",
         "Date-range filter for records",
-        "WhatsApp alert on absence",
+        
         "Batch-wise attendance report",
         "Export attendance to Excel",
         
@@ -161,13 +161,31 @@ export default function ModulesPage() {
         "Delete & update lead records",
       ]
     },
+    {
+      id: "website",
+      icon: <WebsiteIcon />,
+      title: "Institute Website",
+      badge: "Included Free",
+      desc: "A fully branded, mobile-ready website auto-powered by your Tuoora panel data.",
+      features: [
+        "Branded landing page with logo & colours",
+        "Batch schedule & fee structure display",
+        "Admission enquiry form (CRM-linked)",
+        "Auto-synced with your Tuoora dashboard",
+        "Mobile responsive on all devices",
+        "Custom domain support",
+        "Zero hosting or setup cost",
+        "Goes live instantly — no code needed",
+      ]
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD]">
+    <div className="min-h-screen bg-[#FDFDFD] relative overflow-hidden">
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <TechBackground />
 
-      <main className="pt-24 pb-8">
+      <main className="relative z-10 pt-24 pb-8">
         {/* Header */}
         <section className="section-container mb-6">
           <div className="max-w-2xl">
@@ -177,7 +195,7 @@ export default function ModulesPage() {
             <h1 className="text-3xl font-bold text-navy tracking-tighter mb-2">
               Every Tool Your Institute <span className="text-primary italic">Needs.</span>
             </h1>
-            <p className="text-xs text-gray-500 font-light leading-relaxed max-w-xl">
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">
               9 production-ready modules covering students, fees, staff HR, attendance, homework, CRM, notifications, expenses, and analytics — all in one dashboard.
             </p>
           </div>
@@ -240,7 +258,7 @@ export default function ModulesPage() {
                 </button>
                 <Link href="/contact">
                   <button className="bg-white/5 border border-white/10 px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-all">
-                    Contact Sales
+                    Contact 
                   </button>
                 </Link>
               </div>
@@ -283,4 +301,7 @@ const WhatsappIcon = () => (
 );
 const NotebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+);
+const WebsiteIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
 );
