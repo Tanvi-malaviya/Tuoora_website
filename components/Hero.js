@@ -1,39 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Sparkles, ArrowRight, Play, Coins, Clock, BookOpen, Shield } from "lucide-react";
+import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function Hero({ setIsModalOpen, isLoading }) {
-  const containerRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Mouse coordinate tracking for 3D parallax tilt
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  // Transform coordinates into rotation angles for the right-side bento scene
-  const rotateX = useTransform(mouseY, [-300, 300], [8, -8]);
-  const rotateY = useTransform(mouseX, [-300, 300], [-8, 8]);
-
-  const handleMouseMove = (event) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const x = event.clientX - rect.left - width / 2;
-    const y = event.clientY - rect.top - height / 2;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    motion.animate(mouseX, 0, { duration: 0.8, ease: "easeOut" });
-    motion.animate(mouseY, 0, { duration: 0.8, ease: "easeOut" });
-  };
-
-  // Staggered lines/words animations for the left side text
+  // Staggered text reveal animations
   const containerVariants = {
     hidden: {},
     visible: {
@@ -58,257 +37,274 @@ export default function Hero({ setIsModalOpen, isLoading }) {
   };
 
   const fadeUpVariants = {
-    hidden: { y: 25, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.7,
+        duration: 0.6,
         ease: [0.16, 1, 0.3, 1]
       }
     }
   };
 
-  // Replace this with your actual YouTube video embed ID
-  const youtubeVideoId = "dQw4w9WgXcQ";
-
   return (
-    <section className="relative pt-12 pb-20 lg:pt-2 lg:pb-16 overflow-hidden bg-slate-50/45 text-navy">
-      {/* Light Premium Mesh Glows */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-10%] w-[55%] h-[55%] bg-primary/4 rounded-full blur-[140px] animate-pulse" />
-        <div className="absolute bottom-[20%] left-[-10%] w-[50%] h-[50%] bg-teal-500/3 rounded-full blur-[120px]" />
-        <div className="absolute top-[40%] right-[30%] w-[35%] h-[35%] bg-orange-300/3 rounded-full blur-[110px] animate-[pulse_6s_infinite]" />
+    <section className="relative pt-12 pb-16 lg:pt-14 lg:pb-1 overflow-hidden text-navy flex items-center justify-center min-h-[75vh] z-0">
+      {/* Subtle Ambient Orange Glow matching other sections */}
+      <div className="absolute top-[-10%] right-[-5%] w-[45%] h-[45%] bg-primary/8 rounded-full blur-[130px] pointer-events-none z-0" />
+
+      {/* SVG Circuits - Only in Hero section */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Style block for animating SVG dashes with hardware-accelerated CSS properties */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+          @keyframes circuit-pulse-left {
+            0% { stroke-dashoffset: 400; }
+            100% { stroke-dashoffset: -400; }
+          }
+          @keyframes circuit-pulse-right {
+            0% { stroke-dashoffset: 400; }
+            100% { stroke-dashoffset: -400; }
+          }
+          .animate-circuit-pulse-1 {
+            stroke-dasharray: 40 200;
+            animation: circuit-pulse-left 6s linear infinite;
+          }
+          .animate-circuit-pulse-2 {
+            stroke-dasharray: 30 150;
+            animation: circuit-pulse-left 5s linear infinite;
+          }
+          .animate-circuit-pulse-3 {
+            stroke-dasharray: 40 200;
+            animation: circuit-pulse-right 6.5s linear infinite;
+          }
+          .animate-circuit-pulse-4 {
+            stroke-dasharray: 30 150;
+            animation: circuit-pulse-right 4.5s linear infinite;
+          }
+        `}} />
+
+        {/* SVG Circuit Lines - Left Side (Increased stroke opacity to 0.22) */}
+        <svg
+          className="absolute left-[-2%] top-[10%] w-[35%] h-[80%] fill-none hidden lg:block"
+          viewBox="0 0 200 400"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="circuit-grad-left" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#f97316" stopOpacity="0" />
+              <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
+              <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Base path lines */}
+          <path d="M 0 50 L 80 50 L 110 80 L 110 150 L 150 190 L 150 250 L 120 280 L 0 280" stroke="rgba(249, 115, 22, 0.22)" strokeWidth="1.5" />
+          <path d="M 0 120 L 50 120 L 70 140 L 70 200 L 100 230 L 100 320" stroke="rgba(249, 115, 22, 0.22)" strokeWidth="1.5" />
+          <path d="M 0 350 L 60 350 L 90 320 L 140 320 L 160 300" stroke="rgba(249, 115, 22, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
+
+          {/* Animated Overlay Signals */}
+          <path d="M 0 50 L 80 50 L 110 80 L 110 150 L 150 190 L 150 250 L 120 280 L 0 280" stroke="url(#circuit-grad-left)" strokeWidth="2.5" className="animate-circuit-pulse-1" />
+          <path d="M 0 120 L 50 120 L 70 140 L 70 200 L 100 230 L 100 320" stroke="url(#circuit-grad-left)" strokeWidth="2.5" className="animate-circuit-pulse-2" />
+
+          <circle cx="80" cy="50" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
+          <circle cx="110" cy="80" r="3" fill="rgba(249, 115, 22, 0.5)" />
+          <circle cx="150" cy="190" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
+          <circle cx="120" cy="280" r="3.5" fill="rgba(249, 115, 22, 0.5)" />
+          <circle cx="100" cy="230" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
+          <circle cx="160" cy="300" r="4" fill="rgba(249, 115, 22, 0.5)" />
+        </svg>
+
+        {/* SVG Circuit Lines - Right Side (Increased stroke opacity to 0.22) */}
+        <svg
+          className="absolute right-[-2%] top-[10%] w-[35%] h-[80%] fill-none hidden lg:block"
+          viewBox="0 0 200 400"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="circuit-grad-right" x1="100%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0" />
+              <stop offset="50%" stopColor="#14b8a6" stopOpacity="1" />
+              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Base path lines */}
+          <path d="M 200 60 L 120 60 L 90 90 L 90 180 L 50 220 L 50 300 L 80 330 L 200 330" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="1.5" />
+          <path d="M 200 150 L 150 150 L 130 170 L 130 240 L 80 290 L 80 380" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="1.5" />
+          <path d="M 200 270 L 140 270 L 120 290 L 70 290" stroke="rgba(20, 184, 166, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
+
+          {/* Animated Overlay Signals */}
+          <path d="M 200 60 L 120 60 L 90 90 L 90 180 L 50 220 L 50 300 L 80 330 L 200 330" stroke="url(#circuit-grad-right)" strokeWidth="2.5" className="animate-circuit-pulse-3" />
+          <path d="M 200 150 L 150 150 L 130 170 L 130 240 L 80 290 L 80 380" stroke="url(#circuit-grad-right)" strokeWidth="2.5" className="animate-circuit-pulse-4" />
+
+          <circle cx="120" cy="60" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
+          <circle cx="90" cy="90" r="3" fill="rgba(20, 184, 166, 0.5)" />
+          <circle cx="50" cy="220" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
+          <circle cx="80" cy="330" r="3.5" fill="rgba(20, 184, 166, 0.5)" />
+          <circle cx="130" cy="170" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
+          <circle cx="70" cy="290" r="4" fill="rgba(20, 184, 166, 0.5)" />
+        </svg>
       </div>
 
-      {/* Perspective wireframe grid floor (Light theme) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none -z-10 [mask-image:radial-gradient(ellipse_at_center,white_70%,transparent_100%)]" />
+      <div className="section-container relative z-10 flex flex-col items-center text-center">
 
-      <div className="section-container grid gap-14 lg:grid-cols-12 lg:items-center relative z-10">
-        
-        {/* Left Column - Content Area */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate={isLoading ? "hidden" : "visible"}
-          className="lg:col-span-6 space-y-3"
-        >
+        {mounted && (
           <motion.div
-            variants={fadeUpVariants}
-            className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary border border-primary/20"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isLoading ? "hidden" : "visible"}
+            className="max-w-5xl space-y-4 flex flex-col items-center"
           >
-            <Sparkles className="w-3.5 h-3.5 animate-pulse text-primary" />
-            Tuoora Smart Ecosystem
-          </motion.div>
-
-          <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl lg:text-[4.2rem] font-extrabold text-navy leading-[1.04] tracking-tight">
-              <span className="block overflow-hidden pb-1">
-                <motion.span variants={revealVariants} className="inline-block">Unlock growth</motion.span>
-              </span>
-              <span className="block overflow-hidden pb-1">
-                <motion.span variants={revealVariants} className="inline-block">with every</motion.span>
-              </span>
-              <span className="block overflow-hidden pb-1">
-                <motion.span 
-                  variants={revealVariants} 
-                  className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500 font-black"
-                >
-                  enrollment
-                </motion.span>
-              </span>
-            </h1>
-            <motion.p 
-              variants={fadeUpVariants}
-              className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-xl"
-            >
-              Automate class scheduling, simplify parents compliance, and automate fee collections through unified QR payments.
-            </motion.p>
-          </div>
-
-          <motion.div 
-            variants={fadeUpVariants}
-            className="flex flex-col sm:flex-row gap-4 pt-2"
-          >
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-navy text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl overflow-hidden shadow-lg shadow-navy/15 transition-all active:scale-[0.98]"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Get Started Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-            </button>
-            <Link href="/why-tuoora" className="inline-flex items-center justify-center px-8 py-4 border border-slate-200 bg-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl text-navy hover:border-primary/40 hover:text-primary transition-all active:scale-[0.98] text-center">
-               Why Choose Us
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Right Column - Dribbble-inspired Light Chrome Pedestal & YouTube Player */}
-        <div className="lg:col-span-6 flex justify-center lg:justify-end">
-          <div 
-            ref={containerRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative flex justify-center items-center w-full aspect-square max-w-[500px] p-6 sm:p-10 cursor-pointer group"
-            style={{ perspective: "1500px" }}
-          >
-            {/* Ambient reflective glow */}
-            <div className="absolute top-1/4 left-1/4 w-44 h-44 bg-primary/5 rounded-full blur-[65px] -z-10 pointer-events-none" />
-
+            {/* Badge */}
             <motion.div
               variants={fadeUpVariants}
-              initial="hidden"
-              animate={isLoading ? "hidden" : "visible"}
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              className="relative w-full h-full flex items-center justify-center transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary border border-primary/20 shadow-sm mb-1"
             >
-              {/* Chrome Pedestals (Light metallic gradients) */}
-              <div className="absolute inset-0 -z-10 flex items-center justify-center">
-                <svg className="w-[110%] h-[110%] overflow-visible" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="metalSideL" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#e2e8f0" />
-                      <stop offset="50%" stopColor="#cbd5e1" />
-                      <stop offset="100%" stopColor="#94a3b8" />
-                    </linearGradient>
-                    <linearGradient id="metalSideR" x1="100%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#f1f5f9" />
-                      <stop offset="50%" stopColor="#e2e8f0" />
-                      <stop offset="100%" stopColor="#cbd5e1" />
-                    </linearGradient>
-                    <linearGradient id="metalTop" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="50%" stopColor="#f8fafc" />
-                      <stop offset="100%" stopColor="#e2e8f0" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Main Isometric Metal Block */}
-                  <g transform="translate(200, 280)">
-                    <ellipse cx="0" cy="80" rx="100" ry="32" fill="rgba(148, 163, 184, 0.25)" filter="blur(12px)" />
-                    <path d="M -90 0 L -90 60 A 90 25 0 0 0 90 60 L 90 0 A 90 25 0 0 1 -90 0 Z" fill="url(#metalSideL)" stroke="rgba(15, 23, 42, 0.05)" strokeWidth="1" />
-                    <ellipse cx="0" cy="0" rx="90" ry="25" fill="url(#metalTop)" stroke="rgba(15, 23, 42, 0.08)" strokeWidth="1.5" />
-                  </g>
-                </svg>
-              </div>
-
-              {/* Glassmorphic YouTube Player Box */}
-              <div 
-                className="w-[90%] aspect-video rounded-3xl bg-white/85 border border-white/60 shadow-[0_25px_50px_rgba(0,0,0,0.06)] backdrop-blur-xl overflow-hidden relative z-20"
-                style={{ transform: "translateZ(30px)" }}
-              >
-                {!isPlaying ? (
-                  <div className="absolute inset-0 flex flex-col justify-between p-5 bg-gradient-to-br from-white/30 via-slate-50/90 to-white/40">
-                    {/* Header bar */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 bg-white/70 backdrop-blur-md px-3.5 py-1 rounded-full border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
-                        <span className="text-[8.5px] font-black text-navy uppercase tracking-widest leading-none">YouTube Video Preview</span>
-                      </div>
-                      <span className="text-[9px] font-bold text-slate-400">10:00</span>
-                    </div>
-
-                    {/* Central Pulsing Play Button */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <button 
-                        onClick={() => setIsPlaying(true)}
-                        className="h-16 w-16 bg-primary hover:bg-primary-dark text-white rounded-full flex items-center justify-center shadow-xl shadow-primary/30 transition-all hover:scale-105 active:scale-95 group/play"
-                      >
-                        <Play className="w-6 h-6 fill-white ml-1 group-hover/play:scale-105 transition-transform" />
-                      </button>
-                    </div>
-
-                    {/* Video Title Overlay */}
-                    <div className="z-10 bg-white/80 backdrop-blur-md border border-slate-100/50 p-3.5 rounded-2xl flex items-center justify-between mt-auto shadow-[0_8px_32px_rgba(0,0,0,0.02)]">
-                      <div className="min-w-0">
-                        <span className="text-[8.5px] font-black text-primary uppercase tracking-widest block">Tuoora ERP Overview</span>
-                        <p className="text-[7.5px] font-semibold text-slate-500 truncate mt-1">Discover how to manage fees, schedules, and operations.</p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <iframe
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
-                    title="Tuoora YouTube Video Player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full rounded-3xl"
-                  />
-                )}
-              </div>
-
-              {/* Floating Light Glassmorphic Badges */}
-              
-              {/* Badge 1: Fees sync */}
-              <motion.div 
-                style={{ transform: "translateZ(60px)" }}
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute top-8 right-[-10px] bg-white/90 backdrop-blur-md border border-white/60 p-2.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.03)] z-30 flex items-center gap-2"
-              >
-                <div className="h-6 w-6 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
-                  <Coins className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[8px] font-black text-navy block leading-none">Instant QR</span>
-                  <span className="text-[6px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Fee Paid</span>
-                </div>
-              </motion.div>
-
-              {/* Badge 2: Auto backup */}
-              <motion.div 
-                style={{ transform: "translateZ(80px)" }}
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-10 left-[-15px] bg-white/90 backdrop-blur-md border border-white/60 p-2.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.03)] z-30 flex items-center gap-2.5"
-              >
-                <div className="h-6 w-6 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[8.5px] font-black text-navy block leading-none">Auto Backup</span>
-                  <span className="text-[6px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Secured</span>
-                </div>
-              </motion.div>
-
-              {/* Badge 3: Timetable schedules */}
-              <motion.div 
-                style={{ transform: "translateZ(50px)" }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-                className="absolute bottom-10 right-0 bg-white/90 backdrop-blur-md border border-white/60 p-2.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.03)] z-30 flex items-center gap-2"
-              >
-                <div className="h-6 w-6 rounded-lg bg-teal-500/10 text-teal-500 flex items-center justify-center flex-shrink-0">
-                  <BookOpen className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <span className="text-[8px] font-black text-navy block leading-none">Time Table</span>
-                  <span className="text-[6px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">12 Lectures</span>
-                </div>
-              </motion.div>
-
-              {/* Badge 4: Live attendance sync */}
-              <motion.div 
-                style={{ transform: "translateZ(70px)" }}
-                animate={{ y: [0, -7, 0] }}
-                transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                className="absolute bottom-8 left-[-10px] bg-white/90 backdrop-blur-md border border-white/60 p-2.5 rounded-xl shadow-[0_12px_24px_rgba(0,0,0,0.03)] z-30 flex items-center gap-2"
-              >
-                <div className="h-6 w-6 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-3.5 h-3.5 animate-pulse" />
-                </div>
-                <div>
-                  <span className="text-[8px] font-black text-navy block leading-none">Live Sync</span>
-                  <span className="text-[6px] font-bold text-slate-400 uppercase tracking-widest mt-0.5 block">Attendance</span>
-                </div>
-              </motion.div>
-
+              <Sparkles className="w-3.5 h-3.5 animate-pulse text-primary" />
+              Tuoora Smart Ecosystem
             </motion.div>
-          </div>
-        </div>
+
+            {/* Heading */}
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-6xl lg:text-[4.2rem] font-bold text-navy leading-[1.08] tracking-tight">
+                <span className=" overflow-hidden pb-1">
+                  <motion.span variants={revealVariants} className="inline-block">Unlock growth  with every</motion.span>
+                </span>
+
+                <span className=" overflow-hidden pb-1">
+                  <motion.span
+                    variants={revealVariants}
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500 font-black"
+                  >
+                    enrollment
+                  </motion.span>
+                </span>
+              </h1>
+
+              {/* Description */}
+              <motion.p
+                variants={fadeUpVariants}
+                className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1"
+              >
+                Automate class scheduling, simplify parents compliance, and automate fee collections through unified QR payments.
+              </motion.p>
+            </div>
+
+            {/* 🎯 1 Month Free — Bold Offer Strip */}
+            <motion.div
+              variants={fadeUpVariants}
+              className="relative w-full max-w-lg"
+            >
+              {/* Animated dashed gradient border */}
+              <div className="absolute -inset-[1.5px] rounded-2xl bg-gradient-to-r from-primary via-orange-300 to-primary opacity-60 blur-[1px]" />
+              <motion.div
+                className="absolute -inset-[1.5px] rounded-2xl bg-gradient-to-r from-primary via-orange-400 to-amber-300"
+                animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
+                style={{ backgroundSize: "200% 200%" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl px-5 py-3.5 flex items-center gap-4">
+                {/* Big number */}
+                <div className="shrink-0 text-center leading-none">
+                  <motion.span
+                    className="text-4xl font-black text-primary block"
+                    animate={{ scale: [1, 1.08, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    30
+                  </motion.span>
+                  <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Days</span>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px h-10 bg-slate-200 shrink-0" />
+
+                {/* Text content */}
+                <div className="flex-1 text-left">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-sm font-black text-navy tracking-tight">Free Trial — No Credit Card</span>
+                    <motion.span
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+                      className="text-base"
+                    >🎁</motion.span>
+                  </div>
+                  <p className="text-[10px] text-slate-400 font-medium">Full access to all features from day one. Cancel anytime.</p>
+                </div>
+
+                {/* Tag label */}
+                <div className="shrink-0 bg-primary text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-1.5 rounded-lg">
+                  FREE
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div
+              variants={fadeUpVariants}
+              className="flex flex-col sm:flex-row gap-4 pt-2 justify-center w-full sm:w-auto"
+            >
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-navy text-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl overflow-hidden shadow-lg shadow-navy/15 transition-all active:scale-[0.98] min-w-[190px]"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Get Started Now <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+              </button>
+              <Link href="/why-tuoora" className="inline-flex items-center justify-center px-8 py-3.5 border border-slate-200 bg-white text-[11px] font-black uppercase tracking-[0.2em] rounded-xl text-navy hover:border-primary/40 hover:text-primary transition-all active:scale-[0.98] text-center min-w-[190px]">
+                Why Choose Us
+              </Link>
+            </motion.div>
+
+            {/* Compact QR Code Portals Glass Card */}
+            <motion.div
+              variants={fadeUpVariants}
+              className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10 p-3 sm:p-4 bg-white/45 border border-slate-200/50 backdrop-blur-md rounded-2xl shadow-sm max-w-2xl w-full mt-6"
+            >
+              {/* Web Panel QR Code */}
+              <div className="flex items-center gap-3.5">
+                <div className="relative p-1 bg-white border border-slate-200 rounded-lg shadow-sm flex-shrink-0">
+                  <img
+                    src="/qr-code-web.png"
+                    alt="Web Panel QR Code"
+                    className="w-14 h-14 object-contain"
+                  />
+                </div>
+                <div className="text-left space-y-0.5">
+                  <span className="text-[10px] font-black text-navy uppercase tracking-wider block">Web Panel</span>
+                  <span className="text-[8.5px] font-bold text-slate-400 block max-w-[160px] leading-tight">
+                    Scan to login to institute dashboard.
+                  </span>
+                </div>
+              </div>
+
+              {/* Separator line on desktop */}
+              <div className="hidden sm:block w-px h-8 bg-slate-200" />
+
+              {/* Android App QR Code */}
+              <div className="flex items-center gap-3.5">
+                <div className="relative p-1 bg-white border border-slate-200 rounded-lg shadow-sm flex-shrink-0">
+                  <img
+                    src="/qr-code-android.png"
+                    alt="Android App QR Code"
+                    className="w-14 h-14 object-contain"
+                  />
+                </div>
+                <div className="text-left space-y-0.5">
+                  <span className="text-[10px] font-black text-navy uppercase tracking-wider block">Android App</span>
+                  <span className="text-[8.5px] font-bold text-slate-400 block max-w-[160px] leading-tight">
+                    Scan to download official app on Google Play Store.
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
+          </motion.div>
+        )}
 
       </div>
     </section>

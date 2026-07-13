@@ -32,7 +32,7 @@ export default function MobileShowcase() {
   ];
 
   return (
-    <section className="py-20 bg-[#FDFDFD] overflow-hidden">
+    <section className="py-10 bg-transparent overflow-hidden">
       <div className="section-container">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
@@ -94,7 +94,7 @@ export default function MobileShowcase() {
                   hidden: { opacity: 0, y: 15 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
                 }}
-                className="text-sm text-gray-400 font-light max-w-xl leading-relaxed"
+                className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1"
               >
                 Tuoora offers dedicated applications for administrative control and student interactions. Carry your workspace, ledger records, and academic schedules wherever you go.
               </motion.p>
@@ -168,7 +168,7 @@ export default function MobileShowcase() {
               </div>
 
               {/* Floating Badges */}
-              <motion.div
+              {/* <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
@@ -177,7 +177,7 @@ export default function MobileShowcase() {
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="text-[8px] font-black text-navy uppercase tracking-wider">WhatsApp Cloud API</span>
-              </motion.div>
+              </motion.div> */}
 
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}

@@ -29,14 +29,14 @@ function CountUp({ to, from = 0, duration = 2, decimals = 0, suffix = "" }) {
 
 export default function WhyChooseUs() {
   const stats = [
-    { label: "Institutes", value: 10, suffix: "+", desc: "Trusting Tuoora ERP daily." },
-    { label: "Students", value: 10000, suffix: "+", desc: "Data managed securely." },
+    { label: "Institutes", value: 5, suffix: "+", desc: "Trusting Tuoora ERP daily." },
+    { label: "Students", value: 2500, suffix: "+", desc: "Data managed securely." },
     { label: "Support", value: 24, suffix: "/7", desc: "Dedicated relationship managers." },
     { label: "Uptime", value: 100, from: 90, suffix: "%", desc: "Reliable cloud infrastructure." }
   ];
 
   return (
-    <section className="py-20 bg-white overflow-hidden relative">
+    <section className="py-10 bg-transparent overflow-hidden relative">
       <div className="section-container">
         
         {/* Premium Section Header */}
@@ -99,25 +99,7 @@ export default function WhyChooseUs() {
             }}
             className="relative text-3xl sm:text-4xl lg:text-5xl font-black text-navy tracking-tight leading-[1.15] mb-5"
           >
-            {/* Line 1 */}
-            <span className="block overflow-hidden pb-2">
-              <motion.span
-                variants={{
-                  hidden: { y: 80, opacity: 0 },
-                  visible: {
-                    y: 0,
-                    opacity: 1,
-                    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-                  }
-                }}
-                className="inline-block"
-              >
-                Built for Institutional
-              </motion.span>
-            </span>
-
-            {/* Line 2 */}
-            <span className="block overflow-hidden pb-2">
+            <span className="block overflow-hidden py-2 -my-2">
               <motion.span
                 variants={{
                   hidden: { y: 80, opacity: 0, rotateX: 45 },
@@ -125,22 +107,25 @@ export default function WhyChooseUs() {
                     y: 0,
                     opacity: 1,
                     rotateX: 0,
-                    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+                    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
                   }
                 }}
                 style={{ transformPerspective: 800 }}
-                className="inline-block relative text-primary italic"
+                className="inline-block relative"
               >
-                Excellence
+                Built for Institutional{" "}
+                <span className="text-primary italic relative  overflow-hidden px-2  my-1">
+                  Excellence
 
-                {/* Shine */}
-                <motion.span
-                  initial={{ x: "-120%" }}
-                  whileInView={{ x: "120%" }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-12"
-                />
+                  {/* Shine */}
+                  <motion.span
+                    initial={{ x: "-120%" }}
+                    whileInView={{ x: "120%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.8, ease: "easeInOut" }}
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent skew-x-12"
+                  />
+                </span>
               </motion.span>
             </span>
           </motion.h2>
@@ -151,7 +136,7 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="text-sm text-gray-400 font-light max-w-2xl mx-auto leading-relaxed"
+            className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1"
           >
             We don't just provide software; we provide a foundation for your growth.
             Join the digital revolution in education management.

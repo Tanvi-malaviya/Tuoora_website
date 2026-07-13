@@ -33,17 +33,17 @@ const stats = [
   { val: 3, suffix: "", label: "User Roles", desc: "Institute Admin, Student & Parent — each with separate login" },
   { val: 24, suffix: "hrs", label: "Data Migration", desc: "Our team moves your records for free within 24 hours" },
   { val: "AES-256", isStatic: true, label: "Encryption", desc: "Bank-grade security with daily automated cloud backups" },
-  { val: 500, suffix: "+", label: "Institutes", desc: "Coaching centers, schools, and vocational institutes" },
+  { val: 5, suffix: "+", label: "Institutes", desc: "Coaching centers, schools, and vocational institutes" },
   { val: 30, suffix: " Days", label: "Free Trial", desc: "No credit card required. Full access from day one" }
 ];
 
 const comparison = [
   { feature: "UPI & QR Fee Collection", tuoora: true, generic: false },
-  { feature: "WhatsApp Business API Alerts", tuoora: true, generic: false },
+  // { feature: "WhatsApp Business API Alerts", tuoora: true, generic: false },
   { feature: "Firebase FCM Push Notifications", tuoora: true, generic: false },
-  { feature: "Student & Parent Mobile App", tuoora: true, generic: false },
-  { feature: "GST Invoicing & PDF Receipts", tuoora: true, generic: true },
-  { feature: "Staff Payroll & Salary Slips", tuoora: true, generic: true },
+  { feature: "Student Mobile App", tuoora: true, generic: false },
+  { feature: " PDF Receipts", tuoora: true, generic: true },
+  // { feature: "Staff Payroll & Salary Slips", tuoora: true, generic: true },
   { feature: "Homework Submission via App", tuoora: true, generic: false },
   { feature: "Free 24-hour Data Migration", tuoora: true, generic: false },
   { feature: "30-Day Free Trial (No Card)", tuoora: true, generic: false },
@@ -52,7 +52,7 @@ const comparison = [
 
 export default function PowerSection() {
   return (
-    <section className="relative py-20 bg-white">
+    <section className="relative bg-transparent">
       {/* Stats Grid */}
       <div className="section-container mb-24">
         
@@ -127,7 +127,7 @@ export default function PowerSection() {
       <div className="section-container">
         
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.span
             initial={{ letterSpacing: "0.1em", opacity: 0 }}
             whileInView={{ letterSpacing: "0.3em", opacity: 1 }}
@@ -142,7 +142,7 @@ export default function PowerSection() {
             Tuoora vs. Generic ERP
           </h2>
           
-          <p className="text-gray-400 text-xs mt-2 max-w-lg mx-auto font-light leading-relaxed">
+          <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">
             Most ERPs are built for generic businesses. Tuoora is purpose-built for Indian coaching institutes.
           </p>
         </div>

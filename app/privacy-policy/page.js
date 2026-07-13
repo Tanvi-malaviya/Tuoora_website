@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
+import TechBackground from "../../components/TechBackground";
 import { 
   Shield, 
   Eye, 
@@ -419,13 +420,11 @@ export default function PrivacyPolicy() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50/50 selection:bg-primary/30">
+    <div className="min-h-screen bg-slate-50/50 selection:bg-primary/30 relative overflow-x-clip">
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <TechBackground />
 
-      <main className="pt-24 pb-20 font-sans relative">
-        {/* Background Mesh Gradients */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] -z-10 rounded-full animate-pulse pointer-events-none"></div>
-        <div className="absolute top-[30vh] right-1/4 w-[400px] h-[400px] bg-secondary/5 blur-[100px] -z-10 rounded-full pointer-events-none"></div>
+      <main className="relative z-10 pt-24 pb-20 font-sans">
 
         {/* Hero Header */}
         <div className="max-w-6xl mx-auto px-4 sm:px-3 mb-3 ">

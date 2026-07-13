@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Loader from './Loader';
 
@@ -16,12 +16,12 @@ export default function LoaderWrapper({ children }) {
 
       if (document.readyState === 'complete') {
          // Tiny elegant delay to prevent quick jarring flashes on fast networks
-         const timer = setTimeout(() => setIsLoading(false), 850);
+         const timer = setTimeout(() => setIsLoading(false), 150);
          return () => clearTimeout(timer);
       } else {
          window.addEventListener('load', handleLoad);
          // Fallback timer if load event is delayed or already fired
-         const fallback = setTimeout(() => setIsLoading(false), 1500);
+         const fallback = setTimeout(() => setIsLoading(false), 500);
          return () => {
             window.removeEventListener('load', handleLoad);
             clearTimeout(fallback);
@@ -29,10 +29,16 @@ export default function LoaderWrapper({ children }) {
       }
    }, []);
 
+   const isFirstRender = useRef(true);
+
    // Trigger loader on pathname changes (navigation between pages)
    useEffect(() => {
+      if (isFirstRender.current) {
+         isFirstRender.current = false;
+         return;
+      }
       setIsLoading(true);
-      const timer = setTimeout(() => setIsLoading(false), 850);
+      const timer = setTimeout(() => setIsLoading(false), 200);
       return () => clearTimeout(timer);
    }, [pathname]);
 

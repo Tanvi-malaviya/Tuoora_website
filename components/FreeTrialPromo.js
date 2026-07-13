@@ -56,7 +56,7 @@ export default function FreeTrialPromo() {
               </span>
             </h2>
 
-            <p className="text-sm text-gray-400 font-medium leading-relaxed max-w-xl">
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">
               Get full enterprise dashboard access for 30 days. Automate class schedules, parent alerts, 
               and collect fees with zero platform commission. Transition without interrupting your daily hub.
             </p>
@@ -65,7 +65,7 @@ export default function FreeTrialPromo() {
             <div className="space-y-3 pt-2">
               {[
                 "100% Free for the first 30 days",
-                "Includes Free SMS alerts & App login setup",
+                "Includes  App login setup",
                 "Zero platform commission on QR collections"
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-3">

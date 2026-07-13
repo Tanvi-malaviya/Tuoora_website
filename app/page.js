@@ -8,24 +8,28 @@ import Modules from "../components/Modules";
 import OperationalIntegration from "../components/OperationalIntegration";
 import WhyChooseUs from "../components/WhyChooseUs";
 import MobileShowcase from "../components/MobileShowcase";
+import WebsiteFeature from "../components/WebsiteFeature";
 import Security from "../components/Security";
 import FreeTrialPromo from "../components/FreeTrialPromo";
 import CTA from "../components/CTA";
 import Footer from "../components/Footer";
+import TechBackground from "../components/TechBackground";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white selection:bg-primary/30">
+    <div className="min-h-screen bg-white selection:bg-primary/30 relative overflow-hidden">
       <Navbar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      <main className="pt-14">
+      <TechBackground />
+      <main className="relative z-10 pt-14">
         <Hero setIsModalOpen={setIsModalOpen} isLoading={false} />
         <Overview />
         <Modules />
         <OperationalIntegration />
         <WhyChooseUs />
         <MobileShowcase />
+        <WebsiteFeature />
         <Security />
         <FreeTrialPromo />
         <CTA setIsModalOpen={setIsModalOpen} />
