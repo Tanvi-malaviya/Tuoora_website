@@ -27,10 +27,10 @@ export default function Loader({ isLoading }) {
               <motion.div
                 animate={{ scale: [0.9, 1.05, 0.9] }}
                 transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-                className="w-10 h-10 flex items-center justify-center"
+                className="w-16 h-8 flex items-center justify-center"
               >
                 <img
-                  src="/favicon.png"
+                  src="/final.png"
                   alt="Tuoora Logo"
                   className="w-full h-full object-contain"
                 />
@@ -54,7 +54,7 @@ export default function Loader({ isLoading }) {
               initial={{ width: "0%" }}
               animate={{ width: "100%" }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="bg-gradient-to-r from-primary to-orange-500 h-full rounded-full"
+              className="bg-gradient-to-r from-coral via-sunset to-cyan h-full rounded-full"
             />
           </div>
         </motion.div>

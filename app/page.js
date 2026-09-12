@@ -9,6 +9,7 @@ import OperationalIntegration from "../components/OperationalIntegration";
 import WhyChooseUs from "../components/WhyChooseUs";
 import MobileShowcase from "../components/MobileShowcase";
 import WebsiteFeature from "../components/WebsiteFeature";
+import WhiteLabelFeature from "../components/WhiteLabelFeature";
 import Security from "../components/Security";
 import FreeTrialPromo from "../components/FreeTrialPromo";
 import CTA from "../components/CTA";
@@ -30,6 +31,7 @@ export default function Home() {
         <WhyChooseUs />
         <MobileShowcase />
         <WebsiteFeature />
+        <WhiteLabelFeature />
         <Security />
         <FreeTrialPromo />
         <CTA setIsModalOpen={setIsModalOpen} />

@@ -125,7 +125,7 @@ export default function Overview() {
                           x1="225" y1="225"
                           x2={225 + 160 * Math.cos((angle - 90) * (Math.PI / 180))}
                           y2={225 + 160 * Math.sin((angle - 90) * (Math.PI / 180))}
-                          stroke="#f97316" 
+                          stroke="#F04D36" 
                           strokeWidth="2" 
                           strokeDasharray="10 30"
                           animate={{ strokeDashoffset: [0, -80] }}

@@ -121,7 +121,7 @@ export default function CustomCursor() {
         transition={{ duration: 0.15, ease: "easeInOut" }}
       >
         <img 
-          src="/favicon.png" 
+          src="/favicon2.png" 
           alt="Tuoora Icon Cursor" 
           className="w-full h-full object-contain"
         />
