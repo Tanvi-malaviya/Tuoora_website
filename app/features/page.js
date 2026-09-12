@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Globe, Check } from "lucide-react";
+import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Globe, Check, UserCheck, ClipboardCheck } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PowerSection from "@/components/PowerSection";
@@ -54,6 +54,36 @@ const categoriesData = [
       { title: "Homework Grading & Scores", desc: "Record individual scores per student or bulk-grade an entire batch. Send instant WhatsApp reminders for pending submissions." },
       { title: "Attendance Reports & Export", desc: "Generate batch-wise attendance reports filterable by date range. Export to Excel for record-keeping." },
       { title: "Performance Reports", desc: "Homework and exam performance reports per student — exportable to Excel. View subject-wise and batch-wise analytics." }
+    ]
+  },
+  {
+    id: "faculty",
+    title: "Dedicated Teacher & Faculty Portal",
+    desc: "Empower your educators with modern digital tools for lecture schedules, attendance, and grading — with zero fee data access.",
+    icon: UserCheck,
+    colorClass: "text-violet-600 bg-violet-50 border-violet-100",
+    glowClass: "bg-violet-500/10",
+    features: [
+      { title: "Role-Based Secure Faculty Login", desc: "Dedicated faculty portal on web & mobile. Teachers access only their allocated batches and academic workflows without seeing sensitive financial ledgers." },
+      { title: "Live Timetable & Lecture Schedule", desc: "Consolidated multi-batch schedule with classroom numbers, subject slots, and real-time timing alerts to eliminate miscommunications." },
+      { title: "One-Click Smart Attendance", desc: "Mark full batch attendance in under 15 seconds with 3-state toggles (Present, Absent, Late) synced instantly to institute admin and parent apps." },
+      { title: "Digital Homework & Online Grading", desc: "Upload assignments with PDF or image attachments, review student submissions directly, and submit bulk scores with actionable teacher remarks." },
+      { title: "Role-Based Financial Firewall", desc: "Strict separation between academic operations and institutional revenue. Fee collection, student dues, and expense ledgers remain 100% confidential to admins." }
+    ]
+  },
+  {
+    id: "exams",
+    title: "Smart Examination & Performance Module",
+    desc: "End-to-end exam scheduling, rapid keyboard-driven marks entry grid, auto-grading, and instant parent scorecards.",
+    icon: ClipboardCheck,
+    colorClass: "text-orange-600 bg-orange-50 border-orange-100",
+    glowClass: "bg-orange-500/10",
+    features: [
+      { title: "End-to-End Exam Scheduling", desc: "Create and schedule offline or online exams — from weekly unit tests to midterms and board-pattern finals — across subjects, classes, and batches." },
+      { title: "Rapid Marks Entry Grid", desc: "High-speed marks entry table with pre-filled student rosters, absent mark toggles, keyboard shortcuts, and live validation against maximum marks." },
+      { title: "Instant Auto-Grading & Percentages", desc: "Automated calculation of student percentage, letter grades (A+, A, B), Pass/Fail thresholds, and batch rank benchmarks in real time." },
+      { title: "Instant Parent Scorecard Broadcast", desc: "Publish verified results to send branded student scorecards directly to parents via WhatsApp Cloud API, SMS, and the Tuoora Mobile App." },
+      { title: "Batch Analytics & Top Performers", desc: "Generate comprehensive subject-wise and batch-wise performance curves, identify students needing remediation, and export full reports to Excel." }
     ]
   },
   {
@@ -153,8 +183,8 @@ export default function FeaturesPage() {
               key={idx}
               onClick={() => scrollToSection(category.title)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${isActive
-                  ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
-                  : "bg-slate-50 text-slate-600 border-slate-100"
+                ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
+                : "bg-slate-50 text-slate-600 border-slate-100"
                 }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -250,16 +280,16 @@ export default function FeaturesPage() {
                       >
                         {/* Interactive Bullet Dot */}
                         <div className={`absolute left-[-42px] w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center bg-white transition-all duration-300 ${isActive
-                            ? "border-primary scale-110 shadow-[0_0_8px_rgba(255,107,38,0.4)]"
-                            : "border-slate-200 group-hover:border-slate-400"
+                          ? "border-primary scale-110 shadow-[0_0_8px_rgba(255,107,38,0.4)]"
+                          : "border-slate-200 group-hover:border-slate-400"
                           }`}>
                           {isActive && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
                         </div>
 
                         {/* Card menu item */}
                         <div className={`py-2 px-3 rounded-xl border w-full transition-all duration-300 flex items-center gap-3 bg-white ${isActive
-                            ? "border-primary/20 shadow-[0_12px_25px_-5px_rgba(255,107,38,0.04)]"
-                            : "border-slate-100 group-hover:border-slate-200 group-hover:shadow-[0_10px_20px_-10px_rgba(0,0,0,0.02)]"
+                          ? "border-primary/20 shadow-[0_12px_25px_-5px_rgba(255,107,38,0.04)]"
+                          : "border-slate-100 group-hover:border-slate-200 group-hover:shadow-[0_10px_20px_-10px_rgba(0,0,0,0.02)]"
                           }`}>
                           <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${category.colorClass}`}>
                             <Icon className="w-3.5 h-3.5" />

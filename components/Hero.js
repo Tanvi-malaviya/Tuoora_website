@@ -92,27 +92,27 @@ export default function Hero({ setIsModalOpen, isLoading }) {
         >
           <defs>
             <linearGradient id="circuit-grad-left" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#f97316" stopOpacity="0" />
-              <stop offset="50%" stopColor="#f97316" stopOpacity="1" />
-              <stop offset="100%" stopColor="#f97316" stopOpacity="0" />
+              <stop offset="0%" stopColor="#E83838" stopOpacity="0" />
+              <stop offset="50%" stopColor="#F07838" stopOpacity="1" />
+              <stop offset="100%" stopColor="#E83838" stopOpacity="0" />
             </linearGradient>
           </defs>
 
           {/* Base path lines */}
-          <path d="M 0 50 L 80 50 L 110 80 L 110 150 L 150 190 L 150 250 L 120 280 L 0 280" stroke="rgba(249, 115, 22, 0.22)" strokeWidth="1.5" />
-          <path d="M 0 120 L 50 120 L 70 140 L 70 200 L 100 230 L 100 320" stroke="rgba(249, 115, 22, 0.22)" strokeWidth="1.5" />
-          <path d="M 0 350 L 60 350 L 90 320 L 140 320 L 160 300" stroke="rgba(249, 115, 22, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
+          <path d="M 0 50 L 80 50 L 110 80 L 110 150 L 150 190 L 150 250 L 120 280 L 0 280" stroke="rgba(232, 56, 56, 0.22)" strokeWidth="1.5" />
+          <path d="M 0 120 L 50 120 L 70 140 L 70 200 L 100 230 L 100 320" stroke="rgba(232, 56, 56, 0.22)" strokeWidth="1.5" />
+          <path d="M 0 350 L 60 350 L 90 320 L 140 320 L 160 300" stroke="rgba(232, 56, 56, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
 
           {/* Animated Overlay Signals */}
           <path d="M 0 50 L 80 50 L 110 80 L 110 150 L 150 190 L 150 250 L 120 280 L 0 280" stroke="url(#circuit-grad-left)" strokeWidth="2.5" className="animate-circuit-pulse-1" />
           <path d="M 0 120 L 50 120 L 70 140 L 70 200 L 100 230 L 100 320" stroke="url(#circuit-grad-left)" strokeWidth="2.5" className="animate-circuit-pulse-2" />
 
-          <circle cx="80" cy="50" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
-          <circle cx="110" cy="80" r="3" fill="rgba(249, 115, 22, 0.5)" />
-          <circle cx="150" cy="190" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
-          <circle cx="120" cy="280" r="3.5" fill="rgba(249, 115, 22, 0.5)" />
-          <circle cx="100" cy="230" r="3" fill="white" stroke="rgba(249, 115, 22, 0.5)" strokeWidth="1.5" />
-          <circle cx="160" cy="300" r="4" fill="rgba(249, 115, 22, 0.5)" />
+          <circle cx="80" cy="50" r="3" fill="white" stroke="rgba(232, 56, 56, 0.5)" strokeWidth="1.5" />
+          <circle cx="110" cy="80" r="3" fill="rgba(232, 56, 56, 0.5)" />
+          <circle cx="150" cy="190" r="3" fill="white" stroke="rgba(232, 56, 56, 0.5)" strokeWidth="1.5" />
+          <circle cx="120" cy="280" r="3.5" fill="rgba(232, 56, 56, 0.5)" />
+          <circle cx="100" cy="230" r="3" fill="white" stroke="rgba(232, 56, 56, 0.5)" strokeWidth="1.5" />
+          <circle cx="160" cy="300" r="4" fill="rgba(232, 56, 56, 0.5)" />
         </svg>
 
         {/* SVG Circuit Lines - Right Side (Increased stroke opacity to 0.22) */}
@@ -123,27 +123,27 @@ export default function Hero({ setIsModalOpen, isLoading }) {
         >
           <defs>
             <linearGradient id="circuit-grad-right" x1="100%" y1="100%" x2="0%" y2="0%">
-              <stop offset="0%" stopColor="#14b8a6" stopOpacity="0" />
-              <stop offset="50%" stopColor="#14b8a6" stopOpacity="1" />
-              <stop offset="100%" stopColor="#14b8a6" stopOpacity="0" />
+              <stop offset="0%" stopColor="#20B8D0" stopOpacity="0" />
+              <stop offset="50%" stopColor="#20B8D0" stopOpacity="1" />
+              <stop offset="100%" stopColor="#0891B2" stopOpacity="0" />
             </linearGradient>
           </defs>
 
           {/* Base path lines */}
-          <path d="M 200 60 L 120 60 L 90 90 L 90 180 L 50 220 L 50 300 L 80 330 L 200 330" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="1.5" />
-          <path d="M 200 150 L 150 150 L 130 170 L 130 240 L 80 290 L 80 380" stroke="rgba(20, 184, 166, 0.22)" strokeWidth="1.5" />
-          <path d="M 200 270 L 140 270 L 120 290 L 70 290" stroke="rgba(20, 184, 166, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
+          <path d="M 200 60 L 120 60 L 90 90 L 90 180 L 50 220 L 50 300 L 80 330 L 200 330" stroke="rgba(32, 184, 208, 0.22)" strokeWidth="1.5" />
+          <path d="M 200 150 L 150 150 L 130 170 L 130 240 L 80 290 L 80 380" stroke="rgba(32, 184, 208, 0.22)" strokeWidth="1.5" />
+          <path d="M 200 270 L 140 270 L 120 290 L 70 290" stroke="rgba(32, 184, 208, 0.16)" strokeWidth="1.5" strokeDasharray="4 4" />
 
           {/* Animated Overlay Signals */}
           <path d="M 200 60 L 120 60 L 90 90 L 90 180 L 50 220 L 50 300 L 80 330 L 200 330" stroke="url(#circuit-grad-right)" strokeWidth="2.5" className="animate-circuit-pulse-3" />
           <path d="M 200 150 L 150 150 L 130 170 L 130 240 L 80 290 L 80 380" stroke="url(#circuit-grad-right)" strokeWidth="2.5" className="animate-circuit-pulse-4" />
 
-          <circle cx="120" cy="60" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
-          <circle cx="90" cy="90" r="3" fill="rgba(20, 184, 166, 0.5)" />
-          <circle cx="50" cy="220" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
-          <circle cx="80" cy="330" r="3.5" fill="rgba(20, 184, 166, 0.5)" />
-          <circle cx="130" cy="170" r="3" fill="white" stroke="rgba(20, 184, 166, 0.5)" strokeWidth="1.5" />
-          <circle cx="70" cy="290" r="4" fill="rgba(20, 184, 166, 0.5)" />
+          <circle cx="120" cy="60" r="3" fill="white" stroke="rgba(32, 184, 208, 0.5)" strokeWidth="1.5" />
+          <circle cx="90" cy="90" r="3" fill="rgba(32, 184, 208, 0.5)" />
+          <circle cx="50" cy="220" r="3" fill="white" stroke="rgba(32, 184, 208, 0.5)" strokeWidth="1.5" />
+          <circle cx="80" cy="330" r="3.5" fill="rgba(32, 184, 208, 0.5)" />
+          <circle cx="130" cy="170" r="3" fill="white" stroke="rgba(32, 184, 208, 0.5)" strokeWidth="1.5" />
+          <circle cx="70" cy="290" r="4" fill="rgba(32, 184, 208, 0.5)" />
         </svg>
       </div>
 
@@ -162,7 +162,7 @@ export default function Hero({ setIsModalOpen, isLoading }) {
               className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary border border-primary/20 shadow-sm mb-1"
             >
               <Sparkles className="w-3.5 h-3.5 animate-pulse text-primary" />
-              Tuoora Smart Ecosystem
+              NEW: Dedicated Faculty Portal & Smart Examination Suite
             </motion.div>
 
             {/* Heading */}
@@ -175,7 +175,7 @@ export default function Hero({ setIsModalOpen, isLoading }) {
                 <span className=" overflow-hidden pb-1">
                   <motion.span
                     variants={revealVariants}
-                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500 font-black"
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-coral via-sunset to-cyan font-black"
                   >
                     enrollment
                   </motion.span>

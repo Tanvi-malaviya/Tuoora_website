@@ -5,6 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const features = [
   {
+    title: "Dedicated Teacher Panel",
+    desc: "Role-based faculty workspace for lecture schedules, rapid attendance, and grading with fee privacy.",
+    image: "/studentreg.png"
+  },
+  {
+    title: "Smart Examination Module",
+    desc: "Instant marks entry grid, auto-grading (A+, A, B), and automated WhatsApp scorecard delivery to parents.",
+    image: "/attendence.png"
+  },
+  {
     title: "Smart Registry",
     desc: "High-density student database with real-time profile management and multi-branch sync.",
     image: "/studentreg.png"
