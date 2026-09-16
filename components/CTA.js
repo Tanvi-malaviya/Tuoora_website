@@ -31,7 +31,7 @@ export default function CTA({ setIsModalOpen }) {
             </h2>
 
             <p className="text-white/50 text-sm md:text-base max-w-xl mx-auto mb-8 font-medium">
-              Join 10+ institutions already using Tuoora to automate their operations and scale faster.
+              Join 15+ institutions already using Tuoora to automate their operations and scale faster.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

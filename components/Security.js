@@ -1,12 +1,22 @@
 export default function Security() {
   return (
-    <section className="py-8 bg-navy relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"></div>
-      </div>
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/10 rounded-full blur-[120px]"></div>
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+    <section className="py-12 bg-slate-950 relative overflow-hidden">
+      {/* Dark background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 z-0" />
+
+      {/* Ambient glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-primary/[0.06] rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-primary/[0.04] rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-sky-500/[0.03] rounded-full blur-[100px] pointer-events-none z-0" />
+
+      {/* Dot grid */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.035]"
+        style={{
+          backgroundImage: "radial-gradient(circle, #ffffff 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }}
+      />
 
       <div className="section-container relative z-10">
         <div className="grid lg:grid-cols-3 gap-4">

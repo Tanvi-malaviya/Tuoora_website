@@ -24,6 +24,7 @@ export default function WhyTuoora() {
     { icon: "🔔", title: "Subscription System", desc: "Plan management with Razorpay integration, renewal requests, screenshot uploads, and trial plans." },
     { icon: "📱", title: "Mobile App (Tuoora)", desc: "Android & iOS apps for students, parents, and admins — fee payment, homework, attendance, notifications." },
     { icon: "🌐", title: "Institute Website", desc: "Every institute gets a free branded website — auto-synced with your panel data, live instantly, no code needed." },
+    { icon: "🏷️", title: "100% White-Label", desc: "Your institute logo, custom brand colour theme, and official sender email settings (SMTP) — zero third-party watermarks." },
   ];
 
   const userTypes = [
@@ -33,6 +34,7 @@ export default function WhyTuoora() {
       features: [
         "Student registry & smart batch allocation",
         "UPI & Structured fee cycle settings",
+        "White-label branding: custom logo, colour theme & email settings",
         "Expense tracking & monthly analysis",
         "Staff directory, attendance & payroll slips",
         // "QR-based ID card generator with verification",
@@ -136,52 +138,6 @@ export default function WhyTuoora() {
           </div>
         </section>
 
-        {/* UPI Payment System */}
-        {/* <section className="bg-transparent border-y border-gray-100 py-12 mb-12">
-          <div className="section-container">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-3">UPI Fee Collection</span>
-                <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight mb-4 leading-tight">
-                  Students pay fees <br />
-                  <span className="text-primary italic">directly from the app.</span>
-                </h2>
-                <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1 mb-6">
-                  Institute admin uploads their UPI ID and QR code once. Students and parents see a live payment screen
-                  with one-tap GPay/PhonePe deep link, scannable QR, and UPI ID copy option.
-                </p>
-                <div className="space-y-3">
-                  {[
-                    "Admin sets UPI ID + QR from Profile → Payment Settings",
-                    "Student app fetches live UPI details via API",
-                    "One-tap opens GPay / PhonePe / any UPI app",
-                    "Payment recorded + receipt auto-generated",
-                  ].map((step, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 text-primary text-[9px] font-black flex items-center justify-center shrink-0 mt-0.5">{i + 1}</div>
-                      <span className="text-xs font-medium text-gray-600">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "UPI Deep Link", desc: "Opens GPay/PhonePe instantly with pre-filled amount", icon: "📲" },
-                  { label: "QR Code Scan", desc: "Students scan institute QR from any app", icon: "📷" },
-                  { label: "PDF Receipt", desc: "Auto-generated and downloadable after payment", icon: "🧾" },
-                  { label: "WhatsApp Alert", desc: "Fee reminder sent via WhatsApp Business API", icon: "💬" },
-                ].map((item, i) => (
-                  <div key={i} className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all">
-                    <div className="text-2xl mb-2">{item.icon}</div>
-                    <h4 className="text-xs font-black text-navy mb-1">{item.label}</h4>
-                    <p className="text-[10px] text-gray-400 leading-relaxed">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         {/* Notification System */}
         <section className="section-container mb-12">
           <div className="text-center mb-8">
@@ -204,74 +160,6 @@ export default function WhyTuoora() {
             ))}
           </div>
         </section>
-
-        {/* ROI + Stats Banner */}
-        {/* <section className="bg-navy py-12 overflow-hidden relative mb-12">
-          <div className="absolute -top-20 -right-20 h-64 w-64 bg-primary/20 rounded-full blur-[80px]"></div>
-          <div className="section-container relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-3">Real Impact</span>
-                <h2 className="text-2xl lg:text-4xl font-bold text-white mb-6 tracking-tight leading-tight">
-                  Turning manual work into <br />
-                  <span className="text-primary italic">automated efficiency.</span>
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  {[
-                    { stat: "80%", label: "Time Saved", note: "Push & in-app alerts automation replaces manual calling" },
-                    { stat: "24hrs", label: "Data Migration", note: "Full student/fee records moved by our team for free" },
-                    { stat: "2 Apps", label: "Unified Suite", note: "Admin Web Panel + Student Mobile App" },
-                    { stat: "AES-256", label: "Encryption", note: "Bank-grade security with daily automated backups" },
-                  ].map((item, i) => (
-                    <div key={i} className="flex gap-4 items-start">
-                      <div className="min-w-fit h-10 px-2 shrink-0 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary font-black text-xs whitespace-nowrap">{item.stat}</div>
-                      <div>
-                        <h4 className="text-white font-bold text-[10px] mb-1 uppercase tracking-wider">{item.label}</h4>
-                        <p className="text-white/40 text-[9px] leading-relaxed">{item.note}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="p-6 rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-xl">
-                <div className="text-center mb-6">
-                  <div className="text-3xl font-black text-white mb-1">500+</div>
-                  <div className="text-[9px] font-black text-primary uppercase tracking-[0.2em]">Institutes Onboard</div>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { val: "100k+", label: "Active Students" },
-                    { val: "24/7", label: "Live Support" },
-                    { val: "30 Days", label: "Free Trial" },
-                    { val: "12+", label: "Core Modules" },
-                  ].map((s, i) => (
-                    <div key={i} className="p-3 rounded-xl bg-white/5 border border-white/10 text-center">
-                      <div className="text-white font-bold text-base mb-1">{s.val}</div>
-                      <div className="text-[7px] text-white/40 uppercase font-black tracking-widest">{s.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-
-        {/* Tech Stack */}
-        {/* <section className="section-container mb-12">
-          <div className="text-center mb-8">
-            <span className="text-[9px] font-black text-primary uppercase tracking-[0.4em] block mb-2">Under the Hood</span>
-            <h2 className="text-2xl lg:text-4xl font-bold text-navy tracking-tight">Enterprise-Grade Tech Stack</h2>
-            <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto pt-1">Every layer is built for reliability, speed, and security. No shortcuts taken.</p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {techStack.map((t, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-primary/30 hover:shadow-lg transition-all text-center group">
-                <p className="text-[8px] font-black text-primary uppercase tracking-widest mb-2 group-hover:tracking-[0.2em] transition-all">{t.label}</p>
-                <p className="text-xs font-bold text-navy">{t.value}</p>
-              </div>
-            ))}
-          </div>
-        </section> */}
 
         {/* 3-Step Onboarding */}
         <section className="section-container mb-12">

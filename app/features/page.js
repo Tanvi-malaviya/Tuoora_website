@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Globe, Check, UserCheck, ClipboardCheck } from "lucide-react";
+import { GraduationCap, Wallet, Layers, Briefcase, MessageSquare, Target, Globe, Check, UserCheck, ClipboardCheck, Award } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import PowerSection from "@/components/PowerSection";
@@ -42,7 +42,7 @@ const categoriesData = [
     ]
   },
   {
-    id: "student",
+    id: "attendance",
     title: "Attendance & Homework",
     desc: "Batch-wise attendance tracking, homework submission, grading, and performance reports.",
     icon: Layers,
@@ -140,10 +140,23 @@ const categoriesData = [
     glowClass: "bg-sky-500/10",
     features: [
       { title: "Auto-Branded Landing Page", desc: "Your institute name, logo, and contact details are pulled directly from your Tuoora panel and displayed on your own public website — no manual setup." },
-      // { title: "Batch & Fee Structure Display", desc: "Prospective students can browse your available batches, timings, subjects, and fee structures right from your public website." },
-      // { title: "Admission Enquiry Form", desc: "Built-in enquiry form on your website captures student details and pushes them directly into your Tuoora CRM leads pipeline." },
       { title: "Custom Domain Support", desc: "Point your own domain (e.g., yourinstitute.com) to your Tuoora website. Or use your free subdomain at yourname.tuoora.com instantly." },
       { title: "Zero Hosting Cost — Forever", desc: "The website is fully hosted and maintained by Tuoora as part of every plan. No server bills, no third-party hosting, no technical maintenance needed." }
+    ]
+  },
+  {
+    id: "white-label",
+    title: "100% White-Label & Custom Branding",
+    desc: "Launch with your own institute logo, tailored brand color theme, and custom SMTP email settings — zero Tuoora branding.",
+    icon: Award,
+    colorClass: "text-orange-600 bg-orange-50 border-orange-100",
+    glowClass: "bg-orange-500/10",
+    features: [
+      { title: "Your Institute Logo on App & Web", desc: "Your official institute crest and logo appear on the mobile app launch screen, login page, and dashboard header." },
+      { title: "Brand Colour Theme Integration", desc: "Customize the entire application with your institute's primary and secondary brand colors for buttons, cards, and navigation." },
+      { title: "Custom Email Settings (SMTP)", desc: "Configure your own official SMTP and sender domain (e.g. info@yourinstitute.com). Automated fee receipts and notifications arrive directly from your email." },
+      { title: "Branded PDF Receipts & Reports", desc: "Every generated fee receipt, student ID card, and scorecard carries your registered header, GSTIN, and signatures with zero third-party watermarks." },
+      { title: "Dedicated Custom Domain", desc: "Run your student and parent portal on your dedicated domain (e.g. portal.youracademy.com) with free SSL certificate included." }
     ]
   }
 ];
@@ -181,7 +194,7 @@ export default function FeaturesPage() {
           return (
             <button
               key={idx}
-              onClick={() => scrollToSection(category.title)}
+              onClick={() => scrollToSection(category.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all border ${isActive
                 ? "bg-primary text-white border-primary shadow-lg shadow-primary/20"
                 : "bg-slate-50 text-slate-600 border-slate-100"
@@ -253,10 +266,10 @@ export default function FeaturesPage() {
           <div className="grid lg:grid-cols-12 gap-12">
 
             {/* LEFT Sticky Sidebar Navigation */}
-            <div className="hidden lg:block lg:col-span-4 sticky top-32 self-start pl-4">
-              <div className="relative pl-8">
+            <div className="hidden lg:block lg:col-span-4 sticky top-24 self-start pl-2 max-h-[calc(100vh-6.5rem)] overflow-y-auto scrollbar-none">
+              <div className="relative pl-6">
                 {/* Laser Connector Path */}
-                <div className="absolute left-0 top-5 bottom-5 w-[2px] bg-slate-100">
+                <div className="absolute left-[7px] top-3 bottom-3 w-[2px] bg-slate-100 rounded-full">
                   <motion.div
                     className="absolute top-0 left-0 right-0 bg-gradient-to-b from-primary to-orange-500 rounded-full"
                     style={{
@@ -268,40 +281,41 @@ export default function FeaturesPage() {
                 </div>
 
                 {/* Nav list */}
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {categoriesData.map((category, idx) => {
                     const Icon = category.icon;
                     const isActive = activeSection === idx;
                     return (
                       <button
-                        key={idx}
-                        onClick={() => scrollToSection(category.title)}
-                        className="relative flex items-center gap-5 w-full text-left focus:outline-none group"
+                        key={category.id}
+                        onClick={() => scrollToSection(category.id)}
+                        className="relative flex items-center w-full text-left focus:outline-none group"
                       >
                         {/* Interactive Bullet Dot */}
-                        <div className={`absolute left-[-42px] w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center bg-white transition-all duration-300 ${isActive
-                          ? "border-primary scale-110 shadow-[0_0_8px_rgba(255,107,38,0.4)]"
-                          : "border-slate-200 group-hover:border-slate-400"
+                        <div className={`absolute left-[-23px] w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center bg-white transition-all duration-200 shrink-0 ${isActive
+                          ? "border-primary scale-110 shadow-[0_0_8px_rgba(255,107,38,0.5)] z-10"
+                          : "border-slate-300 group-hover:border-slate-400"
                           }`}>
                           {isActive && <div className="w-1.5 h-1.5 rounded-full bg-primary" />}
                         </div>
 
                         {/* Card menu item */}
-                        <div className={`py-2 px-3 rounded-xl border w-full transition-all duration-300 flex items-center gap-3 bg-white ${isActive
-                          ? "border-primary/20 shadow-[0_12px_25px_-5px_rgba(255,107,38,0.04)]"
-                          : "border-slate-100 group-hover:border-slate-200 group-hover:shadow-[0_10px_20px_-10px_rgba(0,0,0,0.02)]"
+                        <div className={`py-1.5 px-2.5 rounded-xl border w-full transition-all duration-200 flex items-center gap-2.5 bg-white ${isActive
+                          ? "border-primary/30 shadow-[0_4px_16px_-2px_rgba(255,107,38,0.12)] bg-gradient-to-r from-orange-50/70 to-white"
+                          : "border-slate-100 hover:border-slate-200 hover:bg-slate-50/70"
                           }`}>
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${category.colorClass}`}>
+                          <div className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 border transition-transform duration-200 ${category.colorClass} ${isActive ? "scale-105" : ""}`}>
                             <Icon className="w-3.5 h-3.5" />
                           </div>
-                          <div className="min-w-0">
-                            <h4 className={`text-[10px] font-black uppercase tracking-wider transition-colors truncate ${isActive ? "text-primary" : "text-navy group-hover:text-slate-800"
+                          <div className="min-w-0 flex-1 flex items-center justify-between gap-1.5">
+                            <span className={`text-[11px] font-bold tracking-tight transition-colors truncate ${isActive ? "text-primary" : "text-slate-700 group-hover:text-slate-900"
                               }`}>
                               {category.title}
-                            </h4>
-                            <p className="text-[9px] text-slate-400 font-light mt-0.5 truncate">
-                              {category.desc}
-                            </p>
+                            </span>
+                            <span className={`text-[9px] font-mono font-bold shrink-0 px-1.5 py-0.5 rounded-md transition-colors ${isActive ? "text-primary bg-primary/10" : "text-slate-400 bg-slate-100 group-hover:text-slate-600"
+                              }`}>
+                              {String(idx + 1).padStart(2, '0')}
+                            </span>
                           </div>
                         </div>
                       </button>
@@ -317,11 +331,11 @@ export default function FeaturesPage() {
                 const Icon = category.icon;
                 return (
                   <motion.div
-                    key={category.title}
-                    id={category.title}
+                    key={category.id}
+                    id={category.id}
                     onViewportEnter={() => setActiveSection(idx)}
-                    viewport={{ amount: 0.25 }}
-                    className="scroll-mt-36"
+                    viewport={{ amount: 0.2 }}
+                    className="scroll-mt-28"
                   >
                     {/* Category Header */}
                     <div className="flex items-center gap-4 mb-4">
@@ -329,7 +343,7 @@ export default function FeaturesPage() {
                         <Icon className="w-5 h-5 stroke-[2]" />
                       </div>
                       <div>
-                        <span className="text-[9px] font-black text-primary uppercase tracking-[0.2em]">Section 0{idx + 1}</span>
+                        <span className="text-[9px] font-black text-primary uppercase tracking-[0.2em]">Section {String(idx + 1).padStart(2, '0')}</span>
                         <h2 className="text-2xl font-black text-navy tracking-tight">{category.title}</h2>
                         <p className="text-xs text-slate-400 font-medium leading-relaxed mt-1">{category.desc}</p>
                       </div>

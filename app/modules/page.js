@@ -208,6 +208,21 @@ export default function ModulesPage() {
         "Goes live instantly — no code needed",
       ]
     },
+    {
+      id: "white-label",
+      icon: <WhiteLabelIcon />,
+      title: "100% White-Label & Branding",
+      badge: "Signature",
+      desc: "Custom institute logo, tailored brand colour theme, and official sender email (SMTP) settings.",
+      features: [
+        "Custom institute logo on app & web headers",
+        "Tailored primary & secondary brand colours",
+        "Official SMTP & custom sender email setup",
+        "Automated fee receipts from your domain",
+        "Branded PDF receipts & student ID cards",
+        "Zero third-party watermarks or Tuoora branding",
+      ]
+    },
   ];
 
   return (
@@ -340,4 +355,7 @@ const TeacherIcon = () => (
 );
 const ExamIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
+);
+const WhiteLabelIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
 );

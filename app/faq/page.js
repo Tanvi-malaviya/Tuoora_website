@@ -17,7 +17,8 @@ import {
    ArrowRight, 
    MessageSquare, 
    Phone, 
-   Mail 
+   Mail,
+   Award
 } from 'lucide-react';
 
 export default function FAQ() {
@@ -28,10 +29,10 @@ export default function FAQ() {
    const categories = [
       { name: "All", iconComponent: Sparkles },
       { name: "General", iconComponent: HelpCircle },
+      { name: "White-Label & Branding", iconComponent: Award },
       { name: "Payments & Fees", iconComponent: CreditCard },
       { name: "Academic & Exams", iconComponent: GraduationCap },
       { name: "Communication & Alerts", iconComponent: MessageSquare },
-      // { name: "Administration & Security", iconComponent: ShieldCheck }
    ];
 
    const faqs = [
@@ -54,6 +55,24 @@ export default function FAQ() {
                q: "Is there a mobile app available?", 
                a: "Yes, we offer dedicated Student mobile apps for tracking homework, viewing attendance reports, receiving notifications, and paying fees." 
             }
+         ]
+      },
+      {
+         category: "White-Label & Branding",
+         questions: [
+            {
+               q: "Can we use our institute's own logo and brand colours on the app?",
+               a: "Yes, 100%. Tuoora offers complete white-label customization. Your official institute logo appears on the app launcher icon, launch splash screen, and web header, with the entire interface customized to your brand color palette."
+            },
+            {
+               q: "Can automated emails and receipts be sent from our own email address?",
+               a: "Yes. With custom email (SMTP) settings, all automated fee receipts, admission letters, exam reports, and parent alerts are sent directly from your own domain email address (e.g. info@youracademy.com)."
+            },
+            {
+               q: "Will students or parents see any third-party or Tuoora watermarks?",
+               a: "No. With our white-label solution, students and parents see only your institute's name, logo, and identity across the mobile app, web portal, and PDF documents."
+            },
+           
          ]
       },
       {

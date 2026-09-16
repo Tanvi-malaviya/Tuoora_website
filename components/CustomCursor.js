@@ -1,131 +1,165 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
-  const [hovered, setHovered] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Position coordinates for outer ring (exact mouse center)
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  // Position coordinates for inner dot (exact mouse center)
-  const dotX = useMotionValue(-100);
-  const dotY = useMotionValue(-100);
-
-  // Smooth spring configuration for the outer trail ring
-  const springConfig = { damping: 28, stiffness: 220, mass: 0.6 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
+  const [isTouch, setIsTouch] = useState(true);
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
 
   useEffect(() => {
-    // Hide custom cursor on mobile touch screens
-    const checkDevice = () => {
-      setIsMobile(
-        window.matchMedia("(max-width: 768px)").matches || 
-        ('ontouchstart' in window) || 
-        navigator.maxTouchPoints > 0
-      );
-    };
+    // Only enable custom cursor for precise pointer devices (desktop mouse)
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    if (!isFinePointer || (hasTouch && window.innerWidth <= 768)) {
+      setIsTouch(true);
+      return;
+    }
+    setIsTouch(false);
 
-    checkDevice();
-    window.addEventListener("resize", checkDevice);
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let isVisible = false;
+    let isHovered = false;
+    let isTextInput = false;
+    let rafId = null;
 
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
 
-      dotX.set(e.clientX);
-      dotY.set(e.clientY);
+      if (!isVisible) {
+        isVisible = true;
+        ringX = mouseX;
+        ringY = mouseY;
+        if (dotRef.current) dotRef.current.style.opacity = '1';
+        if (ringRef.current) ringRef.current.style.opacity = '1';
+      }
 
-      if (!visible) setVisible(true);
-    };
-
-    const handleMouseOver = (e) => {
+      // Check for interactive elements without layout thrashing (no getComputedStyle)
       const target = e.target;
-      if (!target) return;
-
-      const computedCursor = window.getComputedStyle(target).cursor;
-      const isInteractiveTag = ["BUTTON", "A", "INPUT", "TEXTAREA", "SELECT"].includes(target.tagName);
-      const isClosestInteractive = target.closest("button") || target.closest("a") || target.closest(".cursor-pointer");
-
-      if (
-        isInteractiveTag ||
-        isClosestInteractive ||
-        computedCursor === "pointer"
-      ) {
-        setHovered(true);
-      } else {
-        setHovered(false);
+      if (target && target.closest) {
+        const textTarget = target.closest('input, textarea, [contenteditable="true"], select');
+        if (textTarget) {
+          isTextInput = true;
+          isHovered = false;
+        } else {
+          isTextInput = false;
+          const interactive = target.closest('a, button, [role="button"], .cursor-pointer, input[type="submit"], input[type="button"]');
+          isHovered = !!interactive;
+        }
       }
     };
 
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
+    const onMouseLeave = () => {
+      isVisible = false;
+      if (dotRef.current) dotRef.current.style.opacity = '0';
+      if (ringRef.current) ringRef.current.style.opacity = '0';
+    };
+
+    const onMouseEnter = () => {
+      isVisible = true;
+      if (dotRef.current) dotRef.current.style.opacity = '1';
+      if (ringRef.current) ringRef.current.style.opacity = '1';
+    };
+
+    // Ultra-smooth 60/120/144Hz render loop via requestAnimationFrame
+    const loop = () => {
+      // Snappy lerp (0.28) for the outer ring: responsive without sluggish lag
+      ringX += (mouseX - ringX) * 0.28;
+      ringY += (mouseY - ringY) * 0.28;
+
+      if (dotRef.current) {
+        if (isTextInput) {
+          dotRef.current.style.opacity = '0';
+        } else if (isVisible) {
+          dotRef.current.style.opacity = '1';
+          dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%) scale(${isHovered ? 1.15 : 1})`;
+        }
+      }
+
+      if (ringRef.current) {
+        if (isTextInput) {
+          ringRef.current.style.opacity = '0';
+        } else if (isVisible) {
+          ringRef.current.style.opacity = '1';
+          ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+          ringRef.current.setAttribute('data-hover', isHovered ? 'true' : 'false');
+        }
+      }
+
+      rafId = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.addEventListener('mouseleave', onMouseLeave);
+    document.addEventListener('mouseenter', onMouseEnter);
+    rafId = requestAnimationFrame(loop);
 
     return () => {
-      window.removeEventListener("resize", checkDevice);
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
+      document.removeEventListener('mouseenter', onMouseEnter);
+      if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [visible, cursorX, cursorY, dotX, dotY]);
+  }, []);
 
-  if (isMobile || !visible) return null;
+  if (isTouch) return null;
 
   return (
     <>
-      {/* Global CSS to hide default cursor on desktop devices */}
+      {/* Global CSS for desktop custom cursor */}
       <style dangerouslySetInnerHTML={{__html: `
-        @media (min-width: 769px) {
-          body, a, button, select, input, textarea, [role="button"], .cursor-pointer {
+        @media (pointer: fine) and (min-width: 769px) {
+          body, a, button, [role="button"], .cursor-pointer {
             cursor: none !important;
+          }
+          input, textarea, select, [contenteditable="true"] {
+            cursor: text !important;
           }
         }
       `}} />
 
-      {/* Outer Brand Ring (Smooth Trail Capsule) */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border-2 pointer-events-none z-[9999] flex items-center justify-center bg-white/5 backdrop-blur-[0.5px] origin-center overflow-hidden"
+      {/* Outer Follower Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-orange-500/40 bg-orange-500/[0.04] backdrop-blur-[0.5px] transition-[width,height,border-color,background-color,box-shadow] duration-150 ease-out will-change-transform"
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-          translateX: "-50%",
-          translateY: "-50%"
+          width: '34px',
+          height: '34px',
+          opacity: 0,
         }}
-        animate={{
-          width: hovered ? 35 : 32,
-          height: hovered ? 35 : 32,
-          borderColor: hovered ? "rgba(34, 197, 94, 0.9)" : "rgba(255, 107, 38, 0.4)",
-          backgroundColor: hovered ? "rgba(34, 197, 94, 0.05)" : "rgba(255, 255, 255, 0.05)",
-          boxShadow: hovered ? "0px 0px 20px rgba(34, 197, 94, 0.3)" : "none"
-        }}
-        transition={{ type: "spring", stiffness: 350, damping: 25 }}
       />
 
-      {/* Tiny Precision Icon Pointer (Instant tracking) */}
-      <motion.div
-        className="fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] flex items-center justify-center"
+      {/* Instant Center Pointer Icon */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] flex items-center justify-center transition-[transform,opacity] duration-100 ease-out will-change-transform"
         style={{
-          x: dotX,
-          y: dotY,
-          translateX: "-50%",
-          translateY: "-50%"
+          opacity: 0,
         }}
-        animate={{
-          scale: hovered ? 1.2 : 1,
-          opacity: 1
-        }}
-        transition={{ duration: 0.15, ease: "easeInOut" }}
       >
         <img 
           src="/favicon2.png" 
           alt="Tuoora Icon Cursor" 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain select-none pointer-events-none drop-shadow-[0_2px_8px_rgba(240,77,54,0.35)]"
         />
-      </motion.div>
+      </div>
+
+      {/* Ring hover styles via data attribute */}
+      <style dangerouslySetInnerHTML={{__html: `
+        [data-hover="true"] {
+          width: 44px !important;
+          height: 44px !important;
+          border-color: rgba(240, 77, 54, 0.8) !important;
+          background-color: rgba(240, 77, 54, 0.1) !important;
+          box-shadow: 0 0 16px rgba(240, 77, 54, 0.25) !important;
+        }
+      `}} />
     </>
   );
 }
+
