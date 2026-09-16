@@ -123,15 +123,7 @@ const contactItems = [
     bg: 'bg-violet-50 border-violet-100',
     href: 'mailto:info@tuoora.com',
   },
-  {
-    icon: MapPin,
-    label: 'Headquarters',
-    value: 'Ahmedabad, Gujarat',
-    sub: 'Available for in-person demos',
-    color: 'from-emerald-500 to-teal-500',
-    bg: 'bg-emerald-50 border-emerald-100',
-    href: 'https://maps.google.com/?q=Ahmedabad,+Gujarat',
-  },
+ 
 ];
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
@@ -181,29 +173,23 @@ export default function Contact() {
       <TechBackground />
 
       {/* ── Hero Section ── */}
-      <section className="relative min-h-[52vh] bg-navy overflow-hidden flex items-end pb-0">
-        {/* Animated orb lights */}
-        <FloatingOrb size={500} color="bg-primary/20" delay={0} x="60%" y="-10%" duration={8} />
-        <FloatingOrb size={350} color="bg-violet-500/10" delay={2} x="-5%" y="20%" duration={10} />
-        <FloatingOrb size={280} color="bg-orange-400/10" delay={4} x="40%" y="50%" duration={7} />
+      <section className="relative overflow-hidden pt-28 pb-6 sm:pt-32 sm:pb-8">
+        {/* Subtle Ambient Light Glows */}
+        <FloatingOrb size={500} color="bg-primary/8" delay={0} x="60%" y="-10%" duration={8} />
+        <FloatingOrb size={350} color="bg-violet-500/5" delay={2} x="-5%" y="20%" duration={10} />
+        <FloatingOrb size={280} color="bg-orange-400/8" delay={4} x="40%" y="40%" duration={7} />
 
-        {/* Dot grid overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
-
-        {/* Bottom fade into page */}
-        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#FDFDFD] to-transparent pointer-events-none z-10" />
-
-        <div className="section-container relative z-20 pt-36 pb-20 w-full">
+        <div className="section-container relative z-20 w-full">
           <div className="max-w-4xl">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/15 rounded-full mb-6 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-[10px] font-black uppercase tracking-[0.3em] mb-6 shadow-sm"
             >
               <Sparkles className="w-3.5 h-3.5 text-primary" />
-              <span className="text-[10px] font-black text-white/80 uppercase tracking-[0.3em]">Get in Touch</span>
+              <span>Get in Touch</span>
             </motion.div>
 
             {/* Headline */}
@@ -211,7 +197,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tighter leading-[1.05] mb-5"
+              className="text-4xl sm:text-5xl lg:text-6xl font-black text-navy tracking-tighter leading-[1.05] mb-5"
             >
               Let's build something{' '}
               <TypewriterText words={['remarkable.', 'together.', 'extraordinary.', 'that scales.']} />
@@ -221,7 +207,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="text-white/50 text-base sm:text-lg font-medium leading-relaxed max-w-xl"
+              className="text-slate-500 text-base sm:text-lg font-medium leading-relaxed max-w-xl"
             >
               Talk to our institutional experts — get a live demo, migration walkthrough, or technical consultation. We respond in minutes.
             </motion.p>
@@ -230,7 +216,7 @@ export default function Contact() {
       </section>
 
       {/* ── Main Content ── */}
-      <section className="section-container relative z-10 -mt-6 pb-12 px-4">
+      <section className="section-container relative z-10 pb-16 px-4">
         <div className="grid lg:grid-cols-12 gap-8 items-start">
 
           {/* ── LEFT: Contact Info Cards ── */}
