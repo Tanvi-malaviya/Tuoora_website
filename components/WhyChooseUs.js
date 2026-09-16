@@ -29,8 +29,8 @@ function CountUp({ to, from = 0, duration = 2, decimals = 0, suffix = "" }) {
 
 export default function WhyChooseUs() {
   const stats = [
-    { label: "Institutes", value: 5, suffix: "+", desc: "Trusting Tuoora ERP daily." },
-    { label: "Students", value: 2500, suffix: "+", desc: "Data managed securely." },
+    { label: "Institutes", value: 15, suffix: "+", desc: "Trusting Tuoora ERP daily." },
+    { label: "Students", value: 5000, suffix: "+", desc: "Data managed securely." },
     { label: "Support", value: 24, suffix: "/7", desc: "Dedicated relationship managers." },
     { label: "Uptime", value: 100, from: 90, suffix: "%", desc: "Reliable cloud infrastructure." }
   ];

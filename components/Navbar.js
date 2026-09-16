@@ -84,6 +84,7 @@ export default function Navbar({ isModalOpen: externalIsModalOpen, setIsModalOpe
    const navLinks = [
       { name: "Home", href: "/" },
       { name: "Features", href: "/features" },
+      { name: "About", href: "/about" },
       { name: "Pricing", href: "/pricing" },
       { name: "FAQ", href: "/faq" },
       { name: "Contact", href: "/contact" },

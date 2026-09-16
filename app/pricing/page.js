@@ -74,11 +74,11 @@ export default function Pricing() {
       });
 
    return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
-       <Navbar />
-       <TechBackground />
+      <div className="min-h-screen bg-white relative overflow-hidden">
+         <Navbar />
+         <TechBackground />
 
-       <main className="relative z-10 pt-30 pb-4">
+         <main className="relative z-10 pt-30 pb-4">
             {/* Simple Sober Hero */}
             <section className="section-container text-center mb-4 px-4">
                <motion.span
@@ -238,8 +238,8 @@ function PricingCard({ title, price, duration, isPopular, delayIndex }) {
             boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.04), 0 8px 10px -6px rgb(0 0 0 / 0.04)"
          }}
          className={`relative p-6 pt-10 rounded-2xl border flex flex-col justify-between bg-white overflow-visible transition-colors ${isPopular
-               ? 'border-primary shadow-md ring-1 ring-primary/20'
-               : 'border-slate-200/60 shadow-sm hover:border-slate-300'
+            ? 'border-primary shadow-md ring-1 ring-primary/20'
+            : 'border-slate-200/60 shadow-sm hover:border-slate-300'
             }`}
       >
          <div>

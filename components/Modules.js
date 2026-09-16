@@ -7,12 +7,12 @@ const features = [
   {
     title: "Dedicated Teacher Panel",
     desc: "Role-based faculty workspace for lecture schedules, rapid attendance, and grading with fee privacy.",
-    image: "/studentreg.png"
+    image: "/teachear.png"
   },
   {
     title: "Smart Examination Module",
     desc: "Instant marks entry grid, auto-grading (A+, A, B), and automated WhatsApp scorecard delivery to parents.",
-    image: "/attendence.png"
+    image: "/exam.png"
   },
   {
     title: "Smart Registry",
@@ -115,25 +115,21 @@ export default function Modules() {
                     className="relative pl-10 group cursor-pointer"
                   >
                     {/* Glowing timeline dot indicator */}
-                    <div className={`absolute left-0 top-3.5 h-4 w-4 rounded-full bg-white border-2 flex items-center justify-center transition-all duration-300 ${
-                      isActive ? 'border-primary shadow-sm shadow-primary/30 scale-110' : 'border-slate-200 group-hover:border-primary/50'
-                    }`}>
-                      <div className={`w-1.5 h-1.5 rounded-full transition-transform duration-300 ${
-                        isActive ? 'bg-primary scale-125' : 'bg-slate-300 group-hover:bg-primary/50'
-                      }`} />
+                    <div className={`absolute left-0 top-3.5 h-4 w-4 rounded-full bg-white border-2 flex items-center justify-center transition-all duration-300 ${isActive ? 'border-primary shadow-sm shadow-primary/30 scale-110' : 'border-slate-200 group-hover:border-primary/50'
+                      }`}>
+                      <div className={`w-1.5 h-1.5 rounded-full transition-transform duration-300 ${isActive ? 'bg-primary scale-125' : 'bg-slate-300 group-hover:bg-primary/50'
+                        }`} />
                     </div>
 
                     {/* Text card content that shifts on hover */}
                     <motion.div
                       whileHover={{ x: 8 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className={`rounded-xl p-3 transition-colors duration-300 ${
-                        isActive ? 'bg-primary/[0.03]' : 'hover:bg-primary/[0.02]'
-                      }`}
+                      className={`rounded-xl p-3 transition-colors duration-300 ${isActive ? 'bg-primary/[0.03]' : 'hover:bg-primary/[0.02]'
+                        }`}
                     >
-                      <h3 className={`text-base font-black transition-colors duration-300 tracking-tight ${
-                        isActive ? 'text-primary' : 'text-navy group-hover:text-primary'
-                      }`}>
+                      <h3 className={`text-base font-black transition-colors duration-300 tracking-tight ${isActive ? 'text-primary' : 'text-navy group-hover:text-primary'
+                        }`}>
                         {item.title}
                       </h3>
                       <p className="text-sm text-gray-400 font-light max-w-sm leading-relaxed mt-1">
@@ -172,7 +168,7 @@ export default function Modules() {
                       className="w-full h-full object-contain"
                     />
                   </AnimatePresence>
-                  
+
                   {/* Glass Glare Highlight Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08] pointer-events-none z-10" />
                 </div>

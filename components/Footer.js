@@ -10,6 +10,7 @@ export default function Footer() {
 
   const footerLinks = {
     platform: [
+      { name: "About Us", href: "/about" },
       { name: "Modules", href: "/modules" },
       { name: "Features", href: "/features" },
       { name: "Pricing", href: "/pricing" },
@@ -116,7 +117,7 @@ export default function Footer() {
         <div className="pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-8 order-2 md:order-1">
             <p className="text-[10px] font-black text-navy/50 uppercase tracking-[0.3em]">
-              © {currentYear} Sathwara Infotech
+              © {currentYear} Tuoora ERP. All rights reserved. A product by Sathwara Infotech
             </p>
             <div className="hidden sm:flex gap-6">
               {footerLinks.legal.map(link => (

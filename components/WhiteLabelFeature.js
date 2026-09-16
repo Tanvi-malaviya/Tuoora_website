@@ -6,40 +6,40 @@ import Link from "next/link";
 
 const features = [
   {
-    emoji: "📱",
-    title: "Your Own Mobile App",
-    subTitle: "Android & iOS",
-    desc: "Launch custom apps on Google Play Store & Apple App Store with your institute's name, icon, and branding. Parents & students download YOUR official app — not a generic platform.",
+    emoji: "🏷️",
+    title: "Your Institute Logo",
+    subTitle: "Custom App Logo & Icon",
+    desc: "Seamlessly integrate your official institute logo across the mobile app and web portal. Displayed on the app launch screen, login page, and dashboard header.",
     color: "text-orange-400",
     glow: "bg-orange-500/10",
     hoverBorder: "hover:border-orange-500/40",
     topGradient: "from-orange-500/30 via-orange-400/10 to-transparent",
   },
   {
-    emoji: "🌐",
-    title: "Custom Domain & Portal",
-    subTitle: "portal.youracademy.com",
-    desc: "Run your admin panel and student portal on your own domain. Full custom brand colours, favicon, and login screen — no Tuoora URL ever visible to anyone.",
+    emoji: "🎨",
+    title: "Brand Colour Theme",
+    subTitle: "Tailored Visual Palette",
+    desc: "Personalize the entire application with your institute's primary and secondary brand colors. Action buttons, highlights, and navigation seamlessly match your identity.",
     color: "text-amber-400",
     glow: "bg-amber-500/10",
     hoverBorder: "hover:border-amber-500/40",
     topGradient: "from-amber-500/30 via-amber-400/10 to-transparent",
   },
   {
-    emoji: "🧾",
-    title: "Branded Reports & Receipts",
-    subTitle: "100% Your Identity",
-    desc: "Every fee receipt, exam scorecard, attendance report, and PDF certificate features your official institute header, logo, and signature — building parent trust from day one.",
+    emoji: "✉️",
+    title: "Custom Email Settings",
+    subTitle: "Dedicated SMTP & Sender ID",
+    desc: "Configure your own official SMTP and sender email. Fee receipts, admission alerts, and notifications reach parents directly from your institute's official email address.",
     color: "text-emerald-400",
     glow: "bg-emerald-500/10",
     hoverBorder: "hover:border-emerald-500/40",
     topGradient: "from-emerald-500/30 via-emerald-400/10 to-transparent",
   },
   {
-    emoji: "📲",
-    title: "Personalized WhatsApp & SMS",
-    subTitle: "Your Sender Identity",
-    desc: "Fee reminders, homework alerts, and exam marks reach parents with your institute's sender name and identity — not a generic platform name. Elevate your brand reputation.",
+    emoji: "🧾",
+    title: "Branded Reports & Receipts",
+    subTitle: "100% Your Identity",
+    desc: "Every automated fee receipt, attendance report, and exam scorecard carries your institute logo, authorized signature, and header with zero Tuoora watermarks.",
     color: "text-sky-400",
     glow: "bg-sky-500/10",
     hoverBorder: "hover:border-sky-500/40",
@@ -48,12 +48,12 @@ const features = [
 ];
 
 const checklist = [
-  "Zero Tuoora branding — ever",
-  "Your logo on every student-facing screen",
-  "Custom Play Store & App Store listing",
-  "Branded PDF receipts, report cards & ID cards",
-  "WhatsApp / SMS with your institute sender name",
-  "Custom domain with free SSL certificate",
+  "Custom institute logo on app & web headers",
+  "Custom brand colour theme integration",
+  "Custom SMTP & official sender email settings",
+  "Automated emails sent from your domain",
+  "Branded PDF fee receipts & report cards",
+  "Zero third-party watermarks or Tuoora branding",
 ];
 
 const containerVariants = {
@@ -68,7 +68,7 @@ const cardVariants = {
 
 export default function WhiteLabelFeature() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 bg-slate-950 relative overflow-hidden">
       {/* Dark background */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 z-0" />
 
@@ -117,8 +117,7 @@ export default function WhiteLabelFeature() {
           </h2>
 
           <p className="text-slate-400 text-base sm:text-lg leading-relaxed font-medium max-w-2xl mx-auto">
-            Stand out as an elite educational brand. Get custom Android &amp; iOS mobile apps and a web portal
-            launched completely under your institute&apos;s name, logo, and domain —{" "}
+            Stand out as an elite educational brand. Customize your institute logo, brand colour theme, and official sender email settings —{" "}
             <span className="text-white font-semibold">parents and students see only your brand</span>.
           </p>
         </motion.div>
